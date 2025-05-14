@@ -1,5 +1,5 @@
 ---
-description: "TEMPLATE: Documents common mistakes, anti-patterns, or outdated syntax specific to this project to help the AI avoid them. Needs user customization."
+description: "Documents common mistakes, anti-patterns, or outdated syntax specific to this project to help the AI avoid them. Needs user customization."
 globs: []
 alwaysApply: true
 version: "2.0.0"

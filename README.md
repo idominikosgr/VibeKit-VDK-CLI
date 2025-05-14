@@ -1,10 +1,10 @@
-# DevRulesPlus
+# CodePilotRules
 
 An enhanced framework for AI-assisted development that provides comprehensive rules, patterns, and guidelines for AI coding assistants across multiple platforms, languages, and technologies.
 
 ## Overview
 
-DevRulesPlus enhances AI-assisted development by providing comprehensive guidelines for AI coding assistants across multiple platforms. The project features specialized rules for various languages, frameworks, and technologies, with a focus on modern development practices, memory management, and cross-session continuity.
+CodePilotRules enhances AI-assisted development by providing comprehensive guidelines for AI coding assistants across multiple platforms. The project features specialized rules for various languages, frameworks, and technologies, with a focus on modern development practices, memory management, and cross-session continuity.
 
 Key features include:
 - Multi-platform support for different AI assistants and IDEs
@@ -42,7 +42,7 @@ The rules are organized in `.ai/rules/` with a comprehensive and extensible stru
   - **Command-Execution.mdc**: Safe terminal command execution
 
 ```
-.cursor/rules/
+.ai/rules/
 ├── 00-core-agent.mdc       # Core AI instructions
 ├── 01-project-context.mdc  # Project-specific details (customize!)
 ├── 02-common-errors.mdc    # Common mistakes to avoid (customize!)
@@ -88,8 +88,8 @@ The rules are organized in `.ai/rules/` with a comprehensive and extensible stru
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/idominikosgr/DevRulesPlus.git
-cd DevRulesPlus
+git clone https://github.com/idominikosgr/CodePilotRules.git
+cd CodePilotRules
 ```
 
 2. Run the setup wizard:
@@ -98,7 +98,7 @@ cd DevRulesPlus
 node setup-wizard.js
 ```
 
-3. Follow the interactive prompts to configure DevRulesPlus for your project:
+3. Follow the interactive prompts to configure CodePilotRules for your project:
    - Enter your project path
    - Select your IDE or AI coding tool (Cursor AI, Windsurf, GitHub Copilot, VS Code, etc.)
    - Choose your primary framework
@@ -114,20 +114,20 @@ The wizard will automatically create the appropriate directory structure and cop
 1. Clone this repository into your project:
 
 ```bash
-git clone https://github.com/idominikosgr/DevRulesPlus.git .cursor
+git clone https://github.com/idominikosgr/CodePilotRules.git .ai
 ```
 
 2. Customize the project-specific files:
 
-- Edit `.cursor/rules/01-project-context.mdc` with your project details
-- Modify `.cursor/rules/02-common-errors.mdc` with project-specific anti-patterns
-- Update `.cursor/rules/03-mcp-configuration.mdc` with your MCP server configuration
+- Edit `.ai/rules/01-project-context.mdc` with your project details
+- Modify `.ai/rules/02-common-errors.mdc` with project-specific anti-patterns
+- Update `.ai/rules/03-mcp-configuration.mdc` with your MCP server configuration
 
 ## Usage
 
 ### For Cursor AI Users
 
-DevRulesPlus will be automatically loaded when you use Cursor AI in a project containing these rules.
+CodePilotRules will be automatically loaded when you use Cursor AI in a project containing these rules.
 
 ### For GitHub Copilot Users
 
@@ -174,7 +174,7 @@ To ensure the AI knows which MCP servers are available and how they are configur
 2. Go to the 'MCP' section
 3. Open your global `~/.cursor/mcp.json` file via the provided button/link
 4. Make sure `mcp.json` is the active file in your editor
-5. In the AI chat, ask: "Please populate `.cursor/rules/03-mcp-configuration.mdc` based on the attached `mcp.json` context."
+5. In the AI chat, ask: "Please populate `.ai/rules/03-mcp-configuration.mdc` based on the attached `mcp.json` context."
 6. The AI should read the attached `mcp.json` context and fill in the details about each server in `03-mcp-configuration.mdc`.
 
 ## Benefits
@@ -194,13 +194,13 @@ The rule files use a consistent Markdown format that's easy to customize for you
 To update the standard `tasks/`, `languages/`, `technologies/` rules and the core `00-core-agent.mdc`, while preserving your customized `01-project-context.mdc` and `02-common-errors.mdc`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/idominikosgr/DevRulesPlus/main/install.sh | sh -s -- --upgrade
+curl -fsSL https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/install.sh | sh -s -- --upgrade
 ```
-*Note: The upgrade process preserves `03-mcp-configuration.mdc`. If new standard MCP servers are added to DevRules in the future, you may need to manually update your `03-mcp-configuration.mdc` or ask the AI to regenerate it.*
+*Note: The upgrade process preserves `03-mcp-configuration.mdc`. If new standard MCP servers are added to CodePilotRules in the future, you may need to manually update your `03-mcp-configuration.mdc` or ask the AI to regenerate it.*
 
 ## Contributing
 
-Contributions to DevRulesPlus are welcome and appreciated! You can help improve this project in various ways:
+Contributions to CodePilotRules are welcome and appreciated! You can help improve this project in various ways:
 
 1. **Fork and clone** the repository
 2. **Create a feature branch** for your changes (`git checkout -b feature/amazing-feature`)
@@ -265,16 +265,16 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 #### Changed
 
-- Project renamed from DevRules to DevRulesPlus
+- Project renamed from DevRules to CodePilotRules
 - Reorganized directory structure from `.cursor/rules/` to `.ai/rules/`
 - Updated README with new features and organizational structure
 - Added IDE/tool-specific configuration options for multiple AI ecosystems
 
 ## Origin & Attribution
 
-DevRulesPlus is an enhanced version of the original [DevRules](https://github.com/TheSethRose/DevRules) project created by Seth Rose. While substantially expanded with new features including multi-IDE support, memory management, and 51 task rule files, this project builds upon the original DevRules foundation and maintains the same MIT license terms.
+CodePilotRules is an enhanced version of the original [DevRules](https://github.com/TheSethRose/DevRules) project created by Seth Rose. While substantially expanded with new features including multi-IDE support, memory management, and 51 task rule files, this project builds upon the original DevRules foundation and maintains the same MIT license terms.
 
-**Official Repository:** [https://github.com/idominikosgr/DevRulesPlus](https://github.com/idominikosgr/DevRulesPlus)
+**Official Repository:** [https://github.com/idominikosgr/CodePilotRules](https://github.com/idominikosgr/CodePilotRules)
 
 We gratefully acknowledge Seth Rose's original work which provided the conceptual framework for this project.
 
@@ -286,5 +286,5 @@ We gratefully acknowledge Seth Rose's original work which provided the conceptua
 ---
 
 © Original DevRules: Seth Rose - [GitHub](https://github.com/TheSethRose)  
-© DevRulesPlus Enhancements: Dominikos Pritis - [GitHub](https://github.com/idominikosgr)  
-© 2025 DevRulesPlus
+© CodePilotRules Enhancements: Dominikos Pritis - [GitHub](https://github.com/idominikosgr)  
+© 2025 CodePilotRules

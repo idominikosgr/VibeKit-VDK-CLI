@@ -1,10 +1,10 @@
-# DevRulesPlus Documentation Overview
+# CodePilotRules Documentation Overview
 
 This project implements an enhanced rules system for AI-assisted development, storing a structured set of prompting rules in the `.ai/rules/` directory. These rules enhance the capabilities and consistency of various AI assistants working within codebases across different platforms and IDEs.
 
 ## Purpose
 
-DevRulesPlus provides context, guidelines, and specific instructions to various AI assistants, helping them understand:
+CodePilotRules provides context, guidelines, and specific instructions to various AI assistants, helping them understand:
 
 - Project-specific configurations (tech stack, file structure, conventions) via `01-project-context.mdc`
 - Common errors or anti-patterns to avoid via `02-common-errors.mdc`
@@ -15,7 +15,7 @@ DevRulesPlus provides context, guidelines, and specific instructions to various 
 - Available **MCP** (Model Context Protocol) servers and their usage via `03-mcp-configuration.mdc`
 - Memory management and session continuity protocols
 
-By using DevRulesPlus, developers can achieve more accurate, relevant, and efficient AI assistance tailored to their specific project needs across multiple AI platforms and IDEs.
+By using CodePilotRules, developers can achieve more accurate, relevant, and efficient AI assistance tailored to their specific project needs across multiple AI platforms and IDEs.
 
 ## Project Rules Structure (`.ai/rules/`)
 
@@ -67,7 +67,7 @@ Project Rules can be activated:
 
 ## Creating New Rules
 
-There are several ways to create new project rules in DevRulesPlus:
+There are several ways to create new project rules in CodePilotRules:
 
 1. **Interactive Setup Wizard:** Use the provided setup wizard to create properly structured rule files
 2. **AI Assistance:** Use the dedicated task rule by asking the AI: `@tasks/Create-Cursor-Rule.mdc` 
@@ -87,10 +87,10 @@ There are several ways to create new project rules in DevRulesPlus:
 
 ## Cross-Platform Usage
 
-DevRulesPlus is designed to work across multiple AI coding assistant platforms:
+CodePilotRules is designed to work across multiple AI coding assistant platforms:
 
 - **IDE-Specific Integration:** The setup wizard configures the appropriate directory structure for your chosen IDE or AI tool
-- **AI Assistant Rules:** Different AI assistants may use different rule loading mechanisms, which the DevRulesPlus setup process handles automatically
+- **AI Assistant Rules:** Different AI assistants may use different rule loading mechanisms, which the CodePilotRules setup process handles automatically
 - **Memory Management:** The `AI-Session-Handoff.mdc` task helps maintain continuity across development sessions regardless of the AI platform being used
 
 ## Specialized Components
@@ -100,4 +100,4 @@ DevRulesPlus is designed to work across multiple AI coding assistant platforms:
 - **Version Control:** Tracking system for rule updates and dependencies between rule files
 
 ---
-*See `README.md` for installation and update instructions for the DevRulesPlus project and `CHANGELOG.md` for detailed version history.*
+*See `README.md` for installation and update instructions for the CodePilotRules project and `CHANGELOG.md` for detailed version history.*

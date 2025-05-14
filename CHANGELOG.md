@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the DevRulesPlus project will be documented in this file.
+All notable changes to the CodePilotRules project will be documented in this file.
 
 ## [2.0.0] - 2025-05-14
 
@@ -51,7 +51,7 @@ All notable changes to the DevRulesPlus project will be documented in this file.
 
 ### Changed
 
-- Project renamed from DevRules to DevRulesPlus
+- Project renamed from DevRules to CodePilotRules
 - Reorganized directory structure from `.cursor/rules/` to `.ai/rules/`
 - Updated README with new features and organizational structure
 - Added IDE/tool-specific configuration options for multiple AI ecosystems
@@ -69,4 +69,4 @@ All notable changes to the DevRulesPlus project will be documented in this file.
 - Implement testing for setup wizard across different environments
 - Create additional technology rule files for emerging frameworks
 - Develop unified API for rule file integration with different AI systems
-- Add support for CI/CD integration in DevRulesPlus
+- Add support for CI/CD integration in CodePilotRules

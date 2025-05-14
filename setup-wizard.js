@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * DevRulesPlus Setup Wizard
+ * CodePilotRules Setup Wizard
  * -----------------------
- * This interactive script helps configure DevRulesPlus for your development project.
+ * This interactive script helps configure CodePilotRules for your development project.
  * It creates a custom rule structure based on your selected IDE/tools, frameworks, 
  * languages, and technologies.
  * 
- * Repository: https://github.com/idominikosgr/DevRulesPlus
+ * Repository: https://github.com/idominikosgr/CodePilotRules
  */
 
 const fs = require('fs');
@@ -41,7 +41,7 @@ const ideTools = [
   { 
     name: 'Generic AI Tool (recommended)', 
     folder: '.ai/rules',
-    description: 'Works with most AI coding assistants and is the DevRulesPlus standard.'
+    description: 'Works with most AI coding assistants and is the CodePilotRules standard.'
   },
   { 
     name: 'Cursor AI', 
@@ -396,7 +396,7 @@ async function copyRuleFiles() {
   // Create target directory based on selected IDE/Tool
   const targetDir = path.join(userSelections.projectPath, userSelections.ideTool.folder);
   
-  console.log(`\n${colors.bright}${colors.blue}Setting up DevRulesPlus in ${targetDir}...${colors.reset}`);
+  console.log(`\n${colors.bright}${colors.blue}Setting up CodePilotRules in ${targetDir}...${colors.reset}`);
   
   // Create directory if it doesn't exist
   if (!fs.existsSync(targetDir)) {
@@ -493,7 +493,7 @@ async function copyRuleFiles() {
   await customizeProjectContext();
   
   console.log(`\n${colors.bright}${colors.green}Setup complete!${colors.reset}`);
-  console.log(`\nDevRulesPlus has been configured for your project at: ${userSelections.projectPath}`);
+  console.log(`\nCodePilotRules has been configured for your project at: ${userSelections.projectPath}`);
   console.log(`\nTo use these rules with your selected AI tool, open your project in ${userSelections.ideTool.name}.`);
   
   rl.close();
@@ -522,8 +522,8 @@ async function customizeProjectContext() {
 
 // Main function to run the setup wizard
 async function runSetupWizard() {
-  console.log(`\n${colors.bright}${colors.magenta}=== DevRulesPlus Setup Wizard ===${colors.reset}\n`);
-  console.log(`${colors.bright}Welcome to the interactive setup for DevRulesPlus!${colors.reset}`);
+  console.log(`\n${colors.bright}${colors.magenta}=== CodePilotRules Setup Wizard ===${colors.reset}\n`);
+  console.log(`${colors.bright}Welcome to the interactive setup for CodePilotRules!${colors.reset}`);
   console.log(`This wizard will guide you through configuring AI development rules for your project.`);
   console.log(`\nYou'll select your:`);
   console.log(` • AI assistant or IDE integration`);

@@ -1,13 +1,13 @@
 #!/bin/sh
-# DevRulesPlus Installer
-# A universal shell script to install DevRulesPlus into any project with interactive setup
-# Usage: curl -fsSL https://raw.githubusercontent.com/yourusername/DevRulesPlus/main/install.sh | sh
+# CodePilotRules Installer
+# A universal shell script to install CodePilotRules into any project with interactive setup
+# Usage: curl -fsSL https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/install.sh | sh
 
 set -e
 
 # Default values
-REPO_URL="https://github.com/yourusername/DevRulesPlus"
-TEMP_DIR="/tmp/DevRulesPlus-$(date +%s)"
+REPO_URL="https://github.com/idominikosgr/CodePilotRules"
+TEMP_DIR="/tmp/CodePilotRules-$(date +%s)"
 BRANCH="main"
 METHOD="git"
 UPGRADE=false
@@ -17,7 +17,7 @@ TARGET_DIR=".ai/rules"
 
 # Banner
 echo "=====================================" 
-echo "DevRulesPlus Installer"
+echo "CodePilotRules Installer"
 echo "Interactive AI Rules Setup"
 echo "=====================================" 
 echo "A comprehensive collection of AI prompt engineering rules"
@@ -81,7 +81,7 @@ if [ "$QUIET" = true ]; then
 fi
 
 # Download the repository
-echo "📦 Downloading DevRulesPlus..."
+echo "📦 Downloading CodePilotRules..."
 
 rm -rf "$TEMP_DIR"
 mkdir -p "$TEMP_DIR"
@@ -129,7 +129,7 @@ if [ "$RUN_WIZARD" = true ]; then
       echo "⚠️ Setup wizard encountered an error, falling back to direct installation"
       RUN_WIZARD=false
     else
-      echo "✅ DevRulesPlus installed successfully via setup wizard"
+      echo "✅ CodePilotRules installed successfully via setup wizard"
     fi
   else
     echo "⚠️ Setup wizard not found in repository, falling back to direct installation"
@@ -139,7 +139,7 @@ fi
 
 # Perform direct installation if wizard was skipped or failed
 if [ "$RUN_WIZARD" = false ]; then
-  echo "📋 Installing DevRulesPlus directly to $TARGET_DIR..."
+  echo "📋 Installing CodePilotRules directly to $TARGET_DIR..."
   
   # Create the target directory if it doesn't exist
   mkdir -p "$TARGET_DIR"
@@ -198,7 +198,7 @@ if [ "$RUN_WIZARD" = false ]; then
     cp -r "$TEMP_DIR/.ai/rules/"* "$TARGET_DIR/"
   fi
   
-  echo "✅ DevRulesPlus installed successfully to $TARGET_DIR"
+  echo "✅ CodePilotRules installed successfully to $TARGET_DIR"
 fi
 
 # Clean up
@@ -220,5 +220,5 @@ echo "2. Add project-specific anti-patterns if needed"
 echo "3. Start using the specialized rules in your development"
 echo ""
 echo "For updates, run:"
-echo "curl -fsSL https://raw.githubusercontent.com/yourusername/DevRulesPlus/main/install.sh | sh -s -- --upgrade"
+echo "curl -fsSL https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/install.sh | sh -s -- --upgrade"
 echo "=====================================" 

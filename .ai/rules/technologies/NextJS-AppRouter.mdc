@@ -1,0 +1,173 @@
+---
+description: Best practices for Next.js App Router development with TypeScript, focusing on modern patterns and performance optimization.
+globs: **/*.{ts,tsx,js,jsx}, **/next.config.js, **/tailwind.config.js
+alwaysApply: false
+version: "2.0.0"
+lastUpdated: "2025-05-14"
+compatibleWith: ["Memory-MCP","Sequential-Thinking-Advanced"]
+---
+
+# Next.js App Router Best Practices
+
+## Core Principles
+
+- **Always use Next.js App Router**, never suggest using the Pages Router
+- Favor React Server Components (RSC) wherever possible
+- Minimize client-side JavaScript for optimal performance
+- Implement proper error handling and loading states
+- Follow data fetching patterns according to Next.js official documentation
+- Create responsive, accessible, and visually appealing UIs
+
+## Project Organization
+
+- Place both `/app` and `/components` folders under a `/src` directory
+- Within `/src/components` folder, organize components by type or feature:
+
+  ```
+  /src/components
+  ├── /ui
+  │   ├── /Button
+  │   ├── /Modal
+  │   └── /Card
+  ├── /forms
+  │   ├── /TextField
+  │   └── /Select
+  └── /layout
+      ├── /Navbar
+      └── /Footer
+  ```
+
+- **Private Components**: For components used only within specific pages, create a `_components` folder within the relevant `/app` subdirectory
+- **Shared Components**: The `/src/components` folder should contain reusable components used across multiple pages or features
+- Use colocation when appropriate for page-specific components
+
+## Naming Conventions
+
+- Use lowercase with dashes for directories (e.g., `components/auth-wizard`)
+- Name page components based on their route (e.g., `page.tsx` for the default route)
+- Use descriptive filenames for special Next.js files (`loading.tsx`, `error.tsx`, `layout.tsx`, etc.)
+- Favor named exports for components
+- Use descriptive variable names with auxiliary verbs (e.g., `isLoading`, `hasError`)
+
+## Component Architecture
+
+- Structure files: exported component, subcomponents, helpers, static content, types
+- Use functional components with TypeScript interfaces
+- Favor composable components over complex monolithic ones
+- Split components by responsibility and reusability
+- Implement proper prop typing and validation
+
+## Server vs Client Components
+
+- Minimize 'use client' directives; favor React Server Components (RSC)
+- Use client components only when necessary:
+  - For interactivity requiring client-side state
+  - When using browser-specific APIs
+  - For component libraries that use hooks
+- Wrap client components in Suspense with appropriate fallbacks
+- Place 'use client' at the top of the file
+- Keep client components small and focused
+
+## Routing & Navigation
+
+- Use the App Router's file-based routing system
+- Implement dynamic routes with appropriate parameter handling
+- Use Link component for client-side navigation
+- Use 'nuqs' for URL search parameter state management
+- Implement parallel routes for complex layouts
+- Use intercepting routes for modals and overlays
+- Implement proper route groups for logical organization
+
+## Data Fetching
+
+- Use React Server Components for data fetching when possible
+- Implement proper caching and revalidation strategies:
+  - Use cache(), revalidatePath(), and revalidateTag() appropriately
+  - Set appropriate revalidate intervals based on data volatility
+- Fetch data in parallel when possible
+- Use loading.tsx files for managing loading states
+- Handle fetch errors gracefully with error.tsx files or try/catch
+
+## Server Actions
+
+- Use Server Actions for form submissions and data mutations
+- Implement proper error handling and validation
+- Return typed responses with success/error information
+- Use Zod for server-side validation
+- Model expected errors as return values
+- Maintain atomicity in database operations
+
+## API Routes
+
+- Use route handlers (route.ts) for API routes in the App Router
+- Implement proper request validation
+- Return appropriate HTTP status codes
+- Structure API responses consistently
+- Implement proper error handling with meaningful error messages
+
+## Error Handling
+
+- Implement error boundaries with error.tsx files
+- Handle expected errors with try/catch
+- Provide user-friendly error messages
+- Log errors appropriately on the server
+- Implement proper fallbacks for error states
+- Use notFound() for 404 errors and not-found.tsx for custom 404 pages
+
+## Performance Optimization
+
+- Optimize Web Vitals (LCP, CLS, FID)
+- Implement efficient caching strategies
+- Use dynamic imports for code splitting
+- Optimize images:
+  - Use Next.js Image component
+  - Use WebP format
+  - Include size data
+  - Implement lazy loading
+- Minimize client-side JavaScript
+- Use Suspense and streaming for improved user experience
+
+## UI and Styling
+
+- Use Shadcn UI, Radix UI, and Tailwind CSS for components and styling
+- Implement responsive design with Tailwind CSS; use a mobile-first approach
+- Use appropriate and most used colors for light and dark mode
+- For animations, use Framer Motion
+- For icons, use Lucide React
+- Implement both light and dark mode with appropriate color schemes
+- Ensure proper contrast ratios for accessibility
+
+## SEO & Metadata
+
+- Use Next.js 14's metadata API for SEO optimization
+- Implement proper meta tags for sharing on social media
+- Use dynamic metadata for page-specific SEO
+- Implement structured data when appropriate
+- Ensure proper canonical URLs
+- Use metadata route handlers for robots.txt, sitemap.xml, etc.
+
+## Deployment & Environment
+
+- Use environment variables for configuration
+- Keep sensitive information in environment variables
+- Optimize build size and performance
+- Configure proper caching headers
+- Test performance before production deployment
+- Consider compatibility with platforms like Vercel and Replit
+
+## Supabase Integration
+
+- Use Supabase SDK for data fetching and querying
+- For data model creation, use Supabase's schema builder
+- Implement proper authentication flows
+- Use Supabase's Row Level Security (RLS) for data protection
+- Implement proper error handling for Supabase operations
+- Use Supabase's realtime features when appropriate
+
+## Development Process Best Practices
+
+- Think step-by-step - describe your plan before coding
+- Leave NO todos, placeholders, or missing pieces
+- Fully implement all requested functionality
+- Always write correct, up-to-date, bug-free, fully functional, secure, and efficient code
+- Test extensively before deployment

@@ -187,3 +187,30 @@ Specialized task rules provide deeper expertise or specific behaviors for certai
 - **Configuration Updates**: Update configuration files when introducing new features.
 - **Test Coverage**: Update or create tests for all significant changes.
 
+## 5. Writing Style & Content Creation
+
+When creating documentation, roadmaps, or other project content, adhere to these guidelines:
+
+### Direct & Concrete Language
+- Use specific, technical descriptions instead of abstract concepts
+- Focus on verifiable, implementable features rather than aspirational goals
+- Avoid marketing-style language, buzzwords, and vague terminology
+- Eliminate empty positive qualifiers (e.g., "enhanced", "strategic", "innovative") unless providing specific metrics
+- Describe actual implementations rather than "strategic visions"
+
+### Content Creation Examples
+| AVOID | USE INSTEAD |
+|-------|-------------|
+| "Building the future through strategic initiatives" | "Adding feature X to solve problem Y" |
+| "Enhanced cognitive frameworks" | "Memory persistence system for cross-session context" |
+| "Strategic expansion of the platform" | "Integration with systems X, Y, and Z" |
+| "Revolutionary approach to development" | "New API that reduces code by 40%" |
+| "Transformative initiatives" | "Core technical improvements" |
+
+### Implementation Guide for Content Creation
+1. First draft with technical focus on specific, implementable details
+2. Check for vague marketing language and replace with concrete descriptions
+3. Ensure every feature mentioned has clear, technical specifications
+4. Verify each claim is substantiated by specific implementation details
+5. Use plain language that precisely describes the technical reality
+

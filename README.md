@@ -351,6 +351,12 @@ We gratefully acknowledge Seth Rose's original work which provided the conceptua
 - The wider AI assistant developer community for inspiration and testing
 
 
+## 🔮 Future Plans & Roadmap
+
+We have an extensive roadmap of planned enhancements and features to further improve AI-assisted development. These include actionable ideas and strategic initiatives to help both human developers and AI coding assistants achieve optimal results.
+
+Check out our detailed roadmap here: [**ROADMAP.md**](ROADMAP.md)
+
 ---
 
 <div align="center">

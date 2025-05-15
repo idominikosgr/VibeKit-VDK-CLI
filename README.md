@@ -1,45 +1,86 @@
-# CodePilotRules
+<div align="center">
 
-An enhanced framework for AI-assisted development that provides comprehensive rules, patterns, and guidelines for AI coding assistants across multiple platforms, languages, and technologies.
+# 🚀 CodePilotRules
 
-## Overview
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Stars](https://img.shields.io/github/stars/idominikosgr/CodePilotRules?style=social)](https://github.com/idominikosgr/CodePilotRules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/CodePilotRules)
+
+**An enhanced framework for AI-assisted development that provides comprehensive rules, patterns, and guidelines for AI coding assistants across multiple platforms, languages, and technologies.**
+
+</div>
+
+## 📋 Overview
 
 CodePilotRules enhances AI-assisted development by providing comprehensive guidelines for AI coding assistants across multiple platforms. The project features specialized rules for various languages, frameworks, and technologies, with a focus on modern development practices, memory management, and cross-session continuity.
 
-Key features include:
-- Multi-platform support for different AI assistants and IDEs
-- Enhanced language and technology-specific rule files
-- Memory management and session handoff protocols
-- Interactive setup wizard for project-specific configuration
-- Version-controlled rule files with compatibility indicators
 
-## Structure
+### ✨ Key Features
+
+- 🌐 Multi-platform support for different AI assistants and IDEs
+
+- 🧩 Enhanced language and technology-specific rule files
+
+- 💾 Memory management and session handoff protocols
+
+- 🔧 Interactive setup wizard for project-specific configuration
+
+- 🏷️ Version-controlled rule files with compatibility indicators
+
+
+## 🏗️ Structure
 
 The rules are organized in `.ai/rules/` with a comprehensive and extensible structure:
 
-- **Core rules**: Foundation files that define AI behavior and project context (`00-*`, `01-*`, `02-*`, etc.)
-- **Tasks (`tasks/`)**: 51 task-specific rules for specialized AI behaviors (e.g., `AI-Session-Handoff.mdc`, `Code-Quality-Review.mdc`)
-- **Assistants (`assistants/`)**: Rules specific to various AI assistants (e.g., `Windsurf.mdc`)
-- **Language rules (`languages/`)**: Best practices for programming languages
-  - **Swift.mdc**: Updated for Swift 5.9/6.0 with macros and concurrency patterns
-  - **TypeScript.mdc**: Modern TypeScript with functional programming patterns
-  - **Python.mdc**: Python best practices and typing patterns
-- **Technology rules (`technologies/`)**: Framework and tool-specific guidelines
-  - **SwiftUI.mdc**: Modern SwiftUI with NavigationStack and performance patterns
-  - **PySideUI.mdc**: Python UI development with modern integration approaches
-  - **GraphQL.mdc**: Schema design and implementation best practices
-  - **Docker-Kubernetes.mdc**: Container design and orchestration patterns
-  - **Tauri.mdc**: Modern Electron alternative usage patterns
-  - **SwiftData.mdc**: Apple's data persistence framework guidelines
-- **AI Tools (`ai-tools/`)**: Guides for AI-enhanced development
-  - **Agentic-AI-Development.mdc**: Guidelines for different AI assistants
-  - **MCP-Server-Integration.mdc**: Patterns for memory server integration
-  - **Sequential-Thinking-Advanced.mdc**: Complex problem decomposition
-  - **AI-Workflow-Integration.mdc**: Task-specific AI-assisted patterns
-- **Tool Guides (`tools/`)**: Guidelines for common development tools
-  - **File-Operations.mdc**: Best practices for file manipulation
-  - **Code-Search.mdc**: Effective code search patterns
-  - **Command-Execution.mdc**: Safe terminal command execution
+
+- **🛠️ Core rules**: Foundation files that define AI behavior and project context (`00-*`, `01-*`, `02-*`, etc.)
+
+- **📝 Tasks (`tasks/`)**: 51 task-specific rules for specialized AI behaviors (e.g., `AI-Session-Handoff.mdc`, `Code-Quality-Review.mdc`)
+
+- **🤖 Assistants (`assistants/`)**: Rules specific to various AI assistants (e.g., `Windsurf.mdc`)
+
+- **💻 Language Support**
+
+Comprehensive guidelines for modern programming languages:
+
+- **🍎 Swift**: Swift 5.9/6.0 API design, structured concurrency, macros, result builders
+  - **📱 SwiftUI**: Modern SwiftUI patterns with NavigationStack, observable architecture
+  - **💾 SwiftData**: Core Data replacement with SwiftUI integration
+  - **🔄 Combine**: Reactive programming patterns
+
+- **📘 TypeScript**: Modern TypeScript with functional programming patterns
+  - **⚛️ React**: Component design, hooks architecture, state management
+  - **🧩 Vue**: Composition API, type-safe templates
+  - **🅰️ Angular**: Modular architecture, dependency injection
+
+- **🐍 Python**: Modern Python with type annotations, async/await patterns
+  - **🖼️ PySide/PyQt**: Modern UI development patterns
+  - **⚡ FastAPI**: API development with type validation
+  - **🧪 Pytest**: Comprehensive testing patterns
+
+- **⚙️ Technology rules (`technologies/`)**: Framework and tool-specific guidelines
+  - **📱 SwiftUI.mdc**: Modern SwiftUI with NavigationStack and performance patterns
+
+  - **🖼️ PySideUI.mdc**: Python UI development with modern integration approaches
+
+  - **🔄 GraphQL.mdc**: Schema design and implementation best practices
+
+  - **🐳 Docker-Kubernetes.mdc**: Container design and orchestration patterns
+
+  - **⚡ Tauri.mdc**: Modern Electron alternative usage patterns
+
+  - **💾 SwiftData.mdc**: Apple's data persistence framework guidelines
+
+- **🧠 AI Tools (`ai-tools/`)**: Guides for AI-enhanced development
+  - **🤖 Agentic-AI-Development.mdc**: Guidelines for different AI assistants
+  - **🔌 MCP-Server-Integration.mdc**: Guidelines for server-assisted workflows
+  - **🧩 Sequential-Thinking-Advanced.mdc**: Problem-solving strategies
+  - **⚙️ AI-Workflow-Integration.mdc**: Task-specific AI usage patterns
+
+- **🛠️ Tool Guides (`tools/`)**: Guidelines for common development tools
+  - **📁 File-Operations.mdc**: Best practices for file manipulation
+  - **🔍 Code-Search.mdc**: Effective code search patterns
+  - **⌨️ Command-Execution.mdc**: Safe terminal command execution
 
 ```
 .ai/rules/
@@ -236,55 +277,86 @@ This project is licensed under the MIT License - see the LICENSE file for detail
   - Implemented API-specific tasks (`API-Docs.mdc`, `API-Endpoints.mdc`)
 
 - **Enhanced Language and Technology Rule Files**
-  - **Swift Language Rules**: Updated for Swift 5.9/6.0 with macros, concurrency best practices
-  - **SwiftUI Technology Rules**: Added NavigationStack patterns, performance optimization techniques
-  - **PySideUI Technology Rules**: Added modern Python integration, asyncio patterns
+  - **🍎 Swift Language Rules**: Updated for Swift 5.9/6.0 with macros, concurrency best practices
+  - **📱 SwiftUI Technology Rules**: Added NavigationStack patterns, performance optimization techniques
+  - **💻 TypeScript Language Rules**: Modern TypeScript with functional programming patterns
+  - **🐍 Python Language Rules**: Modern Python with type annotations, async/await patterns
+  - **🖼️ PySideUI Technology Rules**: Added modern Python integration, asyncio patterns
  
 - **New Technology Files**
-  - **GraphQL**: Schema design, client/server implementation guidance
-  - **Docker/Kubernetes**: Container design, security, deployment strategies
-  - **Tauri**: Modern Electron alternative with security and performance best practices
-  - **SwiftData**: Apple's data persistence framework with SwiftUI integration patterns
+  - **🔄 GraphQL**: Schema design, client/server implementation guidance
+  - **🐳 Docker/Kubernetes**: Container design, security, deployment strategies
+  - **⚡ Tauri**: Modern Electron alternative with security and performance best practices
+  - **💾 SwiftData**: Apple's data persistence framework with SwiftUI integration patterns
 
-- **AI Tools Enhancement**
-  - **Agentic AI Development**: Comprehensive guide for different AI assistants and models
-  - **MCP Server Integration**: Patterns for effective memory usage and server integration
-  - **Sequential Thinking Advanced**: In-depth guide for breaking down complex problems
-  - **AI Workflow Integration**: Task-specific patterns for AI-assisted development
+## 🌟 Features
 
-- **Memory and Handoff Systems**
-  - Added memory management guidelines for capturing project context
-  - Implemented AI session handoff procedures for maintaining continuity
+### 🧠 AI Tools Enhancement
 
-#### Enhanced
+- **🤖 Agentic AI Development**: Comprehensive guide for different AI assistants and models
+
+- **🔌 MCP Server Integration**: Patterns for effective memory usage and server integration
+
+- **🧩 Sequential Thinking Advanced**: In-depth guide for breaking down complex problems
+
+- **⚙️ AI Workflow Integration**: Task-specific patterns for AI-assisted development
+
+
+### 🔄 Memory and Handoff Systems
+
+- Added memory management guidelines for capturing project context
+
+- Implemented AI session handoff procedures for maintaining continuity
+
+
+### 🔼 Enhanced
 
 - **Core rule integration**
   - Updated `00-core-agent.mdc` with all 51 task references
+
   - Added version indicators to core rule files for tracking updates
+
   - Enhanced compatibility indicators across rule files
 
-#### Changed
+
+### 🔄 Changed
 
 - Project renamed from DevRules to CodePilotRules
+
 - Reorganized directory structure from `.cursor/rules/` to `.ai/rules/`
+
 - Updated README with new features and organizational structure
+
 - Added IDE/tool-specific configuration options for multiple AI ecosystems
 
-## Origin & Attribution
+
+## 📚 Origin & Attribution
 
 CodePilotRules is an enhanced version of the original [DevRules](https://github.com/TheSethRose/DevRules) project created by Seth Rose. While substantially expanded with new features including multi-IDE support, memory management, and 51 task rule files, this project builds upon the original DevRules foundation and maintains the same MIT license terms.
 
-**Official Repository:** [https://github.com/idominikosgr/CodePilotRules](https://github.com/idominikosgr/CodePilotRules)
+
+<div align="center">
+
+**[📦 Official Repository](https://github.com/idominikosgr/CodePilotRules)**
+
+</div>
 
 We gratefully acknowledge Seth Rose's original work which provided the conceptual framework for this project.
 
-## Acknowledgments
+
+## 👏 Acknowledgments
 
 - Contributors to the enhanced memory management and session handoff systems
+
 - The wider AI assistant developer community for inspiration and testing
 
+
 ---
+
+<div align="center">
 
 © Original DevRules: Seth Rose - [GitHub](https://github.com/TheSethRose)  
 © CodePilotRules Enhancements: Dominikos Pritis - [GitHub](https://github.com/idominikosgr)  
 © 2025 CodePilotRules
+
+</div>

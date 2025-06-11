@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 CodePilotRules
+# 🚀 Vibe Coding Rules
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/idominikosgr/CodePilotRules?style=social)](https://github.com/idominikosgr/CodePilotRules)
@@ -12,7 +12,7 @@
 
 ## 📋 Overview
 
-CodePilotRules enhances AI-assisted development by providing comprehensive guidelines for AI coding assistants across multiple platforms. The project features specialized rules for various languages, frameworks, and technologies, with a focus on modern development practices, memory management, and cross-session continuity.
+Vibe Coding Rules enhances AI-assisted development by providing comprehensive guidelines for AI coding assistants across multiple platforms. The project features specialized rules for various languages, frameworks, and technologies, with a focus on modern development practices, memory management, and cross-session continuity.
 
 
 ### ✨ Key Features
@@ -44,7 +44,14 @@ The rules are organized in `.ai/rules/` with a comprehensive and extensible stru
 Comprehensive guidelines for modern programming languages:
 
 - **🍎 Swift**: Swift 5.9/6.0 API design, structured concurrency, macros, result builders
-  - **📱 SwiftUI**: Modern SwiftUI patterns with NavigationStack, observable architecture
+  - **📱 SwiftUI**: Modern SwiftUI patterns with NavigationStack
+
+- **🌐 Advanced Framework Templates**
+  - **⚛️ React**: Modern React with hooks, context, suspense
+  - **🅰️ Angular**: Angular with RxJS, OnPush change detection
+  - **🔵 Vue.js**: Vue 3 with Composition API and Pinia
+  - **🟢 Node.js/Express**: Modern server architecture patterns
+  - **🐍 Django**: Django with best practices and DRF, observable architecture
   - **💾 SwiftData**: Core Data replacement with SwiftUI integration
   - **🔄 Combine**: Reactive programming patterns
 
@@ -122,6 +129,25 @@ Comprehensive guidelines for modern programming languages:
 - **Error prevention** through common mistake documentation
 - **Reduced repetition** of instructions to AI tools
 
+### 📊 Analytics & Feedback
+
+Vibe Coding Rules includes a robust analytics and feedback system that helps track rule usage and collect user input:
+
+- **Usage Analytics**: Track which rules are most frequently used, downloaded, and copied
+- **Search Insights**: Understand what developers are looking for and how they find rules
+- **User Feedback**: Collect structured feedback on rules for continuous improvement
+- **Performance Metrics**: Measure the impact of rules on development workflows
+
+### 🔗 Editor Path Integration
+
+The Editor Path Integration system automatically configures paths across different development environments:
+
+- **Auto-Detection**: Automatically detects and configures editor-specific paths
+- **Multi-Environment Support**: Works across VS Code, Cursor, Claude, Windsurf, JetBrains, and more
+- **MCP Configuration**: Automatically updates the MCP configuration file with correct paths
+- **Path Resolution**: Resolves absolute and relative paths based on your environment
+- **Simple Updates**: Run `./update-mcp-config.sh` to refresh editor configuration
+
 ## Installation
 
 ### Option 1: Interactive Setup (Recommended)
@@ -139,10 +165,9 @@ cd CodePilotRules
 node setup-wizard.js
 ```
 
-3. Follow the interactive prompts to configure CodePilotRules for your project:
-   - Enter your project path
-   - Select your IDE or AI coding tool (Cursor AI, Windsurf, GitHub Copilot, VS Code, etc.)
-   - Choose your primary framework
+3. Follow the interactive prompts to configure Vibe Coding Rules for your project:    - Enter your project path
+    - Select your IDE or AI coding tool (VS Code, Cursor AI, Windsurf, GitHub Copilot, Claude, JetBrains IDEs, Zed Editor, etc.)
+    - Choose your primary framework
    - Select your programming language
    - Pick your technology stack
    - Select additional technologies
@@ -166,9 +191,19 @@ git clone https://github.com/idominikosgr/CodePilotRules.git .ai
 
 ## Usage
 
-### For Cursor AI Users
+### For AI Assistant Users
 
-CodePilotRules will be automatically loaded when you use Cursor AI in a project containing these rules.
+Vibe Coding Rules will be automatically loaded when you use supported AI coding assistants in a project containing these rules.
+
+#### Supported AI Tools and IDEs
+
+- **VS Code / VS Code Insiders**: Use with AI extensions
+- **Cursor AI**: Automatically integrates with project rules
+- **GitHub Copilot**: Enhanced with context from rules
+- **Claude (Desktop & Code)**: Optimized integration
+- **Windsurf / Windsurf Next (formerly Codeium)**: Configured for seamless use
+- **JetBrains IDEs**: Compatible with AI assistant plugins
+- **Zed Editor**: Works with AI features
 
 ### For GitHub Copilot Users
 
@@ -211,12 +246,31 @@ Please add a common error pattern about our naming convention for API routes.
 
 To ensure the AI knows which MCP servers are available and how they are configured:
 
-1. Open Cursor Settings (Cmd+, or Ctrl+,)
-2. Go to the 'MCP' section
-3. Open your global `~/.cursor/mcp.json` file via the provided button/link
-4. Make sure `mcp.json` is the active file in your editor
-5. In the AI chat, ask: "Please populate `.ai/rules/03-mcp-configuration.mdc` based on the attached `mcp.json` context."
-6. The AI should read the attached `mcp.json` context and fill in the details about each server in `03-mcp-configuration.mdc`.
+1. Open your AI tool's settings:
+   - **VS Code**: Open Settings (Cmd+, or Ctrl+,) → MCP section
+   - **VS Code Insiders**: Open Settings → MCP section
+   - **Cursor**: Open Settings (Cmd+, or Ctrl+,) → MCP section
+   - **Windsurf**: Configure through settings UI
+   - **Claude Desktop**: Check MCP configuration
+   - **JetBrains IDEs**: Settings → Tools → AI Assistant → Model Context Protocol (MCP)
+   - **Zed Editor**: Configure through settings
+2. Locate your MCP configuration file:
+   - VS Code: `.vscode/mcp.json` (project) or `~/Library/Application Support/Code/User/settings.json` (global)
+   - VS Code Insiders: `.vscode-insiders/mcp.json` or `~/Library/Application Support/Code - Insiders/User/settings.json`
+   - Cursor: `.cursor/mcp.json` (project) or `~/.cursor/mcp.json` (global)
+   - Windsurf: `~/.codeium/windsurf/mcp_config.json`
+   - Claude Desktop: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Claude Code: `.claude/settings.json` (project) or `~/.claude/settings.json` (global)
+   - JetBrains: Configure through IDE settings
+3. Make sure the configuration file is active in your editor
+4. **Automatic Method**: Run the provided script to automatically detect and configure MCP paths
+   ```bash
+   ./update-mcp-config.sh
+   ```
+   This will scan your environment for editor configurations and populate the MCP settings accordingly.
+5. **Manual Method**: Attach the configuration file to your AI assistant chat (or open it in an editor window)
+   - In the AI chat, ask: "Please populate `.ai/rules/03-mcp-configuration.mdc` based on the attached `mcp.json` context."
+   - The AI should read the attached `mcp.json` context and fill in the details about each server in `03-mcp-configuration.mdc`.
 
 ## Benefits
 
@@ -228,7 +282,7 @@ To ensure the AI knows which MCP servers are available and how they are configur
 
 ## Customization
 
-The rule files use a consistent Markdown format that's easy to customize for your specific needs. See the `Cursor-Rules.md` file at the project root for detailed formatting guidelines and best practices.
+The rule files use a consistent Markdown format that's easy to customize for your specific needs. See the `Vibe-Coding-Rules-StandardizationPlan.md` file for detailed formatting guidelines and best practices.
 
 ## Updating
 
@@ -237,17 +291,18 @@ To update the standard `tasks/`, `languages/`, `technologies/` rules and the cor
 ```bash
 curl -fsSL https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/install.sh | sh -s -- --upgrade
 ```
-*Note: The upgrade process preserves `03-mcp-configuration.mdc`. If new standard MCP servers are added to CodePilotRules in the future, you may need to manually update your `03-mcp-configuration.mdc` or ask the AI to regenerate it.*
+*Note: The upgrade process preserves `03-mcp-configuration.mdc`. If new standard MCP servers are added to Vibe Coding Rules in the future, you may need to manually update your `03-mcp-configuration.mdc` or ask the AI to regenerate it.*
 
 ## Contributing
 
-Contributions to CodePilotRules are welcome and appreciated! You can help improve this project in various ways:
+Contributions to Vibe Coding Rules are welcome and appreciated! You can help improve this project in various ways:
 
 1. **Fork and clone** the repository
 2. **Create a feature branch** for your changes (`git checkout -b feature/amazing-feature`)
 3. **Make your changes** following the existing style and format
 4. **Test extensively** before submitting:
-   - Verify the rules work with compatible AI tools (e.g., Cursor)
+   - Verify the rules work with compatible AI tools (e.g., VS Code, Cursor, GitHub Copilot, Claude, Windsurf, etc.)
+   - Test across different IDEs when possible to ensure broad compatibility
    - Test different scenarios and edge cases
    - Document your testing process
 5. **Submit a pull request** with:
@@ -282,7 +337,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
   - **💻 TypeScript Language Rules**: Modern TypeScript with functional programming patterns
   - **🐍 Python Language Rules**: Modern Python with type annotations, async/await patterns
   - **🖼️ PySideUI Technology Rules**: Added modern Python integration, asyncio patterns
- 
+
 - **New Technology Files**
   - **🔄 GraphQL**: Schema design, client/server implementation guidance
   - **🐳 Docker/Kubernetes**: Container design, security, deployment strategies
@@ -321,7 +376,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ### 🔄 Changed
 
-- Project renamed from DevRules to CodePilotRules
+- Project renamed from DevRules to Vibe Coding Rules
 
 - Reorganized directory structure from `.cursor/rules/` to `.ai/rules/`
 
@@ -332,7 +387,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📚 Origin & Attribution
 
-CodePilotRules is an enhanced version of the original [DevRules](https://github.com/TheSethRose/DevRules) project created by Seth Rose. While substantially expanded with new features including multi-IDE support, memory management, and 51 task rule files, this project builds upon the original DevRules foundation and maintains the same MIT license terms.
+Vibe Coding Rules is an enhanced version of the original [DevRules](https://github.com/TheSethRose/DevRules) project created by Seth Rose. While substantially expanded with new features including multi-IDE support, memory management, and 51 task rule files, this project builds upon the original DevRules foundation and maintains the same MIT license terms.
 
 
 <div align="center">
@@ -351,6 +406,24 @@ We gratefully acknowledge Seth Rose's original work which provided the conceptua
 - The wider AI assistant developer community for inspiration and testing
 
 
+## 📚 Documentation
+
+Comprehensive documentation is available to help you get started and make the most of Vibe Coding Rules:
+
+- **[📖 Getting Started Guide](docs/getting-started.md)**: Quick start for new users
+- **[📋 Project Scanner Guide](tools/project-scanner/USER-GUIDE.md)**: Detailed guide for using the Project Scanner
+- **[🛠️ Template Reference](docs/templates.md)**: Details on all available templates and customization options
+- **[🔌 IDE Integration Guide](docs/ide-integration.md)**: Setting up Vibe Coding Rules with your favorite IDE
+
+## 🔧 Tools
+
+- **🧙‍♂️ Setup Wizard**: Interactive configuration for new projects
+- **🔍 Project Scanner**: Analyzes project structure to generate custom rules
+  - **✅ Rule Validation**: Validates generated rules for correctness and consistency
+  - **🔌 IDE Integration**: Seamless integration with popular IDEs
+  - **🏛️ Architecture Recognition**: Detects MVC, MVVM, and Microservices patterns
+  - **📊 Project Analysis**: Intelligent project complexity assessment
+
 ## 🔮 Future Plans & Roadmap
 
 We have an extensive roadmap of planned enhancements and features to further improve AI-assisted development. These include actionable ideas and strategic initiatives to help both human developers and AI coding assistants achieve optimal results.
@@ -361,8 +434,8 @@ Check out our detailed roadmap here: [**ROADMAP.md**](ROADMAP.md)
 
 <div align="center">
 
-© Original DevRules: Seth Rose - [GitHub](https://github.com/TheSethRose)  
-© CodePilotRules Enhancements: Dominikos Pritis - [GitHub](https://github.com/idominikosgr)  
-© 2025 CodePilotRules
+© Original DevRules: Seth Rose - [GitHub](https://github.com/TheSethRose)
+© Vibe Coding Rules Enhancements: Dominikos Pritis - [GitHub](https://github.com/idominikosgr)
+© 2025 Vibe Coding Rules
 
 </div>

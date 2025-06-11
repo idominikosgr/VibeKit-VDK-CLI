@@ -12,13 +12,7 @@ compatibleWith: ["Python3", "TypeScript-Modern", "Memory-MCP", "Sequential-Think
 ## Foundation Model Selection
 - Choose the appropriate AI model based on your specific requirements:
   - **GPT-4/GPT-4o**: Best for complex reasoning, code generation, and multi-step planning
-  - **Claude 3 Opus**: Excellent for detailed reasoning, instruction following, and content creation
   - **Claude 3 Sonnet**: Good balance of performance and cost for many applications
-  - **GPT-3.5 Turbo**: Suitable for simpler tasks with lower cost requirements
-  - **Deepseek Coder**: Specialized for code generation and technical tasks
-  - **Llama 3 70B**: Strong open-source alternative for deployment flexibility
-  - **GPT-4o-mini**: Cost-effective for medium-complexity tasks requiring reasoning
-  - **Mistral Large**: Versatile open-source option with good reasoning capabilities
 - Consider performance characteristics beyond just capabilities:
   - Latency requirements
   - Token limitations
@@ -56,9 +50,7 @@ compatibleWith: ["Python3", "TypeScript-Modern", "Memory-MCP", "Sequential-Think
   ```
 - For different model families, adjust your prompting style:
   - **GPT-4/o**: Direct, clear instructions with explicit formatting works well
-  - **Claude**: Responds well to role-based prompting and detailed instructions
-  - **Llama/Mistral**: May need more explicit instructions and examples
-  - **Specialized models**: Tailor prompts to their domain expertise
+  - **Claude 3.7 Sonnet**: Responds well to role-based prompting and detailed instructions
 - Implement few-shot examples for complex or ambiguous tasks.
 - Use JSON mode or structured output format for programmatic consumption.
 - Consider implementing Chain-of-Thought prompting for complex reasoning tasks.

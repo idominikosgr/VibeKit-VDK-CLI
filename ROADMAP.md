@@ -1,4 +1,12 @@
-# 🗺️ CodePilotRules: Roadmap
+# 🗺️ Vibe Coding Rules: Roadmap
+
+## 🎯 Recently Completed
+
+### Documentation Improvements
+- ✅ Created comprehensive user guide for .mdc rule customization
+- ✅ Documented formal .mdc schema specification
+- ✅ Added testing framework to project-scanner with >70% test coverage
+- ✅ Refactored codebase to remove magic strings and improve maintainability
 
 ## Core Development Goals
 
@@ -11,9 +19,10 @@
 - Documentation for effective context management practices
 
 #### Project Analyzer
-- File indexer to understand project structure and dependencies
+- ✅ File indexer to understand project structure and dependencies
 - Symbol table generator for quick reference by AI systems
 - Codebase statistics and complexity metrics reporter
+- 🔄 Enhanced architectural pattern detection with advanced analysis techniques
 
 ### IDE Integration & Standardization
 

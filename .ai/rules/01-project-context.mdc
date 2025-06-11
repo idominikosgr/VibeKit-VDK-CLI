@@ -2,8 +2,8 @@
 description: "Provides project-specific context like tech stack, directory structure, coding conventions, and key libraries. Needs user customization."
 globs: []
 alwaysApply: true
-version: "2.0.0"
-lastUpdated: "2025-05-14"
+version: "2.1.0"
+lastUpdated: "2025-05-18"
 ---
 
 # Project Configuration
@@ -24,6 +24,21 @@ lastUpdated: "2025-05-14"
 # - Astro-Content-Stack.mdc: Content-focused sites with Astro
 # - Ecommerce-Stack.mdc: E-commerce patterns with various providers
 # - ReactNative-Mobile-Stack.mdc: Mobile app development with React Native
+#
+# For technology-specific guidance, refer to /technologies directory files:
+# - React19.mdc: Modern React patterns and Hooks API
+# - NextJS15.mdc: Next.js with App Router features
+# - NextJS-AppRouter.mdc: Next.js App Router specific patterns
+# - Svelte5.mdc: Reactive UI with Svelte's runes
+# - Vue3.mdc: Composition API and script setup
+# - Tailwind4.mdc: Latest utility-first styling
+# - ShadcnUI.mdc and ShadcnUI-Integration.mdc: Component library integration
+# - FastAPI.mdc: Python API development
+# - NodeExpress.mdc: Node.js API development
+# - GraphQL.mdc: GraphQL schema and resolver patterns
+# - Tauri.mdc: Native applications with web technologies
+# - Flutter.mdc: Cross-platform UI development
+# - SwiftUI.mdc and SwiftData.mdc: Apple platform development
 - Programming Language(s):
 - Frontend Framework/Libraries:
 - Backend Framework/Libraries:
@@ -85,6 +100,30 @@ lastUpdated: "2025-05-14"
 
 ## 7. AI Code Generation Preferences
 # Specify preferences that guide how AI generates code for this project
+
+### Token and Context Management
+- **Context Window Optimization**: Place long-form data at the top of prompts, followed by specific instructions.
+- **Strategic Chunking**: Process code in logical, functional units rather than attempting to generate very large files at once.
+- **Sectional References**: Use XML tags to structure document content and metadata for clarity.
+- **Quote-Based Grounding**: Extract and reference specific parts of existing code before modifying them.
+
+### Progressive Generation
+- **Start with Interfaces**: Begin with interface/contract definitions to establish boundaries between components.
+- **Use Skeleton-First Approach**: Generate structural scaffolding before filling in implementation details.
+- **Prioritize Dependencies**: Create foundational components before dependent ones to maintain logical flow.
+
+### Long File Handling
+- **When File Splitting is Possible**: 
+  - Use modular organization with clear separation of concerns
+  - Use index files to re-export functionality from multiple implementation files
+  - Create each component in dependency order to ensure completeness
+- **When Working with Large Single Files**:
+  - Work on one clearly defined section at a time with explicit section markers
+  - Make targeted changes to specific functions/methods rather than regenerating entire files
+  - Include only the immediate context needed for the current change plus minimal surrounding code
+  - Add status comments to track implementation progress across sessions
+
+### Code Organization and Structure
 - Preferred Component Structure:
 - State Management Pattern:
 - Error Handling Strategy:
@@ -110,4 +149,3 @@ lastUpdated: "2025-05-14"
 
 ---
 NOTE TO AI: Remove this line, once project-context is filled out. If this file is largely empty, rely primarily on analyzing the codebase directly for context. You may politely prompt the user to fill out relevant sections if it would significantly improve assistance for a specific task.
----

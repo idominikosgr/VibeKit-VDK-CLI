@@ -1,0 +1,113 @@
+{{! MVC Pattern Template }}
+
+## Architecture: MVC Pattern
+
+This project follows the **Model-View-Controller (MVC)** architectural pattern which separates the application into three interconnected components.
+
+### Component Responsibilities
+
+#### Model
+
+- Represents the data and business logic
+- Maintains the application state
+- Responds to instructions to change its state
+- Notifies observers when state changes
+
+{{#if detectedModels}}
+**Detected Models:**
+{{#each detectedModels}}
+- `{{this.name}}` - {{this.purpose}}
+{{/each}}
+{{else}}
+**Model Implementation:**
+Models are typically implemented as {{#if patterns.classBased}}classes{{else}}data structures{{/if}} that encapsulate data and provide methods for data manipulation.
+{{/if}}
+
+#### View
+
+- Renders the model for display
+- Provides the user interface
+- Communicates user actions to the controller
+
+{{#if detectedViews}}
+**Detected Views:**
+{{#each detectedViews}}
+- `{{this.name}}` - {{this.purpose}}
+{{/each}}
+{{else}}
+**View Implementation:**
+Views are implemented as {{#if patterns.templateBased}}templates{{else}}{{#if patterns.componentBased}}components{{else}}UI elements{{/if}}{{/if}} that display information to the user.
+{{/if}}
+
+#### Controller
+
+- Processes incoming requests
+- Performs operations on the model
+- Selects the view to render
+
+{{#if detectedControllers}}
+**Detected Controllers:**
+{{#each detectedControllers}}
+- `{{this.name}}` - {{this.purpose}}
+{{/each}}
+{{else}}
+**Controller Implementation:**
+Controllers are implemented as {{#if patterns.classBased}}classes{{else}}modules{{/if}} that handle user input and update the model and view accordingly.
+{{/if}}
+
+### Data Flow
+
+1. User interacts with the View
+2. Controller handles user input
+3. Controller updates the Model
+4. Model notifies View of state changes
+5. View updates with new data from Model
+
+### Best Practices
+
+- Keep controllers thin by moving business logic to the model
+- Don't perform data manipulation in views
+- Maintain clear separation between components
+- Use consistent naming conventions for models, views, and controllers
+{{#if patterns.fileNaming}}
+  - In this project: {{patterns.fileNaming}}
+{{/if}}
+- Implement proper error handling at each layer
+
+### Testing Approaches
+
+- **Unit Tests**: Test each component in isolation
+- **Integration Tests**: Test interaction between components
+- **End-to-End Tests**: Test full user flow through the system
+
+{{#if techStack.frameworks.web}}
+### Framework-Specific Implementation
+
+In {{techStack.frameworks.web}}, MVC is implemented with:
+{{#eq techStack.frameworks.web "Express"}}
+- Models: Defined in the models directory
+- Views: Templates using {{techStack.templateEngine|default:"a templating engine"}}
+- Controllers: Route handlers in the controllers directory
+{{else}}{{#eq techStack.frameworks.web "Django"}}
+- Models: Defined in models.py using Django ORM
+- Views: Functions or classes in views.py
+- Templates: HTML templates with Django template language
+- Controllers: Django calls them "views" but they function as controllers
+{{else}}{{#eq techStack.frameworks.web "Ruby on Rails"}}
+- Models: ActiveRecord classes in app/models
+- Views: ERB/HAML templates in app/views
+- Controllers: Controller classes in app/controllers
+{{else}}{{#eq techStack.frameworks.web "ASP.NET MVC"}}
+- Models: POCO classes in Models directory
+- Views: Razor templates in Views directory
+- Controllers: Controller classes in Controllers directory
+{{else}}{{#eq techStack.frameworks.web "Laravel"}}
+- Models: Eloquent models in app/Models
+- Views: Blade templates in resources/views
+- Controllers: Controller classes in app/Http/Controllers
+{{else}}
+- Models: Data structure classes
+- Views: Template/UI layer
+- Controllers: Logic handling user input
+{{/eq}}{{/eq}}{{/eq}}{{/eq}}{{/eq}}
+{{/if}}

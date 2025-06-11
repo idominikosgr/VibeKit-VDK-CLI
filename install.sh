@@ -1,13 +1,13 @@
 #!/bin/sh
-# CodePilotRules Installer
-# A universal shell script to install CodePilotRules into any project with interactive setup
+# Vibe Coding Rules Installer
+# A universal shell script to install Vibe Coding Rules into any project with interactive setup
 # Usage: curl -fsSL https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/install.sh | sh
 
 set -e
 
 # Default values
 REPO_URL="https://github.com/idominikosgr/CodePilotRules"
-TEMP_DIR="/tmp/CodePilotRules-$(date +%s)"
+TEMP_DIR="/tmp/VibeCodingRules-$(date +%s)"
 BRANCH="main"
 METHOD="git"
 UPGRADE=false
@@ -16,12 +16,12 @@ QUIET=false
 TARGET_DIR=".ai/rules"
 
 # Banner
-echo "=====================================" 
-echo "CodePilotRules Installer"
+echo "====================================="
+echo "Vibe Coding Rules Installer"
 echo "Interactive AI Rules Setup"
-echo "=====================================" 
+echo "====================================="
 echo "A comprehensive collection of AI prompt engineering rules"
-echo "=====================================" 
+echo "====================================="
 
 # Parse arguments
 while [ "$#" -gt 0 ]; do
@@ -81,7 +81,7 @@ if [ "$QUIET" = true ]; then
 fi
 
 # Download the repository
-echo "📦 Downloading CodePilotRules..."
+echo "📦 Downloading Vibe Coding Rules..."
 
 rm -rf "$TEMP_DIR"
 mkdir -p "$TEMP_DIR"
@@ -113,23 +113,23 @@ fi
 # Installation approach based on user preference
 if [ "$RUN_WIZARD" = true ]; then
   echo "🧙 Running interactive setup wizard..."
-  
+
   # Make setup wizard executable
   if [ -f "$TEMP_DIR/setup-wizard.js" ]; then
     chmod +x "$TEMP_DIR/setup-wizard.js"
-    
+
     # Run the setup wizard from the temporary directory
     # The wizard will determine the target directory based on IDE selection
     # and copy the appropriate files
     cd "$TEMP_DIR"
     node setup-wizard.js
-    
+
     WIZARD_EXIT=$?
     if [ $WIZARD_EXIT -ne 0 ]; then
       echo "⚠️ Setup wizard encountered an error, falling back to direct installation"
       RUN_WIZARD=false
     else
-      echo "✅ CodePilotRules installed successfully via setup wizard"
+      echo "✅ Vibe Coding Rules installed successfully via setup wizard"
     fi
   else
     echo "⚠️ Setup wizard not found in repository, falling back to direct installation"
@@ -139,33 +139,33 @@ fi
 
 # Perform direct installation if wizard was skipped or failed
 if [ "$RUN_WIZARD" = false ]; then
-  echo "📋 Installing CodePilotRules directly to $TARGET_DIR..."
-  
+  echo "📋 Installing Vibe Coding Rules directly to $TARGET_DIR..."
+
   # Create the target directory if it doesn't exist
   mkdir -p "$TARGET_DIR"
-  
+
   if [ "$UPGRADE" = true ]; then
     # Upgrade mode - preserve user customizations
     echo "🔄 Upgrade mode: Preserving user customizations..."
-    
+
     # Copy core agent without overwriting user customizations
     if [ -f "$TEMP_DIR/.ai/rules/00-core-agent.mdc" ]; then
       cp -f "$TEMP_DIR/.ai/rules/00-core-agent.mdc" "$TARGET_DIR/"
     fi
-    
+
     # Skip user customization files if they already exist
     if [ ! -f "$TARGET_DIR/01-project-context.mdc" ] && [ -f "$TEMP_DIR/.ai/rules/01-project-context.mdc" ]; then
       cp "$TEMP_DIR/.ai/rules/01-project-context.mdc" "$TARGET_DIR/"
     fi
-    
+
     if [ ! -f "$TARGET_DIR/02-common-errors.mdc" ] && [ -f "$TEMP_DIR/.ai/rules/02-common-errors.mdc" ]; then
       cp "$TEMP_DIR/.ai/rules/02-common-errors.mdc" "$TARGET_DIR/"
     fi
-    
+
     if [ ! -f "$TARGET_DIR/03-mcp-configuration.mdc" ] && [ -f "$TEMP_DIR/.ai/rules/03-mcp-configuration.mdc" ]; then
       cp "$TEMP_DIR/.ai/rules/03-mcp-configuration.mdc" "$TARGET_DIR/"
     fi
-    
+
     # Create directories if they don't exist
     mkdir -p "$TARGET_DIR/tasks"
     mkdir -p "$TARGET_DIR/languages"
@@ -173,7 +173,7 @@ if [ "$RUN_WIZARD" = false ]; then
     mkdir -p "$TARGET_DIR/stacks"
     mkdir -p "$TARGET_DIR/assistants"
     mkdir -p "$TARGET_DIR/tools"
-    
+
     # Copy other directories, overwriting existing files
     if [ -d "$TEMP_DIR/.ai/rules/tasks" ]; then
       cp -rf "$TEMP_DIR/.ai/rules/tasks/"* "$TARGET_DIR/tasks/"
@@ -197,8 +197,13 @@ if [ "$RUN_WIZARD" = false ]; then
     # Fresh install - copy everything
     cp -r "$TEMP_DIR/.ai/rules/"* "$TARGET_DIR/"
   fi
-  
-  echo "✅ CodePilotRules installed successfully to $TARGET_DIR"
+
+  echo "✅ Vibe Coding Rules installed successfully to $TARGET_DIR"
+fi
+
+# Make the update-mcp-config.sh script executable
+if [ -f "update-mcp-config.sh" ]; then
+  chmod +x update-mcp-config.sh
 fi
 
 # Clean up
@@ -211,14 +216,15 @@ if [ "$QUIET" = true ]; then
 fi
 
 echo ""
-echo "=====================================" 
+echo "====================================="
 echo "🚀 Ready for AI-assisted development!"
 echo ""
 echo "📚 Next steps:"
 echo "1. Customize project context with your details"
 echo "2. Add project-specific anti-patterns if needed"
-echo "3. Start using the specialized rules in your development"
+echo "3. Configure MCP paths with the update tool: ./update-mcp-config.sh"
+echo "4. Start using the specialized rules in your development"
 echo ""
 echo "For updates, run:"
 echo "curl -fsSL https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/install.sh | sh -s -- --upgrade"
-echo "=====================================" 
+echo "====================================="

@@ -1,0 +1,116 @@
+---
+description: "Best practices and patterns for modern React development"
+globs: ["**/*.jsx", "**/*.tsx", "**/*.js", "**/*.ts"]
+version: "1.0.0"
+lastUpdated: "2025-05-16"
+---
+
+<div align="center">
+
+# u269bufe0f React Best Practices
+
+[![Framework](https://img.shields.io/badge/Framework-React-61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Supported-3178C6)](https://www.typescriptlang.org/)
+
+**Modern React coding standards and patterns for **
+
+</div>
+
+## ud83dudcda Overview
+
+This rule file contains best practices and patterns for developing with React in the  project.
+
+## ud83eudde9 Component Structure
+
+### Component Organization
+
+- Organize components by feature or responsibility
+- Keep components small and focused on a single task
+- Use appropriate state management patterns
+- Separate logic from presentation when complexity grows
+
+### Component Types
+
+- Use functional components with hooks as the default
+- Implement higher-order components (HOCs) for cross-cutting concerns
+- Use render props pattern when appropriate for component composition
+
+## ud83dudcdd Naming Conventions
+
+- **Components**: Use PascalCase naming convention
+  - Example: `UserProfile`
+- **Event Handlers**: Use camelCase with "handle" prefix
+  - Example: `handleClick`
+- **Props**: Use camelCase naming
+  - Example: `userData`
+
+- **Custom Hooks**: Use camelCase with "use" prefix
+  - Example: `useWindowSize`
+
+## ud83dudd10 State Management
+
+### Local State
+
+- Use `useState` for simple component state
+- Use `useReducer` for complex state logic
+- Keep state as close as possible to where it's used
+
+### Global State
+
+- Consider Redux/Redux Toolkit for complex global state
+- Use Context API for shared state between related components
+- Consider React Query or SWR for server state management
+
+## ud83dudcac Props Management
+
+- Use destructuring to access props
+- Define prop types with TypeScript interfaces or PropTypes
+- Implement default values for optional props
+- Avoid passing too many props (use composition instead)
+- Pass callbacks wrapped in useCallback when appropriate
+
+## ud83dudee0ufe0f Hooks Best Practices
+
+- Follow the Rules of Hooks (only call at the top level, only call from React functions)
+- Use the dependency array correctly in useEffect/useCallback/useMemo
+- Extract complex logic into custom hooks
+- Memoize expensive calculations with useMemo
+- Memoize callbacks with useCallback when they're passed to child components
+
+## ud83dudcda Libraries and Ecosystem
+
+
+### ud83euddea Testing
+- Use React Testing Library for component testing
+- Use Jest or Vitest as the test runner
+- Test user interactions rather than implementation details
+
+## u26a1 Performance Optimizations
+
+- Use React.memo for pure functional components that render often
+- Implement virtualization for long lists (react-window or react-virtualized)
+- Use code splitting with React.lazy and Suspense
+- Avoid unnecessary re-renders with proper dependency arrays
+- Implement proper key props for list items (avoid using array index)
+
+## u267bufe0f Styling Approaches
+
+- Choose a consistent styling approach (CSS modules, styled-components, etc.)
+- Consider utility-first approaches like TailwindCSS
+- Use CSS-in-JS for dynamic styling based on props/state
+
+## u267fufe0f Accessibility
+
+- Use semantic HTML elements
+- Implement proper ARIA attributes when needed
+- Ensure keyboard navigation works correctly
+- Support screen readers with appropriate text alternatives
+- Test with accessibility tools like axe-core
+
+---
+
+<div align="center">
+
+**Generated on 2025-05-16 u2022 [CodePilotRules](https://github.com/idominikosgr/CodePilotRules)**
+
+</div>

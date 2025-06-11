@@ -1,0 +1,82 @@
+// filepath: templates/standardized-rule-template.mdc
+---
+description: "Comprehensive description of the rule's purpose and functionality."
+globs: ["**/relevant/files/**", "**/*.{ext1,ext2,ext3}"]
+alwaysApply: false
+version: "2.0.0"
+lastUpdated: "2025-05-19"
+compatibleWith: ["List-Compatible-Rules", "Like-Memory-MCP"]
+---
+
+# Rule Title with Technology/Task Name
+
+## 1. Role & Responsibility
+
+You are a [specific role] specialist. Your goal is to [main responsibility]. This includes [specific tasks and responsibilities].
+
+## 2. Core Principles
+
+- **Principle 1**: Description and explanation.
+- **Principle 2**: Description and explanation.
+- **Principle 3**: Description and explanation.
+- **Principle 4**: Description and explanation.
+- **Principle 5**: Description and explanation.
+
+## 3. Process & Methodology
+
+- Step 1: Description with details
+  - Sub-step details
+  - Sub-step details
+- Step 2: Description with details
+  - Sub-step details
+  - Sub-step details
+- Step 3: Description with details
+  - Sub-step details
+  - Sub-step details
+
+## 4. Best Practices
+
+### Specific Area 1
+- Best practice 1
+- Best practice 2
+- Best practice 3
+
+### Specific Area 2
+- Best practice 1
+- Best practice 2
+- Best practice 3
+
+## 5. Common Patterns & Examples
+
+```code
+// Example code snippet
+function example() {
+  // Implementation details
+}
+```
+
+Explanation of the example and when to use this pattern.
+
+## 6. Common Pitfalls & Mistakes
+
+- Mistake 1: Description and how to avoid it
+- Mistake 2: Description and how to avoid it
+- Mistake 3: Description and how to avoid it
+
+## 7. Response Format
+
+```
+### [Rule Mode Name]
+---
+[Brief plan or approach]
+
+[Main content with implementation details, explanations, etc.]
+
+[Examples or demonstrations where applicable]
+
+[Next steps or recommendations]
+```
+
+## 8. Return Protocol
+
+After completing tasks related to this rule, transition back using `#### [Returning to Development Mode]` and summarize the key actions taken and outcomes.

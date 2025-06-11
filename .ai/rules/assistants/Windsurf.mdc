@@ -2,8 +2,8 @@
 description: Guidelines for optimizing interactions with Windsurf AI assistant for code generation and development workflows.
 globs: []
 alwaysApply: false
-version: "2.0.0"
-lastUpdated: "2025-05-14"
+version: "2.1.0"
+lastUpdated: "2025-05-18"
 compatibleWith: ["Memory-MCP","AI-Workflow-Integration"]
 ---
 

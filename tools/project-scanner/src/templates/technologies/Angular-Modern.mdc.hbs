@@ -1,0 +1,514 @@
+---
+description: "Best practices and patterns for modern Angular development"
+globs: ["**/*.ts", "**/*.html", "**/*.scss"]
+version: "1.0.0"
+lastUpdated: "{{date}}"
+---
+
+<div align="center">
+
+# u269bufe0f Angular Best Practices
+
+[![Framework](https://img.shields.io/badge/Framework-Angular-DD0031)](https://angular.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Required-3178C6)](https://www.typescriptlang.org/)
+
+**Modern Angular coding standards and patterns for {{projectName}}**
+
+</div>
+
+## ud83dudcda Overview
+
+This rule file contains best practices and patterns for developing with Angular in the {{projectName}} project.
+
+{{#if complexity.level}}{{#eq complexity.level "high"}}
+As a high-complexity Angular project, this codebase requires careful attention to architecture, performance optimization, and consistent patterns across many components.
+{{else}}{{#eq complexity.level "medium"}}
+As a medium-complexity Angular project, this codebase follows established Angular patterns while maintaining a reasonable level of abstraction.
+{{/eq}}{{/eq}}{{/if}}
+
+## ud83eudde9 Architecture
+
+### Project Structure
+
+```
+{{#if projectStructure.overview}}
+{{projectStructure.overview}}
+{{else}}
+src/
+├─ app/
+│  ├─ core/           # Singleton services, auth guards, interceptors
+│  ├─ shared/         # Shared components, directives, pipes
+│  ├─ features/       # Feature modules
+│  │  ├─ feature-1/
+│  │  │  ├─ components/
+│  │  │  ├─ services/
+│  │  │  ├─ models/
+│  │  │  ├─ feature-1-routing.module.ts
+│  │  │  └─ feature-1.module.ts
+│  ├─ app-routing.module.ts
+│  └─ app.module.ts
+{{/if}}
+```
+
+### Recommended Module Organization
+
+- **Core Module**: Singleton services, application-wide providers
+- **Shared Module**: Reusable components, directives, and pipes
+- **Feature Modules**: Domain-specific functionality
+  {{#if complexity.level}}{{#eq complexity.level "high"}}
+  - Further divided into sub-feature modules for complex features
+  - Utilize lazy loading for performance optimization
+  - Consider micro-frontend architecture for very large applications
+  {{/eq}}{{/if}}
+
+### Component Design
+
+{{#if patterns.architecture}}{{#eq patterns.architecture "container-presentation"}}  
+#### Container-Presentation Pattern (Smart/Dumb Components)
+
+- **Container Components**: 
+  - Manage state and data sources
+  - Interact with services
+  - Pass data to presentation components
+  - Handle events from presentation components
+- **Presentation Components**: 
+  - Receive data via @Input()
+  - Emit events via @Output()
+  - Focus on UI rendering
+  - Minimal to no dependencies on services
+{{else}}{{#eq patterns.architecture "feature-based"}}
+#### Feature-Based Organization
+
+Components are organized by feature domain, with each feature potentially having its own:
+- Services
+- Components
+- Models
+- Routing
+{{/eq}}{{/eq}}{{else}}
+#### Recommended: Container-Presentation Pattern (Smart/Dumb Components)
+
+- **Container Components**: 
+  - Manage state and data sources
+  - Interact with services
+  - Pass data to presentation components
+  - Handle events from presentation components
+- **Presentation Components**: 
+  - Receive data via @Input()
+  - Emit events via @Output()
+  - Focus on UI rendering
+  - Minimal to no dependencies on services
+{{/if}}
+
+## ud83duddd2ufe0f Component Implementation
+
+### Component Declaration
+
+```typescript
+@Component({
+  selector: 'app-feature',
+  templateUrl: './feature.component.html',
+  styleUrls: ['./feature.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush // Recommended for performance
+})
+export class FeatureComponent implements OnInit, OnDestroy {
+  // Component implementation
+}
+```
+
+### Lifecycle Management
+
+```typescript
+private destroy$ = new Subject<void>();
+
+ngOnInit(): void {
+  // Initialize component
+  this.loadData();
+  
+  this.someService.data$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
+      // Handle data
+    });
+}
+
+ngOnDestroy(): void {
+  // Clean up resources
+  this.destroy$.next();
+  this.destroy$.complete();
+}
+```
+
+### Best Practices
+
+- Use OnPush change detection for better performance
+- Implement OnDestroy and clean up subscriptions
+- Keep components focused on a single responsibility
+- Use async pipe in templates to handle observables
+- Avoid logic in templates; move to component class or services
+
+## ud83cudf10 State Management
+
+{{#if stateManagement}}
+### {{stateManagement.type}} for State Management
+
+{{stateManagement.description}}
+
+```typescript
+{{stateManagement.example}}
+```
+{{else}}{{#if complexity.level}}{{#eq complexity.level "high"}}
+### Recommended: NgRx for Complex State
+
+```typescript
+// Action
+export const loadItems = createAction('[Items] Load Items');
+export const loadItemsSuccess = createAction(
+  '[Items] Load Items Success',
+  props<{ items: Item[] }>()
+);
+
+// Reducer
+export const itemsReducer = createReducer(
+  initialState,
+  on(loadItemsSuccess, (state, { items }) => ({ ...state, items }))
+);
+
+// Effect
+@Injectable()
+export class ItemsEffects {
+  loadItems$ = createEffect(() => this.actions$.pipe(
+    ofType(loadItems),
+    switchMap(() => this.itemsService.getItems().pipe(
+      map(items => loadItemsSuccess({ items })),
+      catchError(...)
+    ))
+  ));
+
+  constructor(
+    private actions$: Actions,
+    private itemsService: ItemsService
+  ) {}
+}
+```
+
+### Component Store for Local State
+
+```typescript
+@Injectable()
+export class TodoComponentStore extends ComponentStore<TodosState> {
+  constructor(private todosService: TodosService) {
+    super(initialState);
+  }
+  
+  readonly todos$ = this.select(state => state.todos);
+  readonly loading$ = this.select(state => state.loading);
+  
+  readonly loadTodos = this.effect((trigger$) => trigger$.pipe(
+    tap(() => this.patchState({ loading: true })),
+    switchMap(() => this.todosService.getTodos().pipe(
+      tap(todos => this.patchState({ todos, loading: false })),
+      catchError(...)
+    ))
+  ));
+}
+```
+{{else}}{{#eq complexity.level "medium"}}
+### Recommended: Services with BehaviorSubject
+
+```typescript
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private dataSubject = new BehaviorSubject<Data[]>([]);
+  data$ = this.dataSubject.asObservable();
+  
+  loadData(): void {
+    this.http.get<Data[]>('/api/data').pipe(
+      tap(data => this.dataSubject.next(data))
+    ).subscribe();
+  }
+  
+  addItem(item: Data): void {
+    const currentData = this.dataSubject.value;
+    this.dataSubject.next([...currentData, item]);
+    
+    this.http.post('/api/data', item).subscribe();
+  }
+}
+```
+{{else}}
+### Recommended: Services with Observable State
+
+```typescript
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private dataSubject = new BehaviorSubject<Data[]>([]);
+  data$ = this.dataSubject.asObservable();
+  
+  loadData(): void {
+    this.http.get<Data[]>('/api/data').subscribe(data => {
+      this.dataSubject.next(data);
+    });
+  }
+}
+```
+{{/eq}}{{/eq}}{{else}}
+### Options for State Management
+
+- **Simple Apps**: Services with RxJS BehaviorSubject
+- **Medium Apps**: Component Store or NGXS
+- **Complex Apps**: NgRx with Actions, Reducers, Selectors, and Effects
+{{/if}}{{/if}}
+
+## ud83dudee0ufe0f Performance Optimization
+
+{{#if complexity.level}}{{#eq complexity.level "high"}}
+### Critical Performance Optimizations
+
+- **Change Detection Strategy**: Use OnPush change detection
+- **Lazy Loading**: Implement route-level lazy loading
+- **Bundle Analysis**: Regularly analyze bundle size with tools like webpack-bundle-analyzer
+- **Code Splitting**: Split code by feature modules
+- **Virtual Scrolling**: Use CDK virtual scroll for long lists
+- **Pure Pipes**: Prefer pure pipes over functions in templates
+- **Memoization**: Use memoization for expensive calculations
+
+### Advanced Techniques
+
+- **Preloading Strategies**: Implement custom preloading strategies
+- **Server-Side Rendering**: Consider Angular Universal for SEO and performance
+- **Web Workers**: Offload heavy calculations to web workers
+- **Incremental DOM**: Take advantage of Angular's rendering engine
+- **Service Worker**: Implement PWA capabilities with Angular service worker
+{{else}}
+### Performance Recommendations
+
+- Use OnPush change detection strategy
+- Implement lazy loading for feature modules
+- Use trackBy in *ngFor directives
+- Avoid computation in templates
+- Optimize change detection with pure pipes
+{{/eq}}{{else}}
+### Performance Recommendations
+
+- Use OnPush change detection strategy
+- Implement lazy loading for feature modules
+- Use trackBy in *ngFor directives
+- Avoid computation in templates
+- Optimize change detection with pure pipes
+{{/if}}
+
+## u2b50 Recommended Patterns
+
+### Reactive Forms
+
+```typescript
+form = this.fb.group({
+  name: ['', [Validators.required, Validators.minLength(3)]],
+  email: ['', [Validators.required, Validators.email]],
+  address: this.fb.group({
+    street: ['', Validators.required],
+    city: ['', Validators.required],
+    state: ['', Validators.required],
+    zip: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]]
+  })
+});
+
+get nameControl(): FormControl {
+  return this.form.get('name') as FormControl;
+}
+```
+
+### HTTP Requests
+
+```typescript
+@Injectable({ providedIn: 'root' })
+export class DataService {
+  constructor(private http: HttpClient) {}
+  
+  getData(): Observable<Data[]> {
+    return this.http.get<ApiResponse<Data[]>>('/api/data').pipe(
+      map(response => response.data),
+      catchError(this.handleError)
+    );
+  }
+  
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    // Log error and return user-friendly message
+    console.error('An error occurred:', error.message);
+    return throwError(() => new Error('Something went wrong. Please try again later.'));
+  }
+}
+```
+
+### Dependency Injection
+
+```typescript
+// Token for configuration
+export const CONFIG_TOKEN = new InjectionToken<AppConfig>('app.config');
+
+// Provider in module
+providers: [
+  {
+    provide: CONFIG_TOKEN,
+    useValue: environment.config
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+]
+
+// Usage in service
+constructor(@Inject(CONFIG_TOKEN) private config: AppConfig) {}
+```
+
+## ud83dudcac Testing Guidelines
+
+### Component Testing
+
+```typescript
+describe('MyComponent', () => {
+  let component: MyComponent;
+  let fixture: ComponentFixture<MyComponent>;
+  let mockDataService: jasmine.SpyObj<DataService>;
+
+  beforeEach(async () => {
+    mockDataService = jasmine.createSpyObj('DataService', ['getData']);
+    
+    await TestBed.configureTestingModule({
+      declarations: [MyComponent],
+      providers: [
+        { provide: DataService, useValue: mockDataService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA] // For testing in isolation
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(MyComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+  
+  it('should load data on init', () => {
+    mockDataService.getData.and.returnValue(of(['item1', 'item2']));
+    fixture.detectChanges();
+    expect(component.items.length).toBe(2);
+  });
+});
+```
+
+### Service Testing
+
+```typescript
+describe('DataService', () => {
+  let service: DataService;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [DataService]
+    });
+    
+    service = TestBed.inject(DataService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify(); // Ensure no outstanding requests
+  });
+
+  it('should return expected data', () => {
+    const testData = ['item1', 'item2'];
+    
+    service.getData().subscribe(data => {
+      expect(data).toEqual(testData);
+    });
+    
+    const req = httpMock.expectOne('/api/data');
+    expect(req.request.method).toBe('GET');
+    req.flush({ data: testData });
+  });
+});
+```
+
+## u267fufe0f Accessibility
+
+- Use semantic HTML elements
+- Implement ARIA attributes when necessary
+- Ensure keyboard navigation works correctly
+- Support screen readers with appropriate text alternatives
+- Maintain color contrast ratios 
+- Test with accessibility tools like axe-core
+
+## ud83dudccc Naming Conventions
+
+{{#with namingConventions}}
+{{#if components.dominant}}
+- **Components**: Use {{components.dominant}} with Component suffix
+  - Example: `{{#ifCond components.dominant '===' 'camelCase'}}userProfile{{else}}{{#ifCond components.dominant '===' 'snake_case'}}user_profile{{else}}{{#ifCond components.dominant '===' 'PascalCase'}}UserProfile{{else}}UserProfile{{/ifCond}}{{/ifCond}}{{/ifCond}}Component`
+{{else}}
+- **Components**: Use PascalCase with Component suffix
+  - Example: `UserProfileComponent`
+{{/if}}
+{{#if services.dominant}}
+- **Services**: Use {{services.dominant}} with Service suffix
+  - Example: `{{#ifCond services.dominant '===' 'camelCase'}}userData{{else}}{{#ifCond services.dominant '===' 'snake_case'}}user_data{{else}}{{#ifCond services.dominant '===' 'PascalCase'}}UserData{{else}}UserData{{/ifCond}}{{/ifCond}}{{/ifCond}}Service`
+{{else}}
+- **Services**: Use PascalCase with Service suffix
+  - Example: `UserDataService`
+{{/if}}
+{{#if directives.dominant}}
+- **Directives**: Use {{directives.dominant}} with Directive suffix
+  - Example: `{{#ifCond directives.dominant '===' 'camelCase'}}highlight{{else}}{{#ifCond directives.dominant '===' 'snake_case'}}highlight{{else}}{{#ifCond directives.dominant '===' 'PascalCase'}}Highlight{{else}}Highlight{{/ifCond}}{{/ifCond}}{{/ifCond}}Directive`
+{{else}}
+- **Directives**: Use camelCase with Directive suffix
+  - Example: `highlightDirective`
+{{/if}}
+{{#if pipes.dominant}}
+- **Pipes**: Use {{pipes.dominant}} with Pipe suffix
+  - Example: `{{#ifCond pipes.dominant '===' 'camelCase'}}formatDate{{else}}{{#ifCond pipes.dominant '===' 'snake_case'}}format_date{{else}}{{#ifCond pipes.dominant '===' 'PascalCase'}}FormatDate{{else}}FormatDate{{/ifCond}}{{/ifCond}}{{/ifCond}}Pipe`
+{{else}}
+- **Pipes**: Use camelCase with Pipe suffix
+  - Example: `formatDatePipe`
+{{/if}}
+{{#if modules.dominant}}
+- **Modules**: Use {{modules.dominant}} with Module suffix
+  - Example: `{{#ifCond modules.dominant '===' 'camelCase'}}feature{{else}}{{#ifCond modules.dominant '===' 'snake_case'}}feature{{else}}{{#ifCond modules.dominant '===' 'PascalCase'}}Feature{{else}}Feature{{/ifCond}}{{/ifCond}}{{/ifCond}}Module`
+{{else}}
+- **Modules**: Use PascalCase with Module suffix
+  - Example: `FeatureModule`
+{{/if}}
+{{/with}}
+
+## u26a1 Error Handling
+
+- Implement global error handling with ErrorHandler
+- Use catchError operator for HTTP requests
+- Provide user-friendly error messages
+- Log errors for debugging
+- Implement retry mechanisms for transient failures
+
+## ud83dudd12 Security Considerations
+
+- Protect against XSS with Angular's built-in sanitization
+- Use HttpClient for automatic XSRF protection
+- Implement proper authentication and authorization
+- Sanitize user inputs
+- Follow Angular Security Best Practices
+- Keep dependencies updated
+
+---
+
+<div align="center">
+
+**Generated on {{date}} u2022 [CodePilotRules](https://github.com/idominikosgr/CodePilotRules)**
+
+</div>

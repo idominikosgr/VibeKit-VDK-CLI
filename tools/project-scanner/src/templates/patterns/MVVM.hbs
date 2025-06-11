@@ -1,0 +1,152 @@
+{{! MVVM Pattern Template }}
+
+## Architecture: MVVM Pattern
+
+This project follows the **Model-View-ViewModel (MVVM)** architectural pattern, which facilitates separation of concerns for UI development.
+
+### Component Responsibilities
+
+#### Model
+
+- Represents the data and business logic
+- Contains domain entities and data access layer
+- Independent of the UI
+
+{{#if detectedModels}}
+**Detected Models:**
+{{#each detectedModels}}
+- `{{this.name}}` - {{this.purpose}}
+{{/each}}
+{{else}}
+**Model Implementation:**
+Models are implemented as {{#if patterns.classBased}}classes{{else}}data structures{{/if}} that encapsulate business logic and data.
+{{/if}}
+
+#### View
+
+- Represents the UI
+- Observes and reacts to ViewModel state changes
+- Forwards user interactions to the ViewModel
+- Contains minimal to no logic
+
+{{#if detectedViews}}
+**Detected Views:**
+{{#each detectedViews}}
+- `{{this.name}}` - {{this.purpose}}
+{{/each}}
+{{else}}
+**View Implementation:**
+Views are implemented as {{#if patterns.declarative}}declarative UI components{{else}}{{#if patterns.componentBased}}components{{else}}UI elements{{/if}}{{/if}} that bind to ViewModel properties.
+{{/if}}
+
+#### ViewModel
+
+- Acts as an intermediary between Model and View
+- Exposes data and commands for the View
+- Handles UI logic and state management
+- Implements data binding and property notification
+
+{{#if detectedViewModels}}
+**Detected ViewModels:**
+{{#each detectedViewModels}}
+- `{{this.name}}` - {{this.purpose}}
+{{/each}}
+{{else}}
+**ViewModel Implementation:**
+ViewModels are implemented as {{#if patterns.classBased}}classes{{else}}modules{{/if}} that transform Model data for display and handle UI events.
+{{/if}}
+
+### Data Flow
+
+1. User interacts with the View
+2. View forwards events to the ViewModel
+3. ViewModel updates the Model or internal state
+4. ViewModel notifies the View of state changes
+5. View updates based on new ViewModel state
+
+### Data Binding
+
+MVVM heavily relies on data binding mechanisms:
+
+{{#if techStack.dataBidingType}}
+- This project uses **{{techStack.dataBidingType}}** data binding.
+{{else}}
+- **One-way binding**: ViewModel to View updates only
+- **Two-way binding**: Changes propagate in both directions
+- **Event binding**: View events trigger ViewModel commands
+{{/if}}
+
+### Best Practices
+
+- Keep Views as thin as possible with minimal code-behind
+- Use commands pattern for user interactions
+- Create dedicated ViewModels for each View
+- Implement property change notification
+- Use dependency injection for services
+{{#if patterns.fileNaming}}
+- File naming convention: {{patterns.fileNaming}}
+{{/if}}
+
+### Testing Approaches
+
+- **Unit Tests**: Focus on ViewModel and Model testing
+- **Integration Tests**: Test interaction between components
+- **UI Tests**: Test the View using UI automation frameworks
+
+{{#if techStack.frameworks.ui}}
+### Framework-Specific Implementation
+
+In {{techStack.frameworks.ui}}, MVVM is implemented with:
+{{#eq techStack.frameworks.ui "Angular"}}
+- Models: TypeScript interfaces or classes
+- Views: Component templates (HTML)
+- ViewModels: Component classes with properties and methods
+- Services: Used for data access and business logic
+- Data Binding: Two-way binding with [(ngModel)]
+{{else}}{{#eq techStack.frameworks.ui "Vue"}}
+- Models: JavaScript objects or API service responses
+- Views: Vue templates in .vue files
+- ViewModels: Vue component instance with data, computed properties, and methods
+- Data Binding: Two-way binding with v-model
+{{else}}{{#eq techStack.frameworks.ui "WPF"}}
+- Models: POCO classes implementing INotifyPropertyChanged
+- Views: XAML
+- ViewModels: Classes implementing INotifyPropertyChanged
+- Data Binding: XAML bindings with dependency properties
+{{else}}{{#eq techStack.frameworks.ui "SwiftUI"}}
+- Models: Swift structs or classes conforming to ObservableObject
+- Views: SwiftUI View structs
+- ViewModels: Classes conforming to ObservableObject with @Published properties
+- Data Binding: SwiftUI bindings
+{{else}}{{#eq techStack.frameworks.ui "React"}}
+- Models: JavaScript objects or Redux state
+- Views: React functional components or class components
+- ViewModels: Custom hooks, context, or state management libraries
+- Data Binding: React hooks (useState, useReducer) or other state management
+{{else}}
+- Models: Domain entities and data access
+- Views: UI components
+- ViewModels: Intermediary classes that handle UI logic
+{{/eq}}{{/eq}}{{/eq}}{{/eq}}{{/eq}}
+{{/if}}
+
+{{#if complexity.level}}
+### Adaptation for Project Complexity
+
+{{#eq complexity.level "high"}}
+For this high-complexity project:
+- Consider adding additional layers like Services and Repositories
+- Implement advanced state management
+- Use dependency injection container
+- Add logging and telemetry throughout the architecture
+{{else}}{{#eq complexity.level "medium"}}
+For this medium-complexity project:
+- Maintain clear separation between components
+- Use service layer for shared business logic
+- Implement proper error handling and logging
+{{else}}
+For this simpler project:
+- Focus on maintainable separation of concerns
+- Keep ViewModels straightforward and focused
+{{/eq}}{{/eq}}
+{{/if}}

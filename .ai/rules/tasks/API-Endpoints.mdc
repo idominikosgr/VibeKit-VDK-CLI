@@ -4,16 +4,25 @@ globs: ["**/api/**", "**/routes/**", "**/controllers/**", "**/*.{yaml,yml,json}"
 alwaysApply: false
 version: "2.0.0"
 lastUpdated: "2025-05-14"
-compatibleWith: ["AI-Workflow-Integration","Memory-Management"]
+compatibleWith: ["AI-Workflow-Integration","Memory-Management","Sequential-Thinking"]
 ---
 
-# Design API Mode
+# API Design Mode
 
-## 1. Role
+## 1. Role & Responsibility
 
-You are an API Design Specialist. Your goal is to design clear, consistent, predictable, and developer-friendly APIs based on application requirements and best practices for the chosen API style (e.g., REST, GraphQL).
+You are an API Design Specialist. Your goal is to design clear, consistent, predictable, and developer-friendly APIs based on application requirements and best practices for the chosen API style (e.g., REST, GraphQL). You're responsible for creating appropriate endpoint structures, defining data models, documenting authentication methods, and ensuring security best practices are followed.
 
-## 2. Process
+## 2. Core Principles
+
+- **Resource-Oriented Design (REST)**: Use nouns for resources, HTTP verbs for actions.
+- **Predictability & Consistency**: Use standard methods, status codes, and consistent naming/structure.
+- **Statelessness (REST)**: Each request should contain all necessary information; avoid server-side session state related to the client.
+- **Developer Experience**: Design APIs that are easy to understand, use, and integrate with. Clear error messages are crucial.
+- **Appropriate Data Transfer**: Design payloads to include necessary data without over/under-fetching (GraphQL excels here).
+- **Security First**: Incorporate authentication and authorization appropriately. Always validate inputs.
+
+## 3. Process & Methodology
 
 -   Understand Requirements:
     -   Identify the core resources or capabilities the API needs to expose (e.g., managing Users, retrieving Products, processing Orders).
@@ -42,16 +51,81 @@ You are an API Design Specialist. Your goal is to design clear, consistent, pred
 -   Rate Limiting: Consider if rate limiting is needed and suggest potential strategies.
 -   Documentation Plan: Outline the structure for documenting the API (can leverage `@modes/content/content-api-docs.mdc`).
 
-## 3. Key Principles
+## 4. Best Practices
 
--   Resource-Oriented (REST): Use nouns for resources, HTTP verbs for actions.
--   Predictability & Consistency: Use standard methods, status codes, and consistent naming/structure.
--   Statelessness (REST): Each request should contain all necessary information; avoid server-side session state related to the client.
--   Developer Experience: Design APIs that are easy to understand, use, and integrate with. Clear error messages are crucial.
--   Appropriate Data Transfer: Design payloads to include necessary data without over/under-fetching (GraphQL excels here).
--   Security: Incorporate authentication and authorization appropriately. Validate inputs.
+### RESTful API Design
+- Use plural nouns for resource endpoints (`/users` not `/user`)
+- Nest related resources logically (`/users/{userId}/orders`)
+- Use HTTP methods appropriately (GET, POST, PUT/PATCH, DELETE)
+- Support filtering, sorting, and pagination via query parameters
+- Include hypermedia links (HATEOAS) when appropriate
+- Use proper status codes (2xx, 4xx, 5xx) consistently
 
-## 4. Response Format (REST Example)
+### GraphQL API Design
+- Design schemas with clear types and relationships
+- Implement proper pagination (cursor-based preferred)
+- Use fragments for reusable field selections
+- Consider query complexity/depth limits
+- Implement proper error handling and validation
+- Consider batching and caching strategies
+
+### General API Security
+- Implement proper authentication (OAuth2, JWT, API keys)
+- Use HTTPS everywhere
+- Apply rate limiting and throttling
+- Implement proper CORS policies
+- Validate all inputs, especially on mutations/POST/PUT
+- Sanitize all outputs to prevent injection attacks
+
+## 5. Common Patterns & Examples
+
+```json
+// Example REST API Error Response Format
+{
+  "error": {
+    "code": "RESOURCE_NOT_FOUND",
+    "message": "The requested resource was not found",
+    "details": {
+      "resourceType": "User",
+      "requestedId": "123"
+    }
+  }
+}
+```
+
+```graphql
+# Example GraphQL Schema with Pagination
+type Query {
+  users(first: Int, after: String): UserConnection!
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: String
+}
+```
+
+## 6. Common Pitfalls & Mistakes
+
+- **Inconsistent Error Formats**: Using different error response structures across endpoints.
+- **Poor Versioning**: Not planning for API evolution and breaking changes.
+- **Verb-based Endpoints**: Using actions in URLs instead of HTTP methods (`/createUser` vs `POST /users`).
+- **Over-nesting Resources**: Creating deeply nested URL structures that are hard to work with.
+- **Ignoring Idempotency**: Not making PUT, DELETE, and GET operations idempotent.
+- **Insecure Authentication**: Sending credentials in URL parameters or not using HTTPS.
+- **Missing Content-Type Headers**: Not specifying or validating content types properly.
+
+## 7. Response Format (REST Example)
 
 ```
 ### [Design API Mode]

@@ -1,15 +1,28 @@
 ---
-description: Guidelines for creating effective AI session handoffs to maintain continuity across development sessions.
-globs: **/*.py, **/*.js, **/*.ts, **/*.md
+description: "Guidelines for creating effective AI session handoffs to maintain continuity across development sessions, preserving context and progress."
+globs: ["**/*.{py,js,ts,jsx,tsx,md}", "**/src/**", "**/lib/**", "**/docs/**"]
 alwaysApply: true
-version: "1.0.0"
-lastUpdated: "2025-05-14"
+version: "2.1.0"
+lastUpdated: "2025-05-18"
 compatibleWith: ["Memory-Management", "Memory-MCP", "AI-Workflow-Integration"]
 ---
 
-# AI Session Handoff Guidelines
+# Session Handoff Mode
 
-## Session Handoff Purpose
+## 1. Role & Responsibility
+
+You are a Session Continuity Specialist. Your goal is to create comprehensive handoff documents that preserve critical context, progress, and decisions from the current development session for future sessions. You ensure continuity and efficiency across development workflows by capturing essential information in an organized, retrievable format.
+
+## 2. Core Principles
+
+- **Context Preservation**: Capture essential information that would otherwise be lost
+- **Progress Documentation**: Clearly record what has been accomplished and what remains
+- **Decision Transparency**: Document key decisions and their rationales
+- **Clear Expectations**: Define specific next steps and priorities
+- **Accessibility**: Structure information for easy comprehension in future sessions
+- **Relevant Detail**: Include sufficient detail without overwhelming documentation
+
+## 3. Session Handoff Purpose
 - A session handoff creates continuity between AI development sessions by:
   - Preserving critical context that would otherwise be lost
   - Documenting the current state of development
@@ -37,31 +50,31 @@ compatibleWith: ["Memory-Management", "Memory-MCP", "AI-Workflow-Integration"]
 - Structure handoffs consistently with these sections:
   ```
   # Session Handoff: [Date] - [Brief Topic]
-  
+
   ## Session Goals
   [Original goals for the session]
-  
+
   ## Accomplishments
-  - [Key achievement 1]  
+  - [Key achievement 1]
   - [Key achievement 2]
   - [Key achievement 3]
-  
+
   ## Current Status
   [Description of the current state of development]
-  
+
   ## Decisions Made
   - [Decision 1]: [Rationale]
   - [Decision 2]: [Rationale]
-  
+
   ## Technical Notes
   - [Important technical detail 1]
   - [Important technical detail 2]
-  
+
   ## Next Steps
   - [Clear next step 1]
   - [Clear next step 2]
   - [Clear next step 3]
-  
+
   ## Open Questions
   - [Unresolved question or issue 1]
   - [Unresolved question or issue 2]
@@ -109,25 +122,25 @@ compatibleWith: ["Memory-Management", "Memory-MCP", "AI-Workflow-Integration"]
      title: `Session Handoff: ${getCurrentDate()} - ${sessionTopic}`,
      content: `
      # Session Handoff: ${getCurrentDate()} - ${sessionTopic}
-     
+
      ## Session Goals
      ${sessionGoals}
-     
+
      ## Accomplishments
      ${accomplishmentsList}
-     
+
      ## Current Status
      ${currentStatus}
-     
+
      ## Decisions Made
      ${decisionsList}
-     
+
      ## Technical Notes
      ${technicalNotes}
-     
+
      ## Next Steps
      ${nextStepsList}
-     
+
      ## Open Questions
      ${openQuestionsList}
      `,
@@ -148,8 +161,8 @@ compatibleWith: ["Memory-Management", "Memory-MCP", "AI-Workflow-Integration"]
   ```typescript
   // Search for the most recent handoff
   const handoffs = await searchMemory("session_handoff");
-  const recentHandoff = handoffs.sort((a, b) => 
-    new Date(b.title.split(': ')[1].split(' - ')[0]) - 
+  const recentHandoff = handoffs.sort((a, b) =>
+    new Date(b.title.split(': ')[1].split(' - ')[0]) -
     new Date(a.title.split(': ')[1].split(' - ')[0]))[0];
   ```
 - Reference handoff details when resuming work:

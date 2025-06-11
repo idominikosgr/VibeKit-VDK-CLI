@@ -1,6 +1,31 @@
 # Changelog
 
-All notable changes to the CodePilotRules project will be documented in this file.
+All notable changes to the Vibe Coding Rules project will be documented in this file.
+
+## [2.1.0] - 2025-05-20
+
+### Added
+
+- **Enhanced Multi-IDE Support**
+  - Comprehensive expansion of supported IDE and AI tool integrations
+  - Added dedicated assistant rule files for all major AI tools and IDEs
+  - Updated configuration instructions for all supported environments
+  - Created platform-specific documentation and integration guides
+  - Renamed Create-Cursor-Rule.mdc to Create-AI-Rule.mdc for inclusivity
+
+- **Automated Editor Path Integration**
+  - Added editor path resolver system to standardize configuration paths
+  - Created `update-mcp-config.sh` script for automatic MCP configuration
+  - Enhanced setup wizard to integrate with editor path resolver
+  - Improved MCP configuration templating with editor-specific paths
+  - Added comprehensive documentation in Editor Path Integration Guide
+
+### Changed
+
+- Updated all platform references to include full range of supported tools
+- Improved MCP configuration documentation with IDE-specific paths
+- Enhanced core agent rules to reference all assistant-specific behaviors
+- Updated documentation with platform-specific setup instructions
 
 ## [2.0.0] - 2025-05-14
 
@@ -17,7 +42,7 @@ All notable changes to the CodePilotRules project will be documented in this fil
   - **Swift Language Rules**: Updated for Swift 5.9/6.0 with macros, concurrency best practices
   - **SwiftUI Technology Rules**: Added NavigationStack patterns, performance optimization techniques
   - **PySideUI Technology Rules**: Added modern Python integration, asyncio patterns
- 
+
 - **New Technology Files**
   - **GraphQL**: Schema design, client/server implementation guidance
   - **Docker/Kubernetes**: Container design, security, deployment strategies
@@ -51,10 +76,16 @@ All notable changes to the CodePilotRules project will be documented in this fil
 
 ### Changed
 
-- Project renamed from DevRules to CodePilotRules
+- Project renamed from DevRules to Vibe Coding Rules
 - Reorganized directory structure from `.cursor/rules/` to `.ai/rules/`
 - Updated README with new features and organizational structure
 - Added IDE/tool-specific configuration options for multiple AI ecosystems
+- Added comprehensive support for additional AI tools and IDEs:
+  - VS Code / VS Code Insiders
+  - Claude Desktop and Claude Code
+  - Windsurf / Windsurf-next (formerly Codeium)
+  - JetBrains IDEs (IntelliJ, PyCharm, WebStorm, etc.)
+  - Zed Editor
 
 ### Technical Notes
 
@@ -69,4 +100,4 @@ All notable changes to the CodePilotRules project will be documented in this fil
 - Implement testing for setup wizard across different environments
 - Create additional technology rule files for emerging frameworks
 - Develop unified API for rule file integration with different AI systems
-- Add support for CI/CD integration in CodePilotRules
+- Add support for CI/CD integration in Vibe Coding Rules

@@ -1,0 +1,165 @@
+{{! Microservices Pattern Template }}
+
+## Architecture: Microservices Pattern
+
+This project follows the **Microservices** architectural pattern, which structures the application as a collection of loosely coupled services that implement business capabilities.
+
+### Key Characteristics
+
+- **Service Independence**: Each service operates independently and can be deployed separately
+- **Decentralized Data Management**: Each service manages its own database
+- **API Communication**: Services interact via well-defined APIs
+- **Domain-Driven Design**: Services are organized around business domains
+- **Infrastructure Automation**: DevOps practices for CI/CD and deployment
+
+{{#if detectedServices}}
+### Detected Services
+
+{{#each detectedServices}}
+#### {{this.name}}
+- **Purpose**: {{this.purpose}}
+- **API Path**: {{this.apiPath}}
+- **Database**: {{this.database}}
+- **Technology**: {{this.technology}}
+{{/each}}
+{{else}}
+### Service Organization
+
+Services should be organized around business capabilities and bounded contexts rather than technical functionality.
+{{/if}}
+
+### Communication Patterns
+
+{{#if patterns.communicationType}}
+This project uses **{{patterns.communicationType}}** for service communication:
+{{#eq patterns.communicationType "Synchronous"}}
+- **REST APIs**: Direct HTTP calls between services
+- **gRPC**: For high-performance internal communication
+- **GraphQL**: For flexible client-service interactions
+{{else}}{{#eq patterns.communicationType "Asynchronous"}}
+- **Message Queues**: {{patterns.messageQueue|default:"RabbitMQ/Kafka/etc."}}
+- **Event-Driven**: Services publish and subscribe to events
+- **Event Sourcing**: Track state changes as a sequence of events
+{{else}}{{#eq patterns.communicationType "Hybrid"}}
+- **Synchronous APIs**: For critical real-time operations
+- **Asynchronous Events**: For non-blocking operations and notifications
+- **CQRS**: Separate read and write operations for scaling
+{{/eq}}{{/eq}}{{/eq}}
+{{else}}
+#### Available Communication Approaches
+- **Synchronous**: REST/gRPC direct calls between services
+- **Asynchronous**: Event-driven with message queues
+- **Hybrid**: Combine synchronous and asynchronous as appropriate
+{{/if}}
+
+### Data Management
+
+{{#if patterns.dataManagement}}
+- **Data Storage**: {{patterns.dataManagement.storage}}
+- **Data Consistency**: {{patterns.dataManagement.consistency}}
+- **Transaction Pattern**: {{patterns.dataManagement.transaction}}
+{{else}}
+- **Database per Service**: Each service manages its own data storage
+- **Eventual Consistency**: Accept that data will be eventually consistent
+- **Saga Pattern**: Manage distributed transactions across services
+{{/if}}
+
+### API Gateway
+
+{{#if apiGateway}}
+This project uses **{{apiGateway.name}}** as the API Gateway:
+- **Routes**: {{apiGateway.routes}}
+- **Authentication**: {{apiGateway.auth}}
+- **Rate Limiting**: {{apiGateway.rateLimiting|default:"Configured based on service requirements"}}
+{{else}}
+Implement an API Gateway to:
+- Route requests to appropriate services
+- Aggregate responses from multiple services
+- Handle authentication and authorization
+- Implement rate limiting and monitoring
+{{/if}}
+
+### Service Discovery
+
+{{#if serviceDiscovery}}
+Using **{{serviceDiscovery.name}}** for service discovery:
+- **Registration**: {{serviceDiscovery.registration}}
+- **Discovery**: {{serviceDiscovery.discovery}}
+{{else}}
+Implement service discovery to:
+- Allow services to find each other without hardcoded locations
+- Support dynamic scaling of service instances
+- Handle service health monitoring
+{{/if}}
+
+### Best Practices
+
+- **Single Responsibility**: Each service should focus on a single business capability
+- **Independent Deployability**: Services should be deployable without affecting others
+- **Resilience**: Implement circuit breakers, retries, and fallbacks
+- **Observability**: Centralized logging, monitoring, and distributed tracing
+- **API Versioning**: Plan for evolution of service APIs
+- **Security**: Authentication, authorization, and secure communication
+
+### Testing Approaches
+
+- **Unit Tests**: Test individual service components
+- **Integration Tests**: Test service interactions with other services
+- **Contract Tests**: Verify API contracts between services
+- **End-to-End Tests**: Test complete user scenarios across services
+
+{{#if complexity.level}}
+### Adaptation for Project Complexity
+
+{{#eq complexity.level "high"}}
+For this high-complexity microservices project:
+- Implement sophisticated service mesh for communication control
+- Use advanced monitoring and observability tools
+- Implement comprehensive CI/CD pipelines for all services
+- Consider multi-region deployment for high availability
+- Implement advanced security with zero-trust architecture
+{{else}}{{#eq complexity.level "medium"}}
+For this medium-complexity microservices project:
+- Focus on clear service boundaries and APIs
+- Implement basic service mesh or API gateway
+- Set up centralized logging and monitoring
+- Establish standardized CI/CD pipelines
+{{else}}
+For this simpler microservices project:
+- Start with a small number of well-defined services
+- Use simple synchronous communication patterns
+- Implement basic monitoring and tracing
+- Consider a monorepo approach for easier maintenance
+{{/eq}}{{/eq}}
+{{/if}}
+
+{{#if techStack.orchestration}}
+### Deployment & Orchestration
+
+This project uses **{{techStack.orchestration}}** for deployment and orchestration:
+{{#eq techStack.orchestration "Kubernetes"}}
+- **Container Orchestration**: Kubernetes
+- **Service Resources**: Deployments, Services, ConfigMaps, Secrets
+- **Networking**: Service mesh ({{techStack.serviceMesh|default:"Istio/Linkerd"}})
+- **Configuration**: Helm charts or Kustomize
+{{else}}{{#eq techStack.orchestration "Docker Compose"}}
+- **Container Definition**: docker-compose.yml
+- **Networking**: Docker networks
+- **Configuration**: Environment variables and configs
+{{else}}{{#eq techStack.orchestration "AWS ECS"}}
+- **Task Definitions**: ECS task definitions
+- **Service Deployment**: ECS services
+- **Load Balancing**: Application Load Balancer
+{{else}}{{#eq techStack.orchestration "Serverless"}}
+- **Function Deployment**: CloudFormation/Terraform/SAM
+- **API Gateway**: For HTTP endpoints
+- **Event Sources**: For event-driven functions
+{{/eq}}{{/eq}}{{/eq}}{{/eq}}
+{{else}}
+### Recommended Deployment Approach
+
+Based on the project structure, consider:
+- Containerization with Docker
+- Orchestration with Kubernetes or docker-compose
+- CI/CD pipelines for automated deployment
+{{/if}}

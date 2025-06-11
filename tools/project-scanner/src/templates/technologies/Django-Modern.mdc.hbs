@@ -1,0 +1,740 @@
+---
+description: "Best practices and patterns for modern Django web development"
+globs: ["**/*.py", "**/settings.py", "**/urls.py", "**/views.py", "**/models.py"]
+version: "1.0.0"
+lastUpdated: "{{date}}"
+---
+
+<div align="center">
+
+# ud83dudc0a Django Best Practices
+
+[![Framework](https://img.shields.io/badge/Framework-Django-092E20)](https://www.djangoproject.com/)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB)](https://www.python.org/)
+
+**Modern Django coding standards and patterns for {{projectName}}**
+
+</div>
+
+## ud83dudcda Overview
+
+This rule file contains best practices and patterns for developing web applications with Django in the {{projectName}} project.
+
+{{#if complexity.level}}{{#eq complexity.level "high"}}
+As a high-complexity Django project, this codebase requires careful attention to architecture, performance optimization, and consistent patterns across many apps and components.
+{{else}}{{#eq complexity.level "medium"}}
+As a medium-complexity Django project, this codebase follows established patterns while maintaining a reasonable level of abstraction.
+{{/eq}}{{/eq}}{{/if}}
+
+## ud83eudde9 Architecture
+
+### Project Structure
+
+```
+{{#if projectStructure.overview}}
+{{projectStructure.overview}}
+{{else}}
+{{projectName}}/
+u251cu2500u2500 config/               # Project-wide settings
+u2502   u251cu2500u2500 settings/
+u2502   u2502   u251cu2500u2500 base.py       # Base settings
+u2502   u2502   u251cu2500u2500 local.py      # Development settings
+u2502   u2502   u2514u2500u2500 production.py # Production settings
+u2502   u251cu2500u2500 urls.py           # Project URLs
+u2502   u2514u2500u2500 wsgi.py           # WSGI configuration
+u251cu2500u2500 apps/                # Application modules
+u2502   u251cu2500u2500 users/           # User-related functionality
+u2502   u2502   u251cu2500u2500 migrations/    # Database migrations
+u2502   u2502   u251cu2500u2500 templates/     # App-specific templates
+u2502   u2502   u251cu2500u2500 admin.py       # Admin configuration
+u2502   u2502   u251cu2500u2500 apps.py        # App configuration
+u2502   u2502   u251cu2500u2500 models.py      # Data models
+u2502   u2502   u251cu2500u2500 urls.py        # URL routing
+u2502   u2502   u251cu2500u2500 views.py       # View functions/classes
+u2502   u2502   u2514u2500u2500 serializers.py # API serializers (if using DRF)
+u2502   u2514u2500u2500 other_app/       # Other application module
+u251cu2500u2500 templates/           # Project-wide templates
+u251cu2500u2500 static/              # Static files (CSS, JS, images)
+u251cu2500u2500 media/               # User-uploaded files
+u251cu2500u2500 utils/               # Utility functions and classes
+u251cu2500u2500 manage.py            # Django management script
+u2514u2500u2500 requirements/        # Dependencies
+    u251cu2500u2500 base.txt         # Base requirements
+    u251cu2500u2500 local.txt        # Development requirements
+    u2514u2500u2500 production.txt  # Production requirements
+{{/if}}
+```
+
+### Django Apps Organization
+
+{{#if patterns.architecture}}{{#eq patterns.architecture "domain-driven"}}
+#### Domain-Driven Design (DDD)
+
+This project organizes apps based on business domains:
+- Each app represents a bounded context
+- Apps are organized by business functionality
+- Limited dependencies between domains
+{{else}}{{#eq patterns.architecture "component-based"}}
+#### Component-Based Architecture
+
+This project uses a component-based approach:
+- Apps are organized by technical functionality
+- Shared components are used across multiple features
+- Reusability is emphasized
+{{else}}{{#eq patterns.architecture "traditional"}}
+#### Traditional Django Architecture
+
+This project follows standard Django conventions:
+- Apps are organized by feature/resource
+- Models, views, and templates in each app
+- Admin integration for content management
+{{/eq}}{{/eq}}{{/eq}}{{else}}
+#### Recommended: Domain-Driven Organization
+
+- Organize apps based on business domains rather than technical layers
+- Each app should have a single, well-defined responsibility
+- Follow the "Fat Models, Thin Views, Stupid Templates" principle
+- Minimize dependencies between apps
+{{/if}}
+
+## ud83dudc0a Models
+
+### Model Best Practices
+
+```python
+from django.db import models
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+
+
+class BaseModel(models.Model):
+    """Base model for all models in the project."""
+    created_at = models.DateTimeField(_('Created at'), default=timezone.now)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Product(BaseModel):
+    """Example product model with best practices."""
+    STATUS_CHOICES = (
+        ('draft', _('Draft')),
+        ('published', _('Published')),
+        ('archived', _('Archived')),
+    )
+    
+    name = models.CharField(_('Product name'), max_length=255)
+    slug = models.SlugField(_('URL slug'), max_length=255, unique=True)
+    description = models.TextField(_('Description'), blank=True)
+    price = models.DecimalField(_('Price'), max_digits=10, decimal_places=2)
+    status = models.CharField(
+        _('Status'),
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='draft'
+    )
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='products',
+        verbose_name=_('Creator')
+    )
+    categories = models.ManyToManyField(
+        'Category',
+        blank=True,
+        related_name='products',
+        verbose_name=_('Categories')
+    )
+    
+    class Meta:
+        verbose_name = _('Product')
+        verbose_name_plural = _('Products')
+        ordering = ('-created_at',)
+        indexes = [
+            models.Index(fields=['status', 'created_at']),
+            models.Index(fields=['slug']),
+        ]
+    
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'slug': self.slug})
+    
+    def is_published(self):
+        return self.status == 'published'
+```
+
+### Model Recommendations
+
+- Use an abstract `BaseModel` for common fields
+- Define `__str__` and `get_absolute_url` methods
+- Use descriptive, verbose field names with translations
+- Define `Meta` class with appropriate options
+- Use custom model managers for query reuse
+- Add database indexes for frequently queried fields
+- Leverage Django model validation
+
+## ud83duddb1 Views
+
+### Class-Based Views
+
+```python
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse_lazy
+from django.contrib import messages
+
+from .models import Product
+from .forms import ProductForm
+
+
+class ProductListView(ListView):
+    model = Product
+    context_object_name = 'products'
+    template_name = 'products/product_list.html'
+    paginate_by = 20
+    
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(status='published')
+        category = self.request.GET.get('category')
+        if category:
+            queryset = queryset.filter(categories__slug=category)
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = 'products/product_detail.html'
+    
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Product.objects.all()
+        return Product.objects.filter(status='published')
+
+
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'products/product_form.html'
+    permission_required = 'products.add_product'
+    
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        messages.success(self.request, 'Product created successfully')
+        return super().form_valid(form)
+```
+
+### Function-Based Views
+
+```python
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required, permission_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+from .models import Product
+from .forms import ProductForm
+
+
+def product_list(request):
+    products = Product.objects.filter(status='published')
+    category = request.GET.get('category')
+    if category:
+        products = products.filter(categories__slug=category)
+        
+    return render(request, 'products/product_list.html', {
+        'products': products,
+        'categories': Category.objects.all()
+    })
+
+
+@login_required
+@permission_required('products.add_product')
+def product_create(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.creator = request.user
+            product.save()
+            form.save_m2m()  # Save many-to-many relationships
+            messages.success(request, 'Product created successfully')
+            return redirect('product_detail', slug=product.slug)
+    else:
+        form = ProductForm()
+        
+    return render(request, 'products/product_form.html', {'form': form})
+```
+
+### View Recommendations
+
+{{#if patterns.views}}{{#eq patterns.views "class-based"}}
+This project primarily uses class-based views for consistency and extensibility.
+{{else}}{{#eq patterns.views "function-based"}}
+This project primarily uses function-based views for simplicity and readability.
+{{else}}{{#eq patterns.views "hybrid"}}
+This project uses a hybrid approach with class-based views for CRUD operations and function-based views for more complex custom logic.
+{{/eq}}{{/eq}}{{/eq}}{{else}}
+- **Class-Based Views**: Prefer for CRUD operations, list views, and detail views
+- **Function-Based Views**: Use for complex custom logic that doesn't fit CBV patterns
+- **Mixins**: Use for reusable view behaviors (e.g., permission checks)
+- **Context Processors**: Use for template variables needed across many views
+{{/if}}
+
+## ud83cudf10 URLs and Routing
+
+```python
+# project/urls.py
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('users/', include('apps.users.urls')),
+    path('products/', include('apps.products.urls')),
+    path('api/', include('apps.api.urls')),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += path('__debug__/', include('debug_toolbar.urls')),
+
+# apps/products/urls.py
+from django.urls import path
+from . import views
+
+app_name = 'products'
+
+urlpatterns = [
+    path('', views.ProductListView.as_view(), name='product_list'),
+    path('create/', views.ProductCreateView.as_view(), name='product_create'),
+    path('<slug:slug>/', views.ProductDetailView.as_view(), name='product_detail'),
+    path('<slug:slug>/update/', views.ProductUpdateView.as_view(), name='product_update'),
+    path('<slug:slug>/delete/', views.ProductDeleteView.as_view(), name='product_delete'),
+]
+```
+
+### URL Recommendations
+
+- Use the `app_name` namespace for all app URL configurations
+- Use descriptive URL names for reverse lookups
+- Use path converters to validate URL parameters
+- Organize URLs hierarchically
+- Use include() to split URLs by app or functionality
+
+## ud83duddd1 Forms and Validation
+
+```python
+from django import forms
+from django.utils.translation import gettext_lazy as _
+
+from .models import Product
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'slug', 'description', 'price', 'status', 'categories']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 5}),
+            'status': forms.RadioSelect,
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add CSS classes or other attributes
+        self.fields['name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['slug'].widget.attrs.update({'class': 'form-control'})
+        self.fields['description'].widget.attrs.update({'class': 'form-control'})
+        
+    def clean_slug(self):
+        slug = self.cleaned_data.get('slug')
+        # Custom validation logic
+        if slug and Product.objects.filter(slug=slug).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError(_('This slug is already in use. Please choose another.'))
+        return slug
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        # Cross-field validation
+        price = cleaned_data.get('price')
+        status = cleaned_data.get('status')
+        
+        if status == 'published' and (price is None or price <= 0):
+            self.add_error('price', _('Published products must have a positive price.'))
+            
+        return cleaned_data
+```
+
+### Form Recommendations
+
+- Use ModelForm for forms that map closely to models
+- Customize widgets to control HTML rendering
+- Add CSS classes in `__init__` method
+- Use clean_<fieldname> methods for field-specific validation
+- Use clean() method for cross-field validation
+- Consider form inheritance for reusable validation logic
+
+## ud83dudcbe Templates and Frontend
+
+### Template Structure
+
+```
+templates/
+u251cu2500u2500 base.html           # Base template with common structure
+u251cu2500u2500 includes/           # Reusable template fragments
+u2502   u251cu2500u2500 header.html
+u2502   u251cu2500u2500 footer.html
+u2502   u251cu2500u2500 pagination.html
+u2502   u2514u2500u2500 messages.html
+u251cu2500u2500 layouts/            # Page layout variations
+u2502   u251cu2500u2500 full_width.html
+u2502   u2514u2500u2500 sidebar.html
+u251cu2500u2500 products/           # App-specific templates
+u2502   u251cu2500u2500 product_list.html
+u2502   u251cu2500u2500 product_detail.html
+u2502   u2514u2500u2500 product_form.html
+u251cu2500u2500 users/              # Another app's templates
+u2514u2500u2500 errors/             # Error pages (404, 500, etc.)
+```
+
+### Template Structure Example
+
+```html
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% include "includes/header.html" %}
+    
+    <main class="container">
+        {% include "includes/messages.html" %}
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% include "includes/footer.html" %}
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+
+<!-- products/product_list.html -->
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}Products | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Products</h1>
+    
+    <div class="product-grid">
+        {% for product in products %}
+            {% include "products/includes/product_card.html" with product=product %}
+        {% empty %}
+            <p>No products found.</p>
+        {% endfor %}
+    </div>
+    
+    {% include "includes/pagination.html" with page_obj=page_obj %}
+{% endblock %}
+```
+
+### Template Recommendations
+
+- Use template inheritance with a base template
+- Extract reusable components to includes
+- Use block tags for customizable sections
+- Follow the DRY principle with includes and template tags
+- Use context processors for variables needed in many templates
+- Create custom template tags for complex logic
+
+## ud83cudf1a Django REST Framework (DRF)
+
+{{#if drf}}
+### API Structure
+
+```python
+# serializers.py
+from rest_framework import serializers
+from .models import Product
+
+class ProductSerializer(serializers.ModelSerializer):
+    creator = serializers.StringRelatedField()
+    
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'slug', 'description', 'price', 'status', 'creator', 'created_at']
+        read_only_fields = ['creator', 'created_at']
+
+# views.py
+from rest_framework import viewsets, permissions
+from .models import Product
+from .serializers import ProductSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    lookup_field = 'slug'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if not self.request.user.is_staff:
+            queryset = queryset.filter(status='published')
+        return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
+
+# urls.py
+from rest_framework.routers import DefaultRouter
+from . import views
+
+router = DefaultRouter()
+router.register('products', views.ProductViewSet)
+
+urlpatterns = router.urls
+```
+{{/if}}
+
+### DRF Recommendations
+
+- Use ModelSerializer for standard CRUD operations
+- Use ViewSets for resource-oriented views
+- Implement proper permissions and authentication
+- Use nested serializers for related objects
+- Apply filtering, ordering, and pagination
+- Use throttling for API rate limiting
+
+## ud83dudcdd Admin Interface
+
+```python
+from django.contrib import admin
+from django.utils.html import format_html
+from .models import Product, Category
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ['name']
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['name', 'price_display', 'status_colored', 'creator', 'created_at']
+    list_filter = ['status', 'created_at', 'categories']
+    search_fields = ['name', 'description']
+    prepopulated_fields = {'slug': ('name',)}
+    readonly_fields = ['created_at', 'updated_at']
+    filter_horizontal = ['categories']
+    date_hierarchy = 'created_at'
+    
+    fieldsets = [
+        (None, {
+            'fields': ('name', 'slug', 'description')
+        }),
+        ('Product Details', {
+            'fields': ('price', 'status', 'categories'),
+            'classes': ('collapse',)
+        }),
+        ('Metadata', {
+            'fields': ('creator', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    ]
+    
+    def price_display(self, obj):
+        return f"${obj.price}"
+    price_display.short_description = 'Price'
+    
+    def status_colored(self, obj):
+        colors = {
+            'draft': 'gray',
+            'published': 'green',
+            'archived': 'red',
+        }
+        return format_html(
+            '<span style="color: {};">\u25CF</span> {}',
+            colors.get(obj.status, 'black'),
+            obj.get_status_display()
+        )
+    status_colored.short_description = 'Status'
+```
+
+### Admin Recommendations
+
+- Customize list_display, list_filter, and search_fields
+- Use fieldsets to organize form fields
+- Create custom admin actions for batch operations
+- Add custom list display methods with formatting
+- Use ModelAdmin.get_queryset to limit visible objects
+- Consider Django admin themes for better UI
+
+## ud83dudee0 Performance Optimization
+
+{{#if complexity.level}}{{#eq complexity.level "high"}}
+### Critical Performance Optimizations
+
+- **Database Query Optimization**:
+  - Use `select_related()` and `prefetch_related()` to reduce query count
+  - Add database indexes for frequently queried fields
+  - Use `django.db.models.F()` and `django.db.models.Q()` for efficient queries
+  - Implement query caching with Redis or Memcached
+  
+- **Caching Strategies**:
+  - Cache template fragments with `{% cache %}`
+  - Use the caching framework for views and querysets
+  - Implement cache versioning and invalidation
+  
+- **Asynchronous Processing**:
+  - Use Celery for background tasks
+  - Implement message queues for heavy processing
+  
+- **Database Connection Pooling**:
+  - Use pgBouncer or similar for connection pooling
+  
+- **Static Asset Optimization**:
+  - Compress and bundle static files
+  - Use a CDN for static assets
+  - Implement proper HTTP caching headers
+{{else}}
+### Performance Recommendations
+
+- Select related objects to minimize database queries
+- Add database indexes for frequently queried fields
+- Use caching for expensive operations
+- Optimize template rendering with fragment caching
+- Use Django Debug Toolbar to identify bottlenecks
+{{/eq}}{{else}}
+### Performance Recommendations
+
+- Select related objects to minimize database queries
+- Add database indexes for frequently queried fields
+- Use caching for expensive operations
+- Optimize template rendering with fragment caching
+- Use Django Debug Toolbar to identify bottlenecks
+{{/if}}
+
+## ud83dudd12 Security Best Practices
+
+- Keep Django and dependencies up-to-date
+- Use environment variables for sensitive settings
+- Implement proper authentication and permission checks
+- Use Django's built-in CSRF protection
+- Validate and sanitize all user inputs
+- Use secure cookies with HTTPS
+- Implement rate limiting for login attempts
+- Follow the principle of least privilege
+- Set proper security headers (HSTS, CSP, etc.)
+
+## ud83dudcac Testing
+
+```python
+from django.test import TestCase, Client
+from django.urls import reverse
+from django.contrib.auth import get_user_model
+
+from .models import Product
+
+User = get_user_model()
+
+class ProductModelTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser',
+            email='test@example.com',
+            password='testpass123'
+        )
+        self.product = Product.objects.create(
+            name='Test Product',
+            slug='test-product',
+            description='Test description',
+            price=99.99,
+            status='published',
+            creator=self.user
+        )
+    
+    def test_product_str(self):
+        self.assertEqual(str(self.product), 'Test Product')
+    
+    def test_get_absolute_url(self):
+        self.assertEqual(
+            self.product.get_absolute_url(),
+            reverse('product_detail', kwargs={'slug': 'test-product'})
+        )
+
+class ProductViewTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(
+            username='testuser',
+            email='test@example.com',
+            password='testpass123'
+        )
+        self.product = Product.objects.create(
+            name='Test Product',
+            slug='test-product',
+            description='Test description',
+            price=99.99,
+            status='published',
+            creator=self.user
+        )
+        self.list_url = reverse('product_list')
+        self.detail_url = reverse('product_detail', kwargs={'slug': 'test-product'})
+    
+    def test_product_list_view(self):
+        response = self.client.get(self.list_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Test Product')
+        self.assertTemplateUsed(response, 'products/product_list.html')
+    
+    def test_product_detail_view(self):
+        response = self.client.get(self.detail_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Test Product')
+        self.assertContains(response, 'Test description')
+```
+
+### Testing Recommendations
+
+- Write tests for models, views, forms, and API endpoints
+- Use Django's TestCase for database-backed tests
+- Use factory_boy or fixtures for test data
+- Implement CI/CD with test automation
+- Aim for high test coverage of business logic
+- Use mocking for external services
+
+## ud83duded6 Deployment
+
+- Use environment-specific settings
+- Implement proper logging configuration
+- Use a WSGI server (Gunicorn, uWSGI)
+- Implement HTTPS with Let's Encrypt
+- Use a reverse proxy (Nginx, Apache)
+- Configure database connection pooling
+- Implement health checks and monitoring
+- Consider containerization with Docker
+
+---
+
+<div align="center">
+
+**Generated on {{date}} u2022 [CodePilotRules](https://github.com/idominikosgr/CodePilotRules)**
+
+</div>

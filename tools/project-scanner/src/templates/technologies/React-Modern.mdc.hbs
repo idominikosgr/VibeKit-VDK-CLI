@@ -1,0 +1,177 @@
+---
+description: "Best practices and patterns for modern React development"
+globs: ["**/*.jsx", "**/*.tsx", "**/*.js", "**/*.ts"]
+version: "1.0.0"
+lastUpdated: "{{date}}"
+---
+
+<div align="center">
+
+# u269bufe0f React Best Practices
+
+[![Framework](https://img.shields.io/badge/Framework-React-61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Supported-3178C6)](https://www.typescriptlang.org/)
+
+**Modern React coding standards and patterns for {{projectName}}**
+
+</div>
+
+## ud83dudcda Overview
+
+This rule file contains best practices and patterns for developing with React in the {{projectName}} project.
+
+## ud83eudde9 Component Structure
+
+### Component Organization
+
+- Organize components by feature or responsibility
+- Keep components small and focused on a single task
+- Use appropriate state management patterns
+- Separate logic from presentation when complexity grows
+
+### Component Types
+
+- Use functional components with hooks as the default
+- Implement higher-order components (HOCs) for cross-cutting concerns
+- Use render props pattern when appropriate for component composition
+
+## ud83dudcdd Naming Conventions
+
+{{#with namingConventions}}
+{{#if components.dominant}}
+- **Components**: Use {{components.dominant}} naming convention
+  - Example: `{{#ifCond components.dominant '===' 'camelCase'}}userProfile{{else}}{{#ifCond components.dominant '===' 'snake_case'}}user_profile{{else}}{{#ifCond components.dominant '===' 'PascalCase'}}UserProfile{{else}}UserProfile{{/ifCond}}{{/ifCond}}{{/ifCond}}`
+{{else}}
+- **Components**: Use PascalCase naming convention
+  - Example: `UserProfile`
+{{/if}}
+{{#if functions.dominant}}
+- **Event Handlers**: Use {{functions.dominant}} with "handle" prefix
+  - Example: `{{#ifCond functions.dominant '===' 'camelCase'}}handleClick{{else}}{{#ifCond functions.dominant '===' 'snake_case'}}handle_click{{else}}{{#ifCond functions.dominant '===' 'PascalCase'}}HandleClick{{else}}handleClick{{/ifCond}}{{/ifCond}}{{/ifCond}}`
+{{else}}
+- **Event Handlers**: Use camelCase with "handle" prefix
+  - Example: `handleClick`
+{{/if}}
+{{#if variables.dominant}}
+- **Props**: Use {{variables.dominant}} naming
+  - Example: `{{#ifCond variables.dominant '===' 'camelCase'}}userData{{else}}{{#ifCond variables.dominant '===' 'snake_case'}}user_data{{else}}{{#ifCond variables.dominant '===' 'PascalCase'}}UserData{{else}}userData{{/ifCond}}{{/ifCond}}{{/ifCond}}`
+{{else}}
+- **Props**: Use camelCase naming
+  - Example: `userData`
+{{/if}}
+{{/with}}
+
+- **Custom Hooks**: Use camelCase with "use" prefix
+  - Example: `useWindowSize`
+
+## ud83dudd10 State Management
+
+### Local State
+
+- Use `useState` for simple component state
+- Use `useReducer` for complex state logic
+- Keep state as close as possible to where it's used
+
+### Global State
+
+{{#if libraries}}
+{{#each libraries}}
+{{#ifCond this '===' 'Redux' 'OR' this '===' 'Redux Toolkit'}}
+- Use **Redux/Redux Toolkit** for complex global state management
+{{/ifCond}}
+{{#ifCond this '===' 'Zustand'}}
+- Use **Zustand** for lightweight global state management
+{{/ifCond}}
+{{#ifCond this '===' 'React Query' 'OR' this '===' 'SWR'}}
+- Use **{{this}}** for server state management
+{{/ifCond}}
+{{#ifCond this '===' 'Jotai' 'OR' this '===' 'Recoil'}}
+- Use **{{this}}** for atomic state management
+{{/ifCond}}
+{{/each}}
+{{else}}
+- Consider Redux/Redux Toolkit for complex global state
+- Use Context API for shared state between related components
+- Consider React Query or SWR for server state management
+{{/if}}
+
+## ud83dudcac Props Management
+
+- Use destructuring to access props
+- Define prop types with TypeScript interfaces or PropTypes
+- Implement default values for optional props
+- Avoid passing too many props (use composition instead)
+- Pass callbacks wrapped in useCallback when appropriate
+
+## ud83dudee0ufe0f Hooks Best Practices
+
+- Follow the Rules of Hooks (only call at the top level, only call from React functions)
+- Use the dependency array correctly in useEffect/useCallback/useMemo
+- Extract complex logic into custom hooks
+- Memoize expensive calculations with useMemo
+- Memoize callbacks with useCallback when they're passed to child components
+
+## ud83dudcda Libraries and Ecosystem
+
+{{#if libraries}}
+### ud83dudcd3 Common Libraries
+{{#each libraries}}
+- **{{this}}**
+{{/each}}
+{{/if}}
+
+{{#if testingFrameworks}}
+### ud83euddea Testing
+{{#each testingFrameworks}}
+- **{{this}}**
+{{/each}}
+{{else}}
+### ud83euddea Testing
+- Use React Testing Library for component testing
+- Use Jest or Vitest as the test runner
+- Test user interactions rather than implementation details
+{{/if}}
+
+## u26a1 Performance Optimizations
+
+- Use React.memo for pure functional components that render often
+- Implement virtualization for long lists (react-window or react-virtualized)
+- Use code splitting with React.lazy and Suspense
+- Avoid unnecessary re-renders with proper dependency arrays
+- Implement proper key props for list items (avoid using array index)
+
+## u267bufe0f Styling Approaches
+
+{{#if libraries}}
+{{#each libraries}}
+{{#ifCond this '===' 'TailwindCSS'}}
+- Use **TailwindCSS** for utility-first styling
+{{/ifCond}}
+{{#ifCond this '===' 'Styled Components'}}
+- Use **Styled Components** for component-based styling
+{{/ifCond}}
+{{#ifCond this '===' 'Material UI' 'OR' this '===' 'Chakra UI' 'OR' this '===' 'shadcn/ui'}}
+- Use **{{this}}** component library for consistent UI elements
+{{/ifCond}}
+{{/each}}
+{{else}}
+- Choose a consistent styling approach (CSS modules, styled-components, etc.)
+- Consider utility-first approaches like TailwindCSS
+- Use CSS-in-JS for dynamic styling based on props/state
+{{/if}}
+
+## u267fufe0f Accessibility
+
+- Use semantic HTML elements
+- Implement proper ARIA attributes when needed
+- Ensure keyboard navigation works correctly
+- Support screen readers with appropriate text alternatives
+- Test with accessibility tools like axe-core
+
+---
+
+<div align="center">
+
+**Generated on {{date}} u2022 [CodePilotRules](https://github.com/idominikosgr/CodePilotRules)**
+
+</div>

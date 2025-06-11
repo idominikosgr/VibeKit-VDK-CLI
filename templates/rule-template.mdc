@@ -1,0 +1,90 @@
+---
+title: "Rule Title"
+description: "Brief description of what this rule does"
+version: "1.0.0"
+author: "Your Name"
+lastUpdated: "{{DATE}}"
+tags: ["category", "tag1", "tag2"]
+alwaysApply: false
+globs: ["**/*.js", "**/*.ts"]
+compatibleWith:
+  ides: ["vscode", "intellij"]
+  aiAssistants: ["copilot", "codewhisperer"]
+  frameworks: ["framework1", "framework2"]
+examples:
+  good:
+    - "```js\n// Good example\nconsole.log('Hello world');\n```"
+  bad:
+    - "```js\n// Bad example\nconsole.log('Hello world')\n```"
+---
+
+# Rule Title
+
+Brief introduction of what this rule is about and why it matters.
+
+## Context
+
+Explain the context and situations where this rule is applicable. Include background information that helps users understand why following this rule is beneficial.
+
+## Rule Details
+
+Detailed explanation of the rule and how to follow it. Be specific and include any conditions or exceptions.
+
+### Key Points
+
+- First key point about the rule
+- Second key point about the rule
+- Third key point about the rule
+
+## Examples
+
+### Good Examples
+
+```javascript
+// Good example code
+function exampleFunction() {
+  // This follows the rule because...
+  const result = someOperation();
+  return result;
+}
+```
+
+### Bad Examples
+
+```javascript
+// Bad example code
+function badExample() {
+  // This violates the rule because...
+  var result = someOperation()
+  return result
+}
+```
+
+## When to Use
+
+Specific situations where this rule should be applied, including:
+
+- Use case 1
+- Use case 2
+- Use case 3
+
+## When to Ignore
+
+Optional section listing valid exceptions to this rule:
+
+- Exception 1
+- Exception 2
+
+## Configuration
+
+Any configuration options for this rule, if applicable.
+
+## Related Rules
+
+- [Related Rule 1](link-to-related-rule)
+- [Related Rule 2](link-to-related-rule)
+
+## References
+
+- [Reference 1](link-to-reference)
+- [Reference 2](link-to-reference)

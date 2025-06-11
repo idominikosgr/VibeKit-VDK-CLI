@@ -1,0 +1,238 @@
+---
+description: "Best practices and patterns for Node.js with Express.js applications"
+globs: ["**/*.js", "**/*.ts", "**/*.mjs"]
+version: "1.0.0"
+lastUpdated: "{{date}}"
+---
+
+<div align="center">
+
+# ud83cudfc1 Node.js with Express.js Best Practices
+
+[![Framework](https://img.shields.io/badge/Framework-Express-000000)](https://expressjs.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-Runtime-339933)](https://nodejs.org/)
+
+**Modern Node.js and Express.js coding standards for {{projectName}}**
+
+</div>
+
+## ud83dudcda Overview
+
+This rule file contains best practices and patterns for developing Node.js applications with Express.js in the {{projectName}} project.
+
+{{#if complexity.level}}{{#eq complexity.level "high"}}
+As a high-complexity Node.js application, this codebase requires careful attention to architecture, performance, security, and error handling.
+{{else}}{{#eq complexity.level "medium"}}
+As a medium-complexity Node.js application, this codebase follows established patterns while maintaining a reasonable level of abstraction.
+{{/eq}}{{/eq}}{{/if}}
+
+## ud83eudde9 Architecture
+
+### Project Structure
+
+```
+{{#if projectStructure.overview}}
+{{projectStructure.overview}}
+{{else}}
+├── config/               # Configuration files
+├── controllers/          # Route controllers
+├── middlewares/          # Custom middleware functions
+├── models/               # Data models
+├── routes/               # Route definitions
+├── services/             # Business logic
+├── utils/                # Utility functions
+├── validators/           # Input validation
+├── app.js                # Express application setup
+└── server.js             # Server entry point
+{{/if}}
+```
+
+### Architectural Patterns
+
+{{#if patterns.architecture}}{{#eq patterns.architecture "mvc"}}
+#### Model-View-Controller (MVC)
+
+This project follows the MVC pattern:
+- **Models**: Data structure and database interactions
+- **Views**: Response formatting (JSON, HTML, etc.)
+- **Controllers**: Request handling logic
+{{else}}{{#eq patterns.architecture "layered"}}
+#### Layered Architecture
+
+This project uses a layered architecture:
+- **Presentation Layer**: Routes and controllers
+- **Business Logic Layer**: Services and workflows
+- **Data Access Layer**: Models and repositories
+{{else}}{{#eq patterns.architecture "microservices"}}
+#### Microservices Architecture
+
+This project is organized as microservices:
+- Each service has its own responsibility
+- Services communicate via APIs/message queues
+- Independently deployable components
+{{/eq}}{{/eq}}{{/eq}}{{else}}
+#### Recommended: Layered Architecture
+
+- **Routes Layer**: URL endpoints definition
+- **Controllers Layer**: Request handling and response formatting
+- **Services Layer**: Business logic and workflows
+- **Data Access Layer**: Database operations and models
+{{/if}}
+
+## ud83cudfc1 Express.js Implementation
+
+### Application Setup
+
+```javascript
+// app.js
+const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const compression = require('compression');
+
+const errorHandler = require('./middlewares/errorHandler');
+const routes = require('./routes');
+
+const app = express();
+
+// Middleware
+app.use(morgan('dev')); // Logging
+app.use(helmet()); // Security headers
+app.use(cors()); // CORS
+app.use(compression()); // Compress responses
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+// Routes
+app.use('/api', routes);
+
+// 404 Handler
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not found' });
+});
+
+// Error Handler
+app.use(errorHandler);
+
+module.exports = app;
+```
+
+### Route Organization
+
+```javascript
+// routes/index.js
+const express = require('express');
+const router = express.Router();
+
+const userRoutes = require('./userRoutes');
+const productRoutes = require('./productRoutes');
+
+router.use('/users', userRoutes);
+router.use('/products', productRoutes);
+
+module.exports = router;
+
+// routes/userRoutes.js
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController');
+const { authenticate } = require('../middlewares/auth');
+const { validateUser } = require('../validators/userValidator');
+
+router.get('/', userController.getAllUsers);
+router.get('/:id', userController.getUserById);
+router.post('/', validateUser, userController.createUser);
+router.put('/:id', authenticate, validateUser, userController.updateUser);
+router.delete('/:id', authenticate, userController.deleteUser);
+
+module.exports = router;
+```
+
+### Controller Pattern
+
+```javascript
+// controllers/userController.js
+const userService = require('../services/userService');
+const { catchAsync } = require('../utils/errorHandler');
+
+exports.getAllUsers = catchAsync(async (req, res) => {
+  const users = await userService.getAllUsers(req.query);
+  res.status(200).json({
+    status: 'success',
+    results: users.length,
+    data: { users }
+  });
+});
+
+exports.getUserById = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
+  
+  if (!user) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'User not found'
+    });
+  }
+  
+  res.status(200).json({
+    status: 'success',
+    data: { user }
+  });
+});
+
+exports.createUser = catchAsync(async (req, res) => {
+  const newUser = await userService.createUser(req.body);
+  
+  res.status(201).json({
+    status: 'success',
+    data: { user: newUser }
+  });
+});
+```
+
+### Service Layer
+
+```javascript
+// services/userService.js
+const User = require('../models/User');
+
+exports.getAllUsers = async (filters) => {
+  return User.find(filters);
+};
+
+exports.getUserById = async (id) => {
+  return User.findById(id);
+};
+
+exports.createUser = async (userData) => {
+  return User.create(userData);
+};
+
+exports.updateUser = async (id, userData) => {
+  return User.findByIdAndUpdate(id, userData, {
+    new: true,
+    runValidators: true
+  });
+};
+
+exports.deleteUser = async (id) => {
+  return User.findByIdAndDelete(id);
+};
+```
+
+## ud83dudde1 Middleware Implementation
+
+### Custom Error Handler
+
+```javascript
+// middlewares/errorHandler.js
+const AppError = require('../utils/appError');
+
+const handleCastErrorDB = (err) => {
+  const message = `Invalid ${err.path}: ${err.value}`;
+  return new AppError(message, 400);
+};
+
+const handleDuplicateFieldsDB = (err) => {
+  const value = err.errmsg.match(/(\

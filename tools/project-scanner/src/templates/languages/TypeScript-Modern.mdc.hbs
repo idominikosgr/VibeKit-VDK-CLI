@@ -1,0 +1,106 @@
+---
+description: "Best practices and patterns for modern TypeScript development"
+globs: ["**/*.ts", "**/*.tsx"]
+version: "1.0.0"
+lastUpdated: "{{date}}"
+---
+
+<div align="center">
+
+# 📘 TypeScript Best Practices
+
+**Modern TypeScript coding standards and patterns for {{projectName}}**
+
+</div>
+
+## Overview
+
+This rule file contains best practices and patterns for writing modern TypeScript code in the {{projectName}} project.
+
+## Naming Conventions
+
+{{#with namingConventions}}
+{{#if variables.dominant}}
+- **Variables**: Use {{variables.dominant}} naming convention
+  - Example: `{{#ifCond variables.dominant '===' 'camelCase'}}userData{{else}}{{#ifCond variables.dominant '===' 'snake_case'}}user_data{{else}}{{#ifCond variables.dominant '===' 'PascalCase'}}UserData{{else}}userData{{/ifCond}}{{/ifCond}}{{/ifCond}}`
+{{/if}}
+{{#if functions.dominant}}
+- **Functions**: Use {{functions.dominant}} naming convention
+  - Example: `{{#ifCond functions.dominant '===' 'camelCase'}}getUserData{{else}}{{#ifCond functions.dominant '===' 'snake_case'}}get_user_data{{else}}{{#ifCond functions.dominant '===' 'PascalCase'}}GetUserData{{else}}getUserData{{/ifCond}}{{/ifCond}}{{/ifCond}}`
+{{/if}}
+{{#if classes.dominant}}
+- **Classes**: Use {{classes.dominant}} naming convention
+  - Example: `{{#ifCond classes.dominant '===' 'camelCase'}}userDataService{{else}}{{#ifCond classes.dominant '===' 'snake_case'}}user_data_service{{else}}{{#ifCond classes.dominant '===' 'PascalCase'}}UserDataService{{else}}UserDataService{{/ifCond}}{{/ifCond}}{{/ifCond}}`
+{{/if}}
+{{#if interfaces.dominant}}
+- **Interfaces**: Use {{interfaces.dominant}} naming convention with 'I' prefix
+  - Example: `I{{#ifCond interfaces.dominant '===' 'camelCase'}}userData{{else}}{{#ifCond interfaces.dominant '===' 'snake_case'}}user_data{{else}}{{#ifCond interfaces.dominant '===' 'PascalCase'}}UserData{{else}}UserData{{/ifCond}}{{/ifCond}}{{/ifCond}}`
+{{else}}
+- **Interfaces**: Use PascalCase with 'I' prefix
+  - Example: `IUserData`
+{{/if}}
+{{#if types.dominant}}
+- **Types**: Use {{types.dominant}} naming convention
+  - Example: `{{#ifCond types.dominant '===' 'camelCase'}}userData{{else}}{{#ifCond types.dominant '===' 'snake_case'}}user_data{{else}}{{#ifCond types.dominant '===' 'PascalCase'}}UserData{{else}}UserData{{/ifCond}}{{/ifCond}}{{/ifCond}}Type`
+{{else}}
+- **Types**: Use PascalCase
+  - Example: `UserDataType`
+{{/if}}
+{{/with}}
+
+## TypeScript Features
+
+### Type Safety
+
+- Use explicit typing for function parameters and return types
+- Prefer interfaces for object shapes that will be implemented or extended
+- Use type for complex types, unions, and intersections
+- Utilize TypeScript's utility types (Partial, Readonly, Record, etc.)
+- Avoid the `any` type wherever possible; use `unknown` when needed
+
+### Modern Syntax
+
+- Use optional chaining (`?.`) for safer property access
+- Leverage nullish coalescing (`??`) for default values
+- Use template literals for string interpolation
+- Implement async/await patterns instead of promise chains
+
+## Framework Guidelines
+
+{{#if frameworks}}
+{{#each frameworks}}
+### {{this}}
+
+- Follow official {{this}} documentation and typing practices
+- Use appropriate TypeScript decorators and annotations
+- Implement strongly-typed components and services
+{{/each}}
+{{/if}}
+
+## Testing Guidelines
+
+{{#if testingFrameworks}}
+- Use {{join testingFrameworks}} with TypeScript for type-safe tests
+- Write unit tests with proper type definitions for mocks
+- Ensure test coverage for critical type conversions and interfaces
+{{else}}
+- Use Jest or Vitest with TypeScript for type-safe tests
+- Implement proper typing for test fixtures and mocks
+- Test edge cases for type conversions and interface implementations
+{{/if}}
+
+## Code Organization
+
+- Use TypeScript's module system for clear imports and exports
+- Structure files by feature rather than type
+- Keep interfaces and types close to where they're used
+- Create barrel files (index.ts) for cleaner imports from directories
+- Split complex types into smaller, reusable types
+
+---
+
+<div align="center">
+
+**Generated on {{date}} • [CodePilotRules](https://github.com/idominikosgr/CodePilotRules)**
+
+</div>

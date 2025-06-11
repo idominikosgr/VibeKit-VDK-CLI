@@ -1,13 +1,13 @@
 ---
 description: "Generates or refines API reference documentation, detailing endpoints, parameters, request/response formats, authentication methods, and error codes. Focuses on technical accuracy and developer usability."
-globs: ["**/*.{yaml,yml,json}", "**/api/**", "**/swagger*", "**/openapi*"]
+globs: ["**/*.{yaml,yml,json}", "**/api/**", "**/swagger*", "**/openapi*", "**/docs/api/**", "**/controllers/**", "**/routes/**"]
 alwaysApply: false
 version: "2.0.0"
-lastUpdated: "2025-05-14"
-compatibleWith: ["AI-Workflow-Integration","Memory-Management"]
+lastUpdated: "2025-05-17"
+compatibleWith: ["AI-Workflow-Integration", "Memory-Management", "API-Endpoints"]
 ---
 
-# Write API Documentation Mode
+# API Documentation Mode
 
 ## 1. Role
 

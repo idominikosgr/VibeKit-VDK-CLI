@@ -2,12 +2,12 @@
 description: Swift 5.9/6.0 best practices and patterns for modern iOS, macOS, and multiplatform development.
 globs: **/*.swift, Package.swift, *.xcodeproj/*, *.xcworkspace/*
 alwaysApply: false
-version: "2.0.0"
-lastUpdated: "2025-05-14"
+version: "2.1.0"
+lastUpdated: "2025-05-18"
 compatibleWith: ["SwiftUI", "SwiftData", "Combine"]
 ---
 
-# Swift 5.9/6.0 Best Practices
+# Swift 5.9/6.1 Best Practices
 
 ## Project Structure & Organization
 - Use Swift Package Manager (SPM) for dependency management when possible.

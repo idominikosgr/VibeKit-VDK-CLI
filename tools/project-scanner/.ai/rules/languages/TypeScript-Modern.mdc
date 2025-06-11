@@ -1,0 +1,81 @@
+---
+description: "Best practices and patterns for modern TypeScript development"
+globs: ["**/*.ts", "**/*.tsx"]
+version: "1.0.0"
+lastUpdated: "2025-05-16"
+---
+
+<div align="center">
+
+# 📘 TypeScript Best Practices
+
+**Modern TypeScript coding standards and patterns for **
+
+</div>
+
+## Overview
+
+This rule file contains best practices and patterns for writing modern TypeScript code in the  project.
+
+## Naming Conventions
+
+- **Variables**: Use camelCase naming convention
+  - Example: `userData`
+- **Functions**: Use camelCase naming convention
+  - Example: `getUserData`
+- **Interfaces**: Use PascalCase with 'I' prefix
+  - Example: `IUserData`
+- **Types**: Use PascalCase
+  - Example: `UserDataType`
+
+## TypeScript Features
+
+### Type Safety
+
+- Use explicit typing for function parameters and return types
+- Prefer interfaces for object shapes that will be implemented or extended
+- Use type for complex types, unions, and intersections
+- Utilize TypeScript's utility types (Partial, Readonly, Record, etc.)
+- Avoid the `any` type wherever possible; use `unknown` when needed
+
+### Modern Syntax
+
+- Use optional chaining (`?.`) for safer property access
+- Leverage nullish coalescing (`??`) for default values
+- Use template literals for string interpolation
+- Implement async/await patterns instead of promise chains
+
+## Framework Guidelines
+
+### React
+
+- Follow official React documentation and typing practices
+- Use appropriate TypeScript decorators and annotations
+- Implement strongly-typed components and services
+### Next.js
+
+- Follow official Next.js documentation and typing practices
+- Use appropriate TypeScript decorators and annotations
+- Implement strongly-typed components and services
+
+## Testing Guidelines
+
+- Use Jest or Vitest with TypeScript for type-safe tests
+- Implement proper typing for test fixtures and mocks
+- Test edge cases for type conversions and interface implementations
+
+## Code Organization
+
+- Use TypeScript's module system for clear imports and exports
+- Structure files by feature rather than type
+- Keep interfaces and types close to where they're used
+- Create barrel files (index.ts) for cleaner imports from directories
+- Split complex types into smaller, reusable types
+
+---
+
+<div align="center">
+
+**Generated on 2025-05-16 • [CodePilotRules](https://github.com/idominikosgr/CodePilotRules)**
+
+</div>

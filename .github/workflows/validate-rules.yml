@@ -1,0 +1,51 @@
+name: Rule Validation and Testing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.mdc'
+      - '**.md'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.mdc'
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: 🔎 Validate Rules
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run rule validation
+        run: npm run validate-rules
+
+      - name: Check for duplicate rule IDs
+        run: npm run check-duplicate-rules
+
+  sync-notification:
+    name: 🔄 Sync Notification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    steps:
+      - name: Notify Hub of Changes
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: ${{ github.repository_owner }}/CodePilotRulesHub
+          event-type: rules-updated
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repository": "${{ github.repository }}", "sender": "${{ github.actor }}"}'

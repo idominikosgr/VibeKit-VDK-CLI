@@ -19,18 +19,18 @@ Vibe Coding Rules is an intelligent framework that automatically analyzes your c
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repository
+# Clone and setup
 git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
 cd Vibe-Coding-Rules
-
-# Install dependencies
 npm install
 
-# Run the interactive setup wizard
+# Run interactive setup
 npm run wizard
 ```
 
 **That's it!** Your AI assistant now understands your project structure, naming conventions, and architectural patterns.
+
+For detailed installation and configuration options, see the **[📖 Complete Guide](GUIDE.md)**.
 
 ## 🎬 See It In Action
 
@@ -105,32 +105,23 @@ your-project/
 │       └── Next.js.mdc
 ```
 
-## 🛠️ Setup Modes
+## 🛠️ Quick Commands
 
-Choose the setup mode that fits your workflow:
-
-### 🔍 Automatic Mode (Recommended)
 ```bash
+# Interactive setup wizard
 npm run wizard
-# Select "Automatic" → Scans and configures everything
-```
 
-### 🔧 Manual Mode
-```bash
-npm run wizard  
-# Select "Manual" → Choose specific technologies
-```
+# Direct project scanning
+npm run scan
 
-### 🔄 Hybrid Mode
-```bash
-npm run wizard
-# Select "Hybrid" → Auto-scan + manual adjustments
-```
+# Validate generated rules
+npm run validate
 
-### ☁️ Remote Sync Mode
-```bash
-npm run wizard
-# Select "Remote" → Download community rules
+# Sync with community rules
+npm run sync
+
+# Check for rule conflicts
+npm run check-duplicates
 ```
 
 ## 📊 Real Impact
@@ -141,54 +132,20 @@ Teams using Vibe Coding Rules report:
 - **40% fewer** back-and-forth clarifications
 - **90% consistency** in code patterns across team members
 
-## 🔄 Advanced Usage
+## 📚 Documentation
 
-### Direct Project Scanning
-```bash
-# Scan with custom options
-npm run scan -- --path ./src --deep --verbose
+- **[📖 Complete Installation & Usage Guide](GUIDE.md)** - Comprehensive setup and configuration
+- **[🤝 Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
+- **[🗺️ Development Roadmap](ROADMAP.md)** - Future features and timeline
+- **[📦 Publishing Guide](PUBLISHING.md)** - NPM publishing information
+- **[🔍 Scanner Guide](src/scanner/USER-GUIDE.md)** - Project scanner documentation
 
-# Use custom templates
-npm run scan -- --templates "project-context,performance-rules"
-
-# Watch for changes
-npm run scan -- --watch
-```
-
-### Rule Management
-```bash
-# Validate generated rules
-npm run validate-rules
-
-# Sync with community repository
-npm run sync
-
-# Check for rule conflicts
-npm run check-duplicate-rules
-```
-
-### MCP Server Integration
-Enhanced AI capabilities through Model Context Protocol:
-```bash
-# Auto-configure MCP servers
-./update-mcp-config.sh
-
-# Generate MCP-enabled rules
-npm run scan -- --ide-integration
-```
-
-## 🤖 AI Assistant Integration
-
-### Memory & Context Management
-- **Session Continuity**: Maintains context across development sessions
-- **Decision History**: Remembers architectural decisions and patterns
-- **Code Evolution**: Tracks how your codebase patterns evolve
-
-### Enhanced Capabilities
-- **Context-Aware Completions**: Suggestions based on your actual codebase
-- **Project-Specific Guidance**: Framework and library usage tailored to your setup
-- **Error Prevention**: Warns about anti-patterns specific to your project
-- **Performance Optimization**: Suggestions based on your performance patterns
+### Advanced Guides
+- **[🎨 Rule Customization](docs/Rule-Customization-Guide.md)** - Creating custom rules
+- **[🔄 Sync System](docs/SYNC-SYSTEM.md)** - Community rule synchronization
+- **[🌐 Web App Implementation](docs/Web-App-Implementation-Guide.md)** - Web interface setup
+- **[📝 Rule Authoring](docs/Rule-Authoring-Guide.md)** - Writing effective rules
+- **[📊 Analytics & Feedback](docs/Analytics-Feedback-Guide.md)** - Usage analytics
 
 ## 🧩 Extensibility
 
@@ -204,102 +161,53 @@ tags: ["api", "{{projectFramework}}"]
 
 ## Detected Patterns
 {{#each apiPatterns}}
-- **{{name}}**: {{description}}
+- {{this.pattern}}: {{this.usage}}
 {{/each}}
 ```
 
 ### Plugin Architecture
 ```javascript
-// Custom analyzer example
-class CustomAnalyzer {
-  analyze(projectStructure) {
+// src/plugins/custom-analyzer.js
+export class CustomAnalyzer {
+  analyze(project) {
+    // Custom analysis logic
     return {
-      patterns: [...],
-      conventions: {...}
+      patterns: this.detectPatterns(project),
+      recommendations: this.generateRecommendations(project)
     };
   }
 }
 ```
 
-## 📈 Roadmap
+## 🤖 AI Assistant Integration
 
-### ✅ Recently Completed
-- Enhanced project scanner with 70%+ test coverage
-- Advanced pattern detection algorithms
-- Comprehensive IDE integration system
-- MCP server integration
+### Memory & Context Management
+- **Session Continuity**: Maintains context across development sessions
+- **Decision History**: Remembers architectural decisions and patterns
+- **Code Evolution**: Tracks how your codebase patterns evolve
 
-### 🔄 In Progress (Q2 2025)
-- TypeScript migration for improved type safety
-- Enhanced architectural pattern detection
-- Advanced rule validation system
-- Performance optimization for large codebases
+### Enhanced Capabilities
+- **Context-Aware Completions**: Suggestions based on your actual codebase
+- **Project-Specific Guidance**: Framework and library usage tailored to your setup
+- **Error Prevention**: Warns about anti-patterns specific to your project
+- **Performance Optimization**: Suggestions based on your performance patterns
 
-### 🎯 Upcoming (Q3-Q4 2025)
-- Machine learning-based pattern detection
-- Team collaboration features
-- Rule marketplace and sharing
-- Advanced analytics dashboard
-- Enterprise governance features
+## 🌐 Community
 
-## 🤝 Contributing
+- **[GitHub Repository](https://github.com/idominikosgr/Vibe-Coding-Rules)** - Source code and issues
+- **[Community Hub](https://vibecodingrules.rocks)** - Share and discover rules
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to get involved
 
-We welcome contributions! Here's how to get started:
+## 📝 License
 
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Run tests**: `npm test`
-4. **Validate rules**: `npm run validate`
-5. **Submit a pull request**
-
-### Development Setup
-```bash
-git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
-cd Vibe-Coding-Rules
-npm install
-npm run dev
-```
-
-## 📚 Documentation
-
-- **[Installation Guide](INSTALLATION.md)** - Detailed setup instructions
-- **[Usage Guide](USAGE-GUIDE.md)** - Complete usage documentation
-- **[Technical Analysis](TECHNICAL-ANALYSIS-SUMMARY.md)** - Deep technical insights
-- **[Project Overview](PROJECT-OVERVIEW.md)** - Comprehensive project analysis
-- **[Roadmap](ROADMAP.md)** - Future development plans
-
-## 🌍 Community
-
-- **GitHub Discussions**: [Join the conversation](https://github.com/idominikosgr/Vibe-Coding-Rules/discussions)
-- **Issues**: [Report bugs or request features](https://github.com/idominikosgr/Vibe-Coding-Rules/issues)
-- **Discord**: [Community chat](https://discord.gg/vibe-coding-rules) *(Coming Soon)*
-
-## 🏆 Recognition
-
-- **GitHub Trending**: Featured in JavaScript and AI tools
-- **Community Choice**: Top-rated AI development tool
-- **Developer Favorite**: 4.8/5 stars from early adopters
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with ❤️ by [Dominikos Pritis](https://github.com/idominikosgr)
-- Inspired by the amazing AI development community
-- Special thanks to all contributors and early adopters
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
 <div align="center">
 
-**Ready to transform your AI coding experience?**
+**Made with ❤️ by the Vibe Coding Rules community**
 
-[![Get Started](https://img.shields.io/badge/Get%20Started-brightgreen?style=for-the-badge)](INSTALLATION.md)
-[![View Docs](https://img.shields.io/badge/View%20Docs-blue?style=for-the-badge)](docs/)
-[![Join Community](https://img.shields.io/badge/Join%20Community-purple?style=for-the-badge)](https://github.com/idominikosgr/Vibe-Coding-Rules/discussions)
-
-⭐ **Star this repo** if it makes your AI coding assistant smarter!
+[⭐ Star on GitHub](https://github.com/idominikosgr/Vibe-Coding-Rules) • [🐛 Report Bug](https://github.com/idominikosgr/Vibe-Coding-Rules/issues) • [💡 Request Feature](https://github.com/idominikosgr/Vibe-Coding-Rules/issues)
 
 </div>

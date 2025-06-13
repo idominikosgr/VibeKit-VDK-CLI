@@ -112,12 +112,12 @@ When adding new features to Vibe Coding Rules:
 
 To add support for a new programming language:
 
-1. Create a new file in `tools/project-scanner/src/analyzers/[language].js`
+1. Create a new file in `src/scanner/analyzers/[language].js`
 2. Implement the required analyzer interface:
    - `analyzeCode(code)`: Analyze code content
    - `analyzeFile(filePath)`: Analyze a file
    - `analyzeNamingConventions(files)`: Detect naming conventions
-3. Add language-specific rule templates in `tools/project-scanner/src/templates/languages/`
+3. Add language-specific rule templates in `src/scanner/templates/languages/`
 4. Update the `TechnologyAnalyzer` to detect the new language
 5. Test your analyzer manually with sample projects to ensure it works correctly
 

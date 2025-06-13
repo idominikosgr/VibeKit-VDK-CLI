@@ -85,8 +85,8 @@ out/
 .ai/rules-wizard-test2/03-mcp-configuration.mdc
 .ai/rules-wizard-test2/languages/JavaScript-Modern.mdc
 
-tools/project-scanner/.ai/rules/00-core-agent.mdc
-tools/project-scanner/.ai/rules/01-project-context.mdc
-tools/project-scanner/.ai/rules/02-common-errors.mdc
-tools/project-scanner/.ai/rules/03-mcp-configuration.mdc
-tools/project-scanner/.ai/rules/languages/JavaScript-Modern.mdc
+src/scanner/.ai/rules/00-core-agent.mdc
+src/scanner/.ai/rules/01-project-context.mdc
+src/scanner/.ai/rules/02-common-errors.mdc
+src/scanner/.ai/rules/03-mcp-configuration.mdc
+src/scanner/.ai/rules/languages/JavaScript-Modern.mdc

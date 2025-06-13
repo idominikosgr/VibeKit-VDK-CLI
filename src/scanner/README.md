@@ -3,9 +3,8 @@
 # 🔍 Project Scanner
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/Vibe-Coding-Rules)
-[![Status](https://img.shields.io/badge/Status-Beta-yellow)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen)](https://github.com/idominikosgr/Vibe-Coding-Rules)
 
 **Automatically analyzes codebases to generate custom Vibe Coding Rules tailored to your project**
 
@@ -17,7 +16,7 @@ The Project Scanner is a powerful tool designed to automatically generate projec
 
 ## 📋 Overview
 
-The VibeCoding Project Scanner is an intelligent utility that analyzes your codebase to automatically generate project-specific rule files for the Vibe Coding Rules framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
+The Project Scanner is an intelligent utility that analyzes your codebase to automatically generate project-specific rule files for the Vibe Coding Rules framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
 
 ## ✨ Features
 
@@ -26,27 +25,37 @@ The VibeCoding Project Scanner is an intelligent utility that analyzes your code
 - 🏗️ **Architecture Pattern Recognition**: Detects common architectural patterns like MVC, MVVM, etc.
 - 📚 **Technology Stack Identification**: Automatically identifies frameworks and libraries in use
 - 🔎 **Anti-Pattern Detection**: Finds potential code smells and inconsistencies
-- 📝 **Rule Generation**: Creates custom `01-project-context.mdc` files with minimal manual input
+- 📝 **Rule Generation**: Creates custom `.mdc` files with minimal manual input
 
 ## 🚀 Installation
 
+The scanner is included with Vibe Coding Rules and requires no separate installation:
+
 ```bash
 # From the Vibe Coding Rules root directory
-cd tools/project-scanner
 npm install
 ```
 
 ## 📊 Usage
 
+### Via CLI Command
+
 ```bash
 # Basic usage - scans the current directory
-npm start
+npm run scan
 
 # Scan a specific project directory
-npm start -- --path /path/to/your/project
+npm run scan -- --path /path/to/your/project
 
 # Advanced usage with all options
-npm start -- --path /path/to/your/project --output /custom/output/path --deep --ignorePattern "**/node_modules/**" --verbose
+npm run scan -- --path /path/to/your/project --output /custom/output/path --deep --ignorePattern "**/node_modules/**" --verbose
+```
+
+### Via Setup Wizard
+
+```bash
+# Interactive setup with scanner integration
+npm run wizard
 ```
 
 ### Available Options
@@ -99,7 +108,7 @@ The rule generation uses a flexible Handlebars template system:
 
 ## 🔄 Integration with Vibe Coding Rules
 
-This tool integrates with the Vibe Coding Rules project to provide automated rule generation:
+This tool integrates seamlessly with the Vibe Coding Rules framework:
 
 1. **Initial Project Setup**: Run the scanner when setting up Vibe Coding Rules for a new project
 2. **Rule Customization**: Review and refine the auto-generated rules for your specific needs
@@ -125,67 +134,11 @@ Contributions are welcome! Please check the [CONTRIBUTING.md](../../CONTRIBUTING
 git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
 cd Vibe-Coding-Rules
 
-# Install dependencies for the project scanner
-cd tools/project-scanner
+# Install dependencies
 npm install
 
-# Run tests
-npm test
-
-# Run tests with watch mode
-npm run test:watch
-
-# Run tests with coverage report
-npm run test:coverage
-```
-
-## 🧪 Testing
-
-The project includes a comprehensive test suite to ensure reliability and maintainability:
-
-### Test Structure
-
-- **Unit Tests**: Cover individual components and utilities
-- **Integration Tests**: Test interactions between components
-- **Fixtures**: Sample project structures for testing analysis
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode (useful during development)
-npm run test:watch
-
-# Generate test coverage report
-npm run test:coverage
-```
-
-### Test Coverage
-
-We maintain high test coverage across all core components:
-
-- **Core Components**: >70% coverage for all critical functionality
-- **Utilities**: Comprehensive testing of helper functions
-- **Analyzers**: Tests for language-specific analyzers
-
-### Writing Tests
-
-When contributing, please include tests for any new functionality:
-
-```javascript
-// Example test for a utility function
-describe('utilityFunction', () => {
-  test('should handle valid input', () => {
-    const result = utilityFunction('valid input');
-    expect(result).toBe('expected output');
-  });
-
-  test('should handle edge cases', () => {
-    expect(utilityFunction('')).toBe('default value');
-  });
-});
+# Run the scanner in development mode
+npm run scan -- --verbose
 ```
 
 ## 📜 License

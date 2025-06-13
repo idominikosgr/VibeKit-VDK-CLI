@@ -2,11 +2,8 @@
 
 <div align="center">
 
-![Project Scanner Logo](https://raw.githubusercontent.com/idominikosgr/Vibe-Coding-Rules/main/docs/assets/project-scanner-logo.png)
-
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-orange.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
 
 *A powerful tool for analyzing project structures and generating customized coding rules*
 
@@ -37,26 +34,23 @@ Key features include:
 - **Architectural Pattern Recognition**: Detects common patterns like MVC, MVVM, Microservices
 - **Customizable Templates**: Generate rules based on project-specific needs
 - **Rule Validation**: Ensures generated rules are correct and consistent
-- **IDE Integration**: Works with VSCode, JetBrains IDEs, and other editors
+- **IDE Integration**: Works with VSCode, Cursor, Windsurf, and other editors
 
 ## 💻 Installation
 
 ### Prerequisites
 
-- Node.js (v14.x or higher)
-- npm (v6.x or higher)
-- Git (for cloning the repository)
+- Node.js (v18.x or higher)
+- npm (v8.x or higher)
 
 ### Installation
 
-Currently, the Project Scanner is not published to npm. You'll need to clone the repository and run it locally:
+The Project Scanner is included with Vibe Coding Rules:
 
 ```bash
 # Clone the repository
 git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
-
-# Navigate to the project scanner directory
-cd Vibe-Coding-Rules/tools/project-scanner
+cd Vibe-Coding-Rules
 
 # Install dependencies
 npm install
@@ -69,23 +63,22 @@ npm install
 Run the scanner on your project:
 
 ```bash
-# From the project-scanner directory
-node src/index.js /path/to/your/project
+# From the Vibe-Coding-Rules directory
+npm run scan
 
-# Or with options
-node src/index.js /path/to/your/project --output ./rules --templates project-context,react-modern
+# Scan a specific project
+npm run scan -- --path /path/to/your/project
+
+# With options
+npm run scan -- --path /path/to/your/project --output ./rules --deep --verbose
 ```
 
-### Creating a Shell Alias (Optional)
+### Via Setup Wizard
 
-For easier usage, you can create a shell alias in your `.bashrc`, `.zshrc`, or equivalent:
+The easiest way to use the scanner is through the interactive setup wizard:
 
 ```bash
-# Add this to your .bashrc or .zshrc
-alias vibe-coding-rules-scan="node /path/to/Vibe-Coding-Rules/tools/project-scanner/src/index.js"
-
-# Then you can use
-vibe-coding-rules-scan /path/to/your/project
+npm run wizard
 ```
 
 ### Configuration File
@@ -94,8 +87,8 @@ Create a `.vibecodingrc.json` file in your project root to configure the scanner
 
 ```json
 {
-  "outputDir": "./rules",
-  "templates": ["project-context", "react-modern"],
+  "outputDir": "./.ai/rules",
+  "deep": true,
   "validateRules": true,
   "strictMode": false,
   "ignorePatterns": ["node_modules/**", "dist/**", "build/**"]
@@ -105,15 +98,14 @@ Create a `.vibecodingrc.json` file in your project root to configure the scanner
 ### Via API
 
 ```javascript
-// Import directly from the local project
-import { scanProject } from './path/to/Vibe-Coding-Rules/tools/project-scanner/src/index.js';
+import { scanProject } from './src/scanner/index.js';
 
 async function run() {
   try {
     const results = await scanProject({
       projectPath: '/path/to/your/project',
-      outputDir: './rules',
-      templates: ['project-context', 'react-modern'],
+      outputDir: './.ai/rules',
+      deep: true,
       validateRules: true
     });
     console.log('Generated rules:', results.generatedRules);
@@ -125,257 +117,136 @@ async function run() {
 run();
 ```
 
-**Note**: Since the package is currently not published to npm, you need to import it directly from the local file path where you have cloned the repository.
-
 ## 🔧 Advanced Options
 
 ### Command Line Options
 
 | Option | Description |
 |--------|-------------|
+| `--path`, `-p` | Specify path to scan (default: current directory) |
 | `--output`, `-o` | Specify output directory for generated rules |
-| `--templates`, `-t` | Comma-separated list of templates to use |
-| `--no-validation` | Skip rule validation |
-| `--strict` | Enable strict validation mode |
-| `--watch`, `-w` | Watch mode - regenerate rules on file changes |
-| `--ide-integration` | Enable IDE integration |
-| `--verbose`, `-v` | Verbose output |
-| `--config`, `-c` | Specify a configuration file path |
+| `--deep`, `-d` | Enable deep scanning for thorough analysis |
+| `--verbose`, `-v` | Enable verbose output |
+| `--help`, `-h` | Display help information |
 
 ### Example Commands
 
-**Generate rules with specific templates:**
+**Generate rules with deep analysis:**
 
 ```bash
-node src/index.js ./ -t project-context,react-modern,typescript-modern
+npm run scan -- --deep --verbose
 ```
 
 **Generate rules with custom output directory:**
 
 ```bash
-node src/index.js ./ -o ./custom-rules-dir
+npm run scan -- -o ./custom-rules-dir
 ```
 
-**Enable watch mode for real-time rule updates:**
+**Scan specific project path:**
 
 ```bash
-node src/index.js ./ --watch
-```
-
-**Skip validation for faster rule generation:**
-
-```bash
-node src/index.js ./ --no-validation
+npm run scan -- --path /path/to/project --output ./.ai/rules
 ```
 
 ## 📝 Templates
 
 ### Available Templates
 
-The Project Scanner comes with several built-in templates for common frameworks and languages:
+The Project Scanner uses intelligent templates to generate rules based on detected technologies:
 
-#### Framework Templates
+#### Framework Detection
 
-- **Angular-Modern**: Best practices for Angular applications
-- **React-Modern**: Best practices for React applications
-- **Vue-Modern**: Best practices for Vue.js applications
-- **Node-Express**: Best practices for Node.js with Express
-- **Django-Modern**: Best practices for Django applications
+- **React**: Detects React components, hooks, and patterns
+- **Next.js**: Identifies Next.js specific patterns and file structure
+- **Vue.js**: Recognizes Vue.js components and composition API usage
+- **Angular**: Detects Angular services, components, and modules
+- **Express.js**: Identifies Express.js routing and middleware patterns
 
-#### Architectural Pattern Templates
+#### Language Analysis
 
-- **MVC**: Model-View-Controller pattern guidelines
-- **MVVM**: Model-View-ViewModel pattern guidelines
-- **Microservices**: Microservices architecture guidelines
+- **TypeScript**: Analyzes type definitions, interfaces, and advanced features
+- **JavaScript**: Detects modern JavaScript patterns and ES6+ usage
+- **Python**: Identifies Python frameworks and coding patterns
 
-#### Language Templates
+#### Architecture Patterns
 
-- **JavaScript-Modern**: Best practices for modern JavaScript
-- **TypeScript-Modern**: Best practices for TypeScript
-- **Python-Modern**: Best practices for Python
-
-#### General Templates
-
-- **Project-Context**: General project information and structure
-- **Security-Best-Practices**: Security guidelines for web applications
-- **Performance-Optimization**: Performance optimization guidelines
+- **Component Architecture**: Detects component-based patterns
+- **MVC Pattern**: Identifies Model-View-Controller structures
+- **API Patterns**: Recognizes REST and GraphQL implementations
 
 ### Custom Templates
 
-Create custom templates in your project's `.vibecoding/templates` directory. Templates use Handlebars syntax and can access various project metadata.
-
-**Example Custom Template:**
-
-```handlebars
----
-description: "Custom rules for our team's code style"
-globs: ["**/*.js", "**/*.ts"]
-version: "1.0.0"
----
-
-# {{projectName}} Code Style Guide
-
-## Naming Conventions
-
-- Use PascalCase for component names
-- Use camelCase for variables and functions
-- Use UPPER_SNAKE_CASE for constants
-
-## Project Structure
-
-```
-{{projectStructure.overview}}
-```
-
-## {{techStack.frameworks.primary}} Best Practices
-
-{{#if techStack.frameworks.primary}}
-// Framework-specific best practices
-{{/if}}
-```
+You can extend the scanner with custom templates by adding them to the `src/scanner/templates/` directory.
 
 ### Template Variables
 
-The following variables are available in templates:
+Templates use Handlebars syntax with project-specific variables:
 
-| Variable | Description |
-|----------|-------------|
-| `projectName` | The name of the project |
-| `date` | Current date |
-| `repositoryUrl` | URL of the Git repository |
-| `techStack` | Detected technologies and frameworks |
-| `complexity` | Project complexity assessment |
-| `patterns` | Detected architectural patterns |
-| `projectStructure` | Overview of the project's directory structure |
-| `namingConventions` | Dominant naming conventions in the codebase |
+- `{{projectName}}` - Project name
+- `{{framework}}` - Detected primary framework
+- `{{languages}}` - Array of detected languages
+- `{{technologies}}` - Array of detected technologies
 
-**Example of accessing nested variables:**
+## ✅ Rule Validation
 
-```handlebars
-{{#if techStack.frameworks.primary}}
-  This project uses {{techStack.frameworks.primary}} as its primary framework.
-{{else}}
-  No primary framework detected.
-{{/if}}
+The scanner includes built-in validation to ensure generated rules are:
 
-{{#if complexity.level}}
-  {{#eq complexity.level "high"}}
-    This is a high-complexity project.
-  {{/eq}}
-{{/if}}
-```
+- **Syntactically correct** - Valid MDC format
+- **Consistent** - No conflicting rules
+- **Complete** - All required sections present
 
-## 🔍 Rule Validation
-
-The Project Scanner includes a powerful validation system to ensure generated rules are correct, consistent, and useful. The validator checks for:
-
-1. **Required Fields**: Ensures front matter contains all required fields
-2. **Required Sections**: Verifies each rule type has necessary sections
-3. **Empty Sections**: Detects and flags empty content
-4. **Unreplaced Placeholders**: Finds templates variables that weren't replaced
-5. **Conflicting Glob Patterns**: Checks for overlapping rules that might conflict
-
-### Validation Levels
-
-- **Standard Validation**: Catches common issues and errors
-- **Strict Mode**: Enforces additional quality checks and formatting rules
-
-### Disabling Validation
-
-While not recommended, validation can be disabled for faster rule generation:
+Enable validation:
 
 ```bash
-node src/index.js ./ --no-validation
+npm run scan -- --validate
 ```
 
-## 🔌 IDE Integration
+## 🔧 IDE Integration
 
-Project Scanner can integrate with popular IDEs to provide real-time rule updates and enhanced coding guidance.
+Generated rules work automatically with supported IDEs:
 
-### Supported IDEs
+- **VS Code**: Rules placed in `.vscode/rules/`
+- **Cursor**: Rules placed in `.cursor/rules/`
+- **Windsurf**: Rules placed in `.windsurf/rules/`
+- **JetBrains**: Rules placed in `.idea/ai-rules/`
 
-- **Visual Studio Code**: Via the VibeCoding Rules extension
-- **JetBrains IDEs**: IntelliJ IDEA, WebStorm, PyCharm via the VibeCoding plugin
-- **Sublime Text**: Through the VibeCoding ST package
-
-### Enabling IDE Integration
-
-```bash
-node src/index.js ./ --ide-integration
-```
-
-This will:
-
-1. Detect your IDE configuration files
-2. Set up the appropriate rule directories
-3. Configure the IDE for real-time rule updates
-4. Enable watch mode for rule regeneration on file changes
-
-### Manual IDE Setup
-
-If automatic integration fails, you can manually set up your IDE:
-
-**VS Code**:
-1. Install the VibeCoding Rules extension
-2. Set the rules directory in settings.json:
-   ```json
-   {
-     "vibeCodingRules.rulesDir": "./rules"
-   }
-   ```
-
-**JetBrains IDEs**:
-1. Install the VibeCoding plugin
-2. Configure the rules directory in Settings → Tools → VibeCoding Rules
-
-## ❓ Troubleshooting
+## 🔍 Troubleshooting
 
 ### Common Issues
 
-**Rule generation fails with template error:**
+**Issue**: Scanner not detecting frameworks
+**Solution**: Ensure package.json and dependency files are present
 
-Check your template syntax for errors. Make sure all Handlebars expressions are properly closed and that you're using valid Handlebars helpers.
+**Issue**: Generated rules are too generic
+**Solution**: Use `--deep` flag for more thorough analysis
 
-**Validation reports too many false positives:**
+**Issue**: Rules not appearing in IDE
+**Solution**: Check IDE-specific rule directory locations
 
-Try disabling strict mode with `--strict false` or modify your template to address the validation warnings.
+### Debug Mode
 
-**IDE integration not working:**
-
-Verify that your IDE is supported and that you have the necessary extensions/plugins installed. Check the permissions on your rules directory.
-
-**Performance issues on large projects:**
-
-Try limiting the templates used or exclude large directories using the `ignorePatterns` configuration option.
-
-### Logging and Debugging
-
-Enable verbose logging for more detailed output:
+Enable verbose output for debugging:
 
 ```bash
-node src/index.js ./ --verbose
+npm run scan -- --verbose
 ```
-
-Examine log files in the `.vibecoding/logs` directory for detailed information about the scanning process.
 
 ## 🤝 Contributing
 
-We welcome contributions to the Project Scanner! Here's how you can help:
+Contributions are welcome! See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
 
-1. **Report Issues**: Open an issue for bugs or feature requests
-2. **Improve Documentation**: Submit PRs for documentation updates
-3. **Add Templates**: Create new templates for frameworks or patterns
-4. **Fix Bugs**: Submit PRs with bug fixes
-5. **Add Features**: Implement new features or enhancements
+### Adding New Analyzers
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
+1. Create analyzer in `src/scanner/analyzers/`
+2. Register in `src/scanner/core/analyzer-registry.js`
+3. Add corresponding templates
+4. Update documentation
 
 ---
 
 <div align="center">
 
-**Project Scanner** • Part of the [Vibe Coding Rules](https://github.com/idominikosgr/Vibe-Coding-Rules) project
-
-MIT License • © 2025
+**Part of [Vibe Coding Rules](https://github.com/idominikosgr/Vibe-Coding-Rules)**
 
 </div>

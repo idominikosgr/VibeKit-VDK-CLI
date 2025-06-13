@@ -682,7 +682,7 @@ async function selectSetupMode() {
     {
       type: 'list',
       name: 'setupMode',
-      message: 'How would you like to configure Vibe Coding Rules?',
+      message: 'How would you like to configure VibeCodingRules?',
       choices: [
         { name: '🔍 Automatic (Scan project and generate rules)', value: 'automatic' },
         { name: '🔧 Manual (Select options individually)', value: 'manual' },
@@ -837,10 +837,10 @@ async function main() {
   try {
     // Display welcome banner
     console.log(`\n${colors.bright}${colors.cyan}╔══════════════════════════════════════════════════════════════╗${colors.reset}`);
-    console.log(`${colors.bright}${colors.cyan}║                    Vibe Coding Rules Setup Wizard              ║${colors.reset}`);
+    console.log(`${colors.bright}${colors.cyan}║                    VibeCodingRules Setup Wizard              ║${colors.reset}`);
     console.log(`${colors.bright}${colors.cyan}║              Configure AI Rules for Your Project            ║${colors.reset}`);
     console.log(`${colors.bright}${colors.cyan}╚══════════════════════════════════════════════════════════════╝${colors.reset}`);
-    console.log(`\nWelcome! This wizard will help you set up Vibe Coding Rules for your project.`);
+    console.log(`\nWelcome! This wizard will help you set up VibeCodingRules for your project.`);
     console.log(`We'll analyze your codebase and generate custom AI assistant rules.\n`);
 
     // Step 1: Select setup mode
@@ -943,7 +943,7 @@ async function main() {
 
     // Success message
     console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
-    console.log(`\nVibe-Coding-Rules has been configured for your project.`);
+    console.log(`\nVibeCodingRules has been configured for your project.`);
     console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
     
     const ideTool = ideConfig.getIDEConfigById(userSelections.ideTool);

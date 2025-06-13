@@ -7,7 +7,7 @@ set -e
 
 # Default values
 REPO_URL="https://github.com/idominikosgr/Vibe-Coding-Rules"
-TEMP_DIR="/tmp/VibeCodingRules-$(date +%s)"
+TEMP_DIR="/tmp/Vibe-Coding-Rules-$(date +%s)"
 BRANCH="main"
 METHOD="git"
 UPGRADE=false

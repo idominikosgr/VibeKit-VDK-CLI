@@ -20,8 +20,8 @@ Vibe Coding Rules is an intelligent framework that automatically analyzes your c
 
 ```bash
 # Clone the repository
-git clone https://github.com/idominikosgr/VibeCodingRules.git
-cd VibeCodingRules
+git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
+cd Vibe-Coding-Rules
 
 # Install dependencies
 npm install

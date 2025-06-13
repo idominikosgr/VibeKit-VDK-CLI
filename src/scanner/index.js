@@ -4,7 +4,7 @@
  * VibeCoding Project Scanner
  * Main entry point for the project scanner utility.
  * 
- * This utility analyzes a codebase to generate custom VibeCodingRules tailored to the project.
+ * This utility analyzes a codebase to generate custom rules tailored to the project.
  */
 
 import { Command } from 'commander';

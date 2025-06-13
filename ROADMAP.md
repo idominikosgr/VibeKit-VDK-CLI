@@ -141,5 +141,5 @@
 
 ---
 
-**Contribute**: [GitHub Issues](https://github.com/idominikosgr/CodePilotRules/issues)
+**Contribute**: [GitHub Issues](https://github.com/idominikosgr/Vibe-Coding-Rules/issues)
 **Contact**: Dominikos Pritis - [GitHub](https://github.com/idominikosgr)

@@ -46,6 +46,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repository: ${{ github.repository_owner }}/CodePilotRulesHub
+          repository: ${{ github.repository_owner }}/VibeCodingRulesHub
           event-type: rules-updated
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repository": "${{ github.repository }}", "sender": "${{ github.actor }}"}'

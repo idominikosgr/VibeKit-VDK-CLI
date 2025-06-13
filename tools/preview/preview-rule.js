@@ -4,7 +4,7 @@
  * Rule Preview Tool
  *
  * This script generates a preview of how a rule will appear in the
- * CodePilotRulesHub web application.
+ * VibeCodingRulesHub web application.
  */
 
 const fs = require('fs').promises;

@@ -1,11 +1,11 @@
-# CodePilotRules Installation Guide
+# VibeCodingRules Installation Guide
 
 ## Quick Start
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/idominikosgr/CodePilotRules.git
-   cd CodePilotRules
+   git clone https://github.com/idominikosgr/VibeCodingRules.git
+   cd VibeCodingRules
    ```
 
 2. **Install main dependencies**:

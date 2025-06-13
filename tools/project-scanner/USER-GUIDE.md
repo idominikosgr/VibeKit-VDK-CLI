@@ -2,11 +2,11 @@
 
 <div align="center">
 
-![Project Scanner Logo](https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/docs/assets/project-scanner-logo.png)
+![Project Scanner Logo](https://raw.githubusercontent.com/idominikosgr/VibeCodingRules/main/docs/assets/project-scanner-logo.png)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/idominikosgr/CodePilotRules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-orange.svg)](https://github.com/idominikosgr/CodePilotRules)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/idominikosgr/VibeCodingRules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-orange.svg)](https://github.com/idominikosgr/VibeCodingRules)
 
 *A powerful tool for analyzing project structures and generating customized coding rules*
 
@@ -53,10 +53,10 @@ Currently, the Project Scanner is not published to npm. You'll need to clone the
 
 ```bash
 # Clone the repository
-git clone https://github.com/idominikosgr/CodePilotRules.git
+git clone https://github.com/idominikosgr/VibeCodingRules.git
 
 # Navigate to the project scanner directory
-cd CodePilotRules/tools/project-scanner
+cd VibeCodingRules/tools/project-scanner
 
 # Install dependencies
 npm install
@@ -82,7 +82,7 @@ For easier usage, you can create a shell alias in your `.bashrc`, `.zshrc`, or e
 
 ```bash
 # Add this to your .bashrc or .zshrc
-alias vibe-coding-rules-scan="node /path/to/CodePilotRules/tools/project-scanner/src/index.js"
+alias vibe-coding-rules-scan="node /path/to/VibeCodingRules/tools/project-scanner/src/index.js"
 
 # Then you can use
 vibe-coding-rules-scan /path/to/your/project
@@ -90,7 +90,7 @@ vibe-coding-rules-scan /path/to/your/project
 
 ### Configuration File
 
-Create a `.codepilotrc.json` file in your project root to configure the scanner:
+Create a `.vibecodingrc.json` file in your project root to configure the scanner:
 
 ```json
 {
@@ -106,7 +106,7 @@ Create a `.codepilotrc.json` file in your project root to configure the scanner:
 
 ```javascript
 // Import directly from the local project
-import { scanProject } from './path/to/CodePilotRules/tools/project-scanner/src/index.js';
+import { scanProject } from './path/to/VibeCodingRules/tools/project-scanner/src/index.js';
 
 async function run() {
   try {
@@ -202,7 +202,7 @@ The Project Scanner comes with several built-in templates for common frameworks 
 
 ### Custom Templates
 
-Create custom templates in your project's `.codepilot/templates` directory. Templates use Handlebars syntax and can access various project metadata.
+Create custom templates in your project's `.vibecoding/templates` directory. Templates use Handlebars syntax and can access various project metadata.
 
 **Example Custom Template:**
 
@@ -294,9 +294,9 @@ Project Scanner can integrate with popular IDEs to provide real-time rule update
 
 ### Supported IDEs
 
-- **Visual Studio Code**: Via the CodePilot Rules extension
-- **JetBrains IDEs**: IntelliJ IDEA, WebStorm, PyCharm via the CodePilot plugin
-- **Sublime Text**: Through the CodePilot ST package
+- **Visual Studio Code**: Via the VibeCoding Rules extension
+- **JetBrains IDEs**: IntelliJ IDEA, WebStorm, PyCharm via the VibeCoding plugin
+- **Sublime Text**: Through the VibeCoding ST package
 
 ### Enabling IDE Integration
 
@@ -316,7 +316,7 @@ This will:
 If automatic integration fails, you can manually set up your IDE:
 
 **VS Code**:
-1. Install the CodePilot Rules extension
+1. Install the VibeCoding Rules extension
 2. Set the rules directory in settings.json:
    ```json
    {
@@ -325,8 +325,8 @@ If automatic integration fails, you can manually set up your IDE:
    ```
 
 **JetBrains IDEs**:
-1. Install the CodePilot plugin
-2. Configure the rules directory in Settings → Tools → CodePilot Rules
+1. Install the VibeCoding plugin
+2. Configure the rules directory in Settings → Tools → VibeCoding Rules
 
 ## ❓ Troubleshooting
 
@@ -356,7 +356,7 @@ Enable verbose logging for more detailed output:
 node src/index.js ./ --verbose
 ```
 
-Examine log files in the `.codepilot/logs` directory for detailed information about the scanning process.
+Examine log files in the `.vibecoding/logs` directory for detailed information about the scanning process.
 
 ## 🤝 Contributing
 
@@ -374,7 +374,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelin
 
 <div align="center">
 
-**Project Scanner** • Part of the [Vibe Coding Rules](https://github.com/idominikosgr/CodePilotRules) project
+**Project Scanner** • Part of the [Vibe Coding Rules](https://github.com/idominikosgr/VibeCodingRules) project
 
 MIT License • © 2025
 

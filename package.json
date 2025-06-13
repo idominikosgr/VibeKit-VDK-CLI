@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idominikosgr/CodePilotRules.git"
+    "url": "git+https://github.com/idominikosgr/VibeCodingRules.git"
   },
   "keywords": [
     "ai",
@@ -35,9 +35,9 @@
   "author": "Dominikos Pritis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/idominikosgr/CodePilotRules/issues"
+    "url": "https://github.com/idominikosgr/VibeCodingRules/issues"
   },
-  "homepage": "https://github.com/idominikosgr/CodePilotRules#readme",
+  "homepage": "https://github.com/idominikosgr/VibeCodingRules#readme",
   "dependencies": {
     "acorn": "^8.15.0",
     "ajv": "^8.17.1",

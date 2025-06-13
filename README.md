@@ -3,8 +3,8 @@
 # 🚀 Vibe Coding Rules
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Stars](https://img.shields.io/github/stars/idominikosgr/CodePilotRules?style=social)](https://github.com/idominikosgr/CodePilotRules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/CodePilotRules)
+[![GitHub Stars](https://img.shields.io/github/stars/idominikosgr/VibeCodingRules?style=social)](https://github.com/idominikosgr/VibeCodingRules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/VibeCodingRules)
 
 **An enhanced framework for AI-assisted development that provides comprehensive rules, patterns, and guidelines for AI coding assistants across multiple platforms, languages, and technologies.**
 
@@ -155,8 +155,8 @@ The Editor Path Integration system automatically configures paths across differe
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/idominikosgr/CodePilotRules.git
-cd CodePilotRules
+git clone https://github.com/idominikosgr/VibeCodingRules.git
+cd VibeCodingRules
 ```
 
 2. Install dependencies:
@@ -213,7 +213,7 @@ For detailed sync system documentation, see [docs/SYNC-SYSTEM.md](docs/SYNC-SYST
 1. Clone this repository into your project:
 
 ```bash
-git clone https://github.com/idominikosgr/CodePilotRules.git .ai
+git clone https://github.com/idominikosgr/VibeCodingRules.git .ai
 ```
 
 2. Customize the project-specific files:
@@ -322,7 +322,7 @@ The rule files use a consistent Markdown format that's easy to customize for you
 To update the standard `tasks/`, `languages/`, `technologies/` rules and the core `00-core-agent.mdc`, while preserving your customized `01-project-context.mdc` and `02-common-errors.mdc`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/idominikosgr/CodePilotRules/main/install.sh | sh -s -- --upgrade
+curl -fsSL https://raw.githubusercontent.com/idominikosgr/VibeCodingRules/main/install.sh | sh -s -- --upgrade
 ```
 *Note: The upgrade process preserves `03-mcp-configuration.mdc`. If new standard MCP servers are added to Vibe Coding Rules in the future, you may need to manually update your `03-mcp-configuration.mdc` or ask the AI to regenerate it.*
 
@@ -425,7 +425,7 @@ Vibe Coding Rules is an enhanced version of the original [DevRules](https://gith
 
 <div align="center">
 
-**[📦 Official Repository](https://github.com/idominikosgr/CodePilotRules)**
+**[📦 Official Repository](https://github.com/idominikosgr/VibeCodingRules)**
 
 </div>
 

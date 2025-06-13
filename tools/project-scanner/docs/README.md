@@ -3,8 +3,8 @@
 # 📚 Project Scanner Documentation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)](https://github.com/idominikosgr/CodePilotRules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/CodePilotRules)
+[![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)](https://github.com/idominikosgr/VibeCodingRules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/VibeCodingRules)
 
 **Complete reference guide for the Vibe Coding Rules Project Scanner tool**
 
@@ -43,8 +43,8 @@ The Project Scanner is included in the Vibe Coding Rules repository. To set it u
 
 ```bash
 # Clone the repository (if you haven't already)
-git clone https://github.com/idominikosgr/CodePilotRules.git
-cd CodePilotRules
+git clone https://github.com/idominikosgr/VibeCodingRules.git
+cd VibeCodingRules
 
 # Install dependencies for the project scanner
 cd tools/project-scanner
@@ -222,7 +222,7 @@ The scanner automatically detects IDE configurations and generates rules in the 
 ```bash
 # Scan the current project with default settings
 cd your-project
-node /path/to/codepilot/tools/project-scanner/src/index.js
+node /path/to/vibecoding/tools/project-scanner/src/index.js
 ```
 
 ### Advanced Configuration
@@ -343,6 +343,6 @@ async function customScan(projectPath) {
 
 <div align="center">
 
-**Made with ❤️ by [Vibe Coding Rules Team](https://github.com/idominikosgr/CodePilotRules)**
+**Made with ❤️ by [Vibe Coding Rules Team](https://github.com/idominikosgr/VibeCodingRules)**
 
 </div>

@@ -2,8 +2,8 @@
 
 # 🚀 Phase 3: Integration & Testing
 
-[![Status](https://img.shields.io/badge/Status-Complete-brightgreen)](https://github.com/idominikosgr/CodePilotRules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-blue)](https://github.com/idominikosgr/CodePilotRules)
+[![Status](https://img.shields.io/badge/Status-Complete-brightgreen)](https://github.com/idominikosgr/VibeCodingRules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-blue)](https://github.com/idominikosgr/VibeCodingRules)
 
 **Phase 3 Implementation Documentation**
 

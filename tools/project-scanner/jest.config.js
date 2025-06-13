@@ -1,5 +1,5 @@
 /**
- * Jest configuration for CodePilotRules project-scanner tool
+ * Jest configuration for VibeCodingRules project-scanner tool
  */
 
 export default {

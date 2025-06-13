@@ -1,7 +1,7 @@
 /**
  * RuleGenerator.js
  *
- * Generates custom CodePilotRules based on project analysis results.
+ * Generates custom VibeCodingRules based on project analysis results.
  * Creates rule files with appropriate templates for the detected
  * technology stack, patterns, and architecture.
  */

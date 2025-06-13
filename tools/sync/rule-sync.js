@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CodePilotRules Sync Tool
+ * VibeCodingRules Sync Tool
  * ------------------------
  * Synchronizes local rule files with the remote repository
  * Supports initial download, updates, and conflict resolution
@@ -104,7 +104,7 @@ function httpRequest(url, options = {}) {
   return new Promise((resolve, reject) => {
     const req = https.request(url, {
       headers: {
-        'User-Agent': 'CodePilotRules-Sync/1.0.0',
+        'User-Agent': 'VibeCodingRules-Sync/1.0.0',
         'Accept': 'application/vnd.github.v3+json',
         ...options.headers
       },
@@ -497,7 +497,7 @@ async function checkSyncStatus() {
  * Initialize sync configuration
  */
 async function initializeSync() {
-  console.log(`${colors.bright}${colors.cyan}Initializing CodePilotRules Sync${colors.reset}`);
+  console.log(`${colors.bright}${colors.cyan}Initializing VibeCodingRules Sync${colors.reset}`);
   
   const prompt = require('inquirer').createPromptModule();
   
@@ -563,7 +563,7 @@ async function main() {
         
       case 'help':
       default:
-        console.log(`${colors.bright}CodePilotRules Sync Tool${colors.reset}`);
+        console.log(`${colors.bright}VibeCodingRules Sync Tool${colors.reset}`);
         console.log(`\nUsage: node rule-sync.js [command] [options]`);
         console.log(`\nCommands:`);
         console.log(`  init     Initialize sync configuration`);

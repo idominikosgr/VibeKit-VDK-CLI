@@ -26,7 +26,7 @@
   <!-- GitHub Repository Box -->
   <rect x="100" y="100" width="200" height="140" rx="8" fill="url(#githubGrad)" filter="url(#shadow)" />
   <text x="200" y="140" font-family="Arial" font-size="16" fill="white" text-anchor="middle">GitHub Repository</text>
-  <text x="200" y="165" font-family="Arial" font-size="14" fill="white" text-anchor="middle">CodePilotRules</text>
+  <text x="200" y="165" font-family="Arial" font-size="14" fill="white" text-anchor="middle">VibeCodingRules</text>
   <text x="200" y="190" font-family="Arial" font-size="12" fill="white" text-anchor="middle">MDC Rule Files</text>
   <text x="200" y="210" font-family="Arial" font-size="12" fill="white" text-anchor="middle">(Source of Truth)</text>
 
@@ -40,7 +40,7 @@
   <!-- Hub Web App Box -->
   <rect x="600" y="100" width="200" height="140" rx="8" fill="url(#nextjsGrad)" filter="url(#shadow)" />
   <text x="700" y="140" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Web Application</text>
-  <text x="700" y="165" font-family="Arial" font-size="14" fill="white" text-anchor="middle">CodePilotRulesHub</text>
+  <text x="700" y="165" font-family="Arial" font-size="14" fill="white" text-anchor="middle">VibeCodingRulesHub</text>
   <text x="700" y="190" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Next.js Frontend</text>
   <text x="700" y="210" font-family="Arial" font-size="12" fill="white" text-anchor="middle">(User Interface)</text>
 

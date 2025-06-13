@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * CodePilotRules Setup Wizard
+ * VibeCodingRules Setup Wizard
  * -----------------------
- * This interactive script helps configure CodePilotRules for your development project.
+ * This interactive script helps configure VibeCodingRules for your development project.
  * It creates a custom rule structure based on your selected IDE/tools, frameworks,
  * languages, and technologies.
  *
- * Repository: https://github.com/idominikosgr/CodePilotRules
+ * Repository: https://github.com/idominikosgr/VibeCodingRules
  */
 
 const fs = require('fs');
@@ -694,7 +694,7 @@ async function selectSetupMode() {
     {
       type: 'list',
       name: 'setupMode',
-      message: 'How would you like to configure CodePilotRules?',
+      message: 'How would you like to configure VibeCodingRules?',
       choices: [
         { name: '🔍 Automatic (Scan project and generate rules)', value: 'automatic' },
         { name: '🔧 Manual (Select options individually)', value: 'manual' },
@@ -849,10 +849,10 @@ async function main() {
   try {
     // Display welcome banner
     console.log(`\n${colors.bright}${colors.cyan}╔══════════════════════════════════════════════════════════════╗${colors.reset}`);
-    console.log(`${colors.bright}${colors.cyan}║                    CodePilotRules Setup Wizard              ║${colors.reset}`);
+    console.log(`${colors.bright}${colors.cyan}║                    VibeCodingRules Setup Wizard              ║${colors.reset}`);
     console.log(`${colors.bright}${colors.cyan}║              Configure AI Rules for Your Project            ║${colors.reset}`);
     console.log(`${colors.bright}${colors.cyan}╚══════════════════════════════════════════════════════════════╝${colors.reset}`);
-    console.log(`\nWelcome! This wizard will help you set up CodePilotRules for your project.`);
+    console.log(`\nWelcome! This wizard will help you set up VibeCodingRules for your project.`);
     console.log(`We'll analyze your codebase and generate custom AI assistant rules.\n`);
 
     // Step 1: Select setup mode
@@ -955,7 +955,7 @@ async function main() {
 
     // Success message
     console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
-    console.log(`\nCodePilotRules has been configured for your project.`);
+    console.log(`\nVibeCodingRules has been configured for your project.`);
     console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
     
     const ideTool = ideConfig.getIDEConfigById(userSelections.ideTool);

@@ -32,7 +32,7 @@ console.log(`This script demonstrates how the editor path integration system det
 console.log(`and configures different editor environments.\n`);
 
 // Create a temporary directory for the demo
-const tempDir = path.join(os.tmpdir(), `codepilot-demo-${Date.now()}`);
+const tempDir = path.join(os.tmpdir(), `vibecoding-demo-${Date.now()}`);
 fs.mkdirSync(tempDir, { recursive: true });
 console.log(`${colors.cyan}Created demo directory: ${tempDir}${colors.reset}\n`);
 

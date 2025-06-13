@@ -3,9 +3,9 @@
 # 🔍 Project Scanner
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)](https://github.com/idominikosgr/CodePilotRules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/CodePilotRules)
-[![Status](https://img.shields.io/badge/Status-Beta-yellow)](https://github.com/idominikosgr/CodePilotRules)
+[![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)](https://github.com/idominikosgr/VibeCodingRules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-brightgreen)](https://github.com/idominikosgr/VibeCodingRules)
+[![Status](https://img.shields.io/badge/Status-Beta-yellow)](https://github.com/idominikosgr/VibeCodingRules)
 
 **Automatically analyzes codebases to generate custom Vibe Coding Rules tailored to your project**
 
@@ -17,7 +17,7 @@ The Project Scanner is a powerful tool designed to automatically generate projec
 
 ## 📋 Overview
 
-The CodePilot Project Scanner is an intelligent utility that analyzes your codebase to automatically generate project-specific rule files for the CodePilotRules framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
+The VibeCoding Project Scanner is an intelligent utility that analyzes your codebase to automatically generate project-specific rule files for the VibeCodingRules framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
 
 ## ✨ Features
 
@@ -122,8 +122,8 @@ Contributions are welcome! Please check the [CONTRIBUTING.md](../../CONTRIBUTING
 
 ```bash
 # Clone the repository
-git clone https://github.com/idominikosgr/CodePilotRules.git
-cd CodePilotRules
+git clone https://github.com/idominikosgr/VibeCodingRules.git
+cd VibeCodingRules
 
 # Install dependencies for the project scanner
 cd tools/project-scanner
@@ -196,6 +196,6 @@ This project is licensed under the MIT License - see the [LICENSE](../../LICENSE
 
 <div align="center">
 
-**Made with ❤️ by [Vibe Coding Rules Team](https://github.com/idominikosgr/CodePilotRules)**
+**Made with ❤️ by [Vibe Coding Rules Team](https://github.com/idominikosgr/VibeCodingRules)**
 
 </div>

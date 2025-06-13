@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CodePilotRules Auto-Sync Service
+ * VibeCodingRules Auto-Sync Service
  * --------------------------------
  * Automatically checks for and applies rule updates from the remote repository
  * Can be run as a scheduled task or daemon process
@@ -186,7 +186,7 @@ async function runSingleCheck() {
  */
 function createSystemdService() {
   const serviceContent = `[Unit]
-Description=CodePilotRules Auto-Sync Service
+Description=VibeCodingRules Auto-Sync Service
 After=network.target
 
 [Service]
@@ -202,14 +202,14 @@ Environment=NODE_ENV=production
 WantedBy=multi-user.target
 `;
 
-  const servicePath = '/tmp/codepilot-autosync.service';
+  const servicePath = '/tmp/vibecoding-autosync.service';
   fs.writeFileSync(servicePath, serviceContent);
   
   console.log(`${colors.green}✓${colors.reset} Systemd service file created: ${servicePath}`);
   console.log(`\nTo install the service:`);
   console.log(`${colors.cyan}sudo cp ${servicePath} /etc/systemd/system/${colors.reset}`);
-  console.log(`${colors.cyan}sudo systemctl enable codepilot-autosync.service${colors.reset}`);
-  console.log(`${colors.cyan}sudo systemctl start codepilot-autosync.service${colors.reset}`);
+  console.log(`${colors.cyan}sudo systemctl enable vibecoding-autosync.service${colors.reset}`);
+  console.log(`${colors.cyan}sudo systemctl start vibecoding-autosync.service${colors.reset}`);
 }
 
 /**
@@ -221,7 +221,7 @@ function createLaunchdPlist() {
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.codepilot.autosync</string>
+    <string>com.vibecoding.autosync</string>
     <key>ProgramArguments</key>
     <array>
         <string>${process.execPath}</string>
@@ -235,20 +235,20 @@ function createLaunchdPlist() {
     <key>KeepAlive</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/tmp/codepilot-autosync.log</string>
+    <string>/tmp/vibecoding-autosync.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/codepilot-autosync.error.log</string>
+    <string>/tmp/vibecoding-autosync.error.log</string>
 </dict>
 </plist>
 `;
 
-  const plistPath = `/tmp/com.codepilot.autosync.plist`;
+  const plistPath = `/tmp/com.vibecoding.autosync.plist`;
   fs.writeFileSync(plistPath, plistContent);
   
   console.log(`${colors.green}✓${colors.reset} Launchd plist file created: ${plistPath}`);
   console.log(`\nTo install the service:`);
   console.log(`${colors.cyan}cp ${plistPath} ~/Library/LaunchAgents/${colors.reset}`);
-  console.log(`${colors.cyan}launchctl load ~/Library/LaunchAgents/com.codepilot.autosync.plist${colors.reset}`);
+  console.log(`${colors.cyan}launchctl load ~/Library/LaunchAgents/com.vibecoding.autosync.plist${colors.reset}`);
 }
 
 /**
@@ -294,7 +294,7 @@ async function main() {
         
       case 'help':
       default:
-        console.log(`${colors.bright}CodePilotRules Auto-Sync Service${colors.reset}`);
+        console.log(`${colors.bright}VibeCodingRules Auto-Sync Service${colors.reset}`);
         console.log(`\nUsage: node auto-sync.js [command] [options]`);
         console.log(`\nCommands:`);
         console.log(`  check              Run a single sync check`);

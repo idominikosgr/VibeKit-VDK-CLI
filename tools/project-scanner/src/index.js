@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * CodePilot Project Scanner
+ * VibeCoding Project Scanner
  * Main entry point for the project scanner utility.
  * 
- * This utility analyzes a codebase to generate custom CodePilotRules tailored to the project.
+ * This utility analyzes a codebase to generate custom VibeCodingRules tailored to the project.
  */
 
 import { Command } from 'commander';
@@ -28,7 +28,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Greeting banner
 const displayBanner = () => {
   console.log(chalk.cyan('\n============================================='));
-  console.log(chalk.cyan(`  🔍 CodePilot Project Scanner v${getVersion()}`));
+  console.log(chalk.cyan(`  🔍 VibeCoding Project Scanner v${getVersion()}`));
   console.log(chalk.cyan('  Intelligent rule generation for AI assistance'));
   console.log(chalk.cyan('=============================================\n'));
 };

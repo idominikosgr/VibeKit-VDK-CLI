@@ -1,6 +1,6 @@
-# CodePilotRules Sync System
+# VibeCodingRules Sync System
 
-The CodePilotRules Sync System allows you to automatically download and synchronize AI rules from the remote repository at [https://github.com/idominikosgr/AI.rules](https://github.com/idominikosgr/AI.rules). This ensures you always have the latest, most up-to-date rules for your AI assistants.
+The VibeCodingRules Sync System allows you to automatically download and synchronize AI rules from the remote repository at [https://github.com/idominikosgr/AI.rules](https://github.com/idominikosgr/AI.rules). This ensures you always have the latest, most up-to-date rules for your AI assistants.
 
 ## Overview
 
@@ -86,11 +86,11 @@ node tools/sync/rule-sync.js init
 npm run install-sync-service
 
 # Install the service
-cp /tmp/com.codepilot.autosync.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.codepilot.autosync.plist
+cp /tmp/com.vibecoding.autosync.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.vibecoding.autosync.plist
 
 # Check service status
-launchctl list | grep codepilot
+launchctl list | grep vibecoding
 ```
 
 #### Linux (systemd)
@@ -100,12 +100,12 @@ launchctl list | grep codepilot
 npm run install-sync-service
 
 # Install the service
-sudo cp /tmp/codepilot-autosync.service /etc/systemd/system/
-sudo systemctl enable codepilot-autosync.service
-sudo systemctl start codepilot-autosync.service
+sudo cp /tmp/vibecoding-autosync.service /etc/systemd/system/
+sudo systemctl enable vibecoding-autosync.service
+sudo systemctl start vibecoding-autosync.service
 
 # Check service status
-sudo systemctl status codepilot-autosync.service
+sudo systemctl status vibecoding-autosync.service
 ```
 
 #### Manual Daemon
@@ -217,7 +217,7 @@ This will:
 ### Local Files
 
 ```
-CodePilotRules/
+VibeCodingRules/
 ├── templates/                    # Local rule templates (synced from remote)
 │   ├── rules/                   # Core rule files
 │   ├── languages/               # Language-specific rules
@@ -251,8 +251,8 @@ AI.rules/
 ### Log Files
 
 - **`tools/sync/sync.log`** - Detailed sync activity log
-- **`/tmp/codepilot-autosync.log`** - Auto-sync daemon output (macOS)
-- **`journalctl -u codepilot-autosync`** - Auto-sync daemon output (Linux)
+- **`/tmp/vibecoding-autosync.log`** - Auto-sync daemon output (macOS)
+- **`journalctl -u vibecoding-autosync`** - Auto-sync daemon output (Linux)
 
 ### Status Checking
 
@@ -426,4 +426,4 @@ To contribute to the sync system:
 
 ## License
 
-The sync system is part of CodePilotRules and follows the same MIT license. Remote rules from [AI.rules repository](https://github.com/idominikosgr/AI.rules) may have their own licensing terms. 
+The sync system is part of VibeCodingRules and follows the same MIT license. Remote rules from [AI.rules repository](https://github.com/idominikosgr/AI.rules) may have their own licensing terms. 

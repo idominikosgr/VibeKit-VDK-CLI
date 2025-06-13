@@ -2,8 +2,8 @@
 
 # 🚀 Implementation Action Plan for Vibe Coding Rules
 
-[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen)](https://github.com/idominikosgr/CodePilotRules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-blue)](https://github.com/idominikosgr/CodePilotRules)
+[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen)](https://github.com/idominikosgr/VibeCodingRules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-blue)](https://github.com/idominikosgr/VibeCodingRules)
 
 **A structured approach to implementing key enhancements for the Vibe Coding Rules project**
 

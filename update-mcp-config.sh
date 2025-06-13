@@ -5,10 +5,18 @@
 # Get directory of the script
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# Ensure we have the expected directory structure
+if [ ! -f "$SCRIPT_DIR/src/utils/update-mcp-config.js" ]; then
+  echo "❌ Error: update-mcp-config.js not found at expected location."
+  echo "Expected: $SCRIPT_DIR/src/utils/update-mcp-config.js"
+  echo "Please ensure you're running this script from the correct directory."
+  exit 1
+fi
+
 # Check if Node.js is installed
 if ! command -v node >/dev/null 2>&1; then
-  echo "Error: Node.js is required to run this script."
-  echo "Please install Node.js and try again."
+  echo "❌ Error: Node.js is required to run this script."
+  echo "Please install Node.js from https://nodejs.org and try again."
   exit 1
 fi
 
@@ -49,7 +57,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 # Build the command
-CMD="node \"$SCRIPT_DIR/tools/update-mcp-config.js\" --path=\"$PROJECT_PATH\""
+CMD="node \"$SCRIPT_DIR/src/utils/update-mcp-config.js\" --path=\"$PROJECT_PATH\""
 
 if [ "$FORCE" = true ]; then
   CMD="$CMD --force"
@@ -59,14 +67,22 @@ if [ "$QUIET" = true ]; then
   CMD="$CMD --quiet"
 fi
 
+# Validate project path exists
+if [ ! -d "$PROJECT_PATH" ]; then
+  echo "❌ Error: Project path does not exist: $PROJECT_PATH"
+  exit 1
+fi
+
 # Run the tool
-echo "Running MCP configuration update tool..."
+echo "🔧 Running MCP configuration update tool..."
+echo "📂 Project path: $PROJECT_PATH"
+
 eval $CMD
 
 EXIT_CODE=$?
 if [ $EXIT_CODE -ne 0 ]; then
-  echo "Error: MCP configuration update failed with exit code $EXIT_CODE."
+  echo "❌ Error: MCP configuration update failed with exit code $EXIT_CODE."
   exit $EXIT_CODE
 fi
 
-echo "MCP configuration update completed successfully."
+echo "✅ MCP configuration update completed successfully."

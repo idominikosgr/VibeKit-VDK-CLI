@@ -44,7 +44,7 @@ while [ "$#" -gt 0 ]; do
       ;;
     --direct)
       RUN_WIZARD=false
-      echo "🔄 Direct mode: Will install to $TARGET_DIR without wizard"
+      echo "🔄 Direct mode: Will install to $TARGET_DIR without CLI"
       ;;
     --quiet)
       QUIET=true
@@ -58,7 +58,7 @@ while [ "$#" -gt 0 ]; do
       echo "  --branch=BRANCH  Use this branch (default: main)"
       echo "  --method=METHOD  Download method: git or curl (default: git)"
       echo "  --upgrade        Preserve user customizations when installing"
-      echo "  --direct         Skip the setup wizard and install directly to .ai/rules"
+      echo "  --direct         Skip the CLI and install directly to .ai/rules"
       echo "  --quiet          Reduce output verbosity"
       echo "  --help           Show this help message"
       exit 0
@@ -95,11 +95,22 @@ fi
 
 if [ "$METHOD" = "git" ]; then
   # Git method
-  git clone --depth=1 --branch="$BRANCH" "$REPO_URL" "$TEMP_DIR"
-  rm -rf "$TEMP_DIR/.git"
-else
+  if ! git clone --depth=1 --branch="$BRANCH" "$REPO_URL" "$TEMP_DIR"; then
+    echo "❌ Failed to clone repository. Falling back to curl method."
+    METHOD="curl"
+  else
+    rm -rf "$TEMP_DIR/.git"
+  fi
+fi
+
+if [ "$METHOD" = "curl" ]; then
   # Curl method
-  curl -L "$REPO_URL/archive/$BRANCH.tar.gz" | tar -xz -C "$TEMP_DIR" --strip-components=1
+  if ! curl -L "$REPO_URL/archive/$BRANCH.tar.gz" | tar -xz -C "$TEMP_DIR" --strip-components=1; then
+    echo "❌ Failed to download repository via curl."
+    echo "Please check your internet connection and try again."
+    rm -rf "$TEMP_DIR"
+    exit 1
+  fi
 fi
 
 # Check for Node.js if running the wizard
@@ -112,27 +123,27 @@ fi
 
 # Installation approach based on user preference
 if [ "$RUN_WIZARD" = true ]; then
-  echo "🧙 Running interactive setup wizard..."
+  echo "🧙 Running interactive CLI..."
 
-  # Make setup wizard executable
-  if [ -f "$TEMP_DIR/setup-wizard.js" ]; then
-    chmod +x "$TEMP_DIR/setup-wizard.js"
+  # Make CLI executable
+  if [ -f "$TEMP_DIR/cli.js" ]; then
+    chmod +x "$TEMP_DIR/cli.js"
 
-    # Run the setup wizard from the temporary directory
-    # The wizard will determine the target directory based on IDE selection
+    # Run the CLI from the temporary directory
+    # The CLI will determine the target directory based on IDE selection
     # and copy the appropriate files
     cd "$TEMP_DIR"
-    node setup-wizard.js
+    node cli.js
 
     WIZARD_EXIT=$?
     if [ $WIZARD_EXIT -ne 0 ]; then
-      echo "⚠️ Setup wizard encountered an error, falling back to direct installation"
+      echo "⚠️ CLI encountered an error, falling back to direct installation"
       RUN_WIZARD=false
     else
-      echo "✅ Vibe Coding Rules installed successfully via setup wizard"
+      echo "✅ Vibe Coding Rules installed successfully via CLI"
     fi
   else
-    echo "⚠️ Setup wizard not found in repository, falling back to direct installation"
+    echo "⚠️ CLI not found in repository, falling back to direct installation"
     RUN_WIZARD=false
   fi
 fi
@@ -142,7 +153,12 @@ if [ "$RUN_WIZARD" = false ]; then
   echo "📋 Installing Vibe Coding Rules directly to $TARGET_DIR..."
 
   # Create the target directory if it doesn't exist
-  mkdir -p "$TARGET_DIR"
+  if ! mkdir -p "$TARGET_DIR"; then
+    echo "❌ Failed to create target directory: $TARGET_DIR"
+    echo "Please check permissions and try again."
+    rm -rf "$TEMP_DIR"
+    exit 1
+  fi
 
   if [ "$UPGRADE" = true ]; then
     # Upgrade mode - preserve user customizations

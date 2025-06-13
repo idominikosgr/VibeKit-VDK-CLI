@@ -52,9 +52,9 @@ npm run sync-init
 
 ```bash
 # Run sync directly with options
-node tools/sync/rule-sync.js sync --force
-node tools/sync/rule-sync.js status
-node tools/sync/rule-sync.js init
+node src/sync/rule-sync.js sync --force
+node src/sync/rule-sync.js status
+node src/sync/rule-sync.js init
 ```
 
 ## Automatic Sync
@@ -115,7 +115,7 @@ sudo systemctl status vibecoding-autosync.service
 npm run auto-sync-daemon
 
 # Run daemon with custom interval (30 minutes)
-node tools/sync/auto-sync.js daemon 30
+node src/sync/auto-sync.js daemon 30
 ```
 
 ## Conflict Resolution
@@ -157,7 +157,7 @@ templates/rules/00-core-agent.mdc.backup.1705312200000
 
 ### Sync Configuration File
 
-The sync system stores configuration in `tools/sync/sync-config.json`:
+The sync system stores configuration in `src/sync/sync-config.json`:
 
 ```json
 {
@@ -223,7 +223,7 @@ VibeCodingRules/
 │   ├── languages/               # Language-specific rules
 │   ├── technologies/            # Technology-specific rules
 │   └── frameworks/              # Framework-specific rules
-├── tools/sync/                  # Sync system
+├── src/sync/                    # Sync system
 │   ├── rule-sync.js            # Main sync functionality
 │   ├── auto-sync.js            # Automatic sync service
 │   ├── sync-config.json        # Sync configuration
@@ -250,7 +250,7 @@ AI.rules/
 
 ### Log Files
 
-- **`tools/sync/sync.log`** - Detailed sync activity log
+- **`src/sync/sync.log`** - Detailed sync activity log
 - **`/tmp/vibecoding-autosync.log`** - Auto-sync daemon output (macOS)
 - **`journalctl -u vibecoding-autosync`** - Auto-sync daemon output (Linux)
 
@@ -264,7 +264,7 @@ npm run sync-status
 npm run auto-sync-status
 
 # View recent sync activity
-tail -f tools/sync/sync.log
+tail -f src/sync/sync.log
 ```
 
 ## Troubleshooting
@@ -285,11 +285,11 @@ curl -s https://raw.githubusercontent.com/idominikosgr/AI.rules/main/.ai/rules/0
 
 ```bash
 # Check file permissions
-ls -la tools/sync/
+ls -la src/sync/
 ls -la templates/
 
 # Fix permissions if needed
-chmod +x tools/sync/*.js
+chmod +x src/sync/*.js
 chmod -R u+w templates/
 ```
 
@@ -297,11 +297,11 @@ chmod -R u+w templates/
 
 ```bash
 # Reset sync configuration
-rm tools/sync/sync-config.json
+rm src/sync/sync-config.json
 npm run sync-init
 
 # View current configuration
-cat tools/sync/sync-config.json
+cat src/sync/sync-config.json
 ```
 
 ### Error Messages
@@ -363,7 +363,7 @@ cat tools/sync/sync-config.json
 3. **Monitor sync activity:**
    ```bash
    # Set up log monitoring
-   tail -f tools/sync/sync.log
+   tail -f src/sync/sync.log
    ```
 
 ## API Reference
@@ -371,7 +371,7 @@ cat tools/sync/sync-config.json
 ### rule-sync.js
 
 ```javascript
-const { performSync, checkSyncStatus, loadSyncConfig } = require('./tools/sync/rule-sync');
+const { performSync, checkSyncStatus, loadSyncConfig } = require('./src/sync/rule-sync');
 
 // Perform sync
 const result = await performSync({ force: false });
@@ -386,7 +386,7 @@ const config = loadSyncConfig();
 ### auto-sync.js
 
 ```javascript
-const { performAutoSync, shouldRunAutoSync } = require('./tools/sync/auto-sync');
+const { performAutoSync, shouldRunAutoSync } = require('./src/sync/auto-sync');
 
 // Check if auto-sync should run
 const shouldSync = shouldRunAutoSync();

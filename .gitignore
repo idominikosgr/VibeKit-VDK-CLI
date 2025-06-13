@@ -84,8 +84,7 @@ out/
 .ai/rules-wizard-test2/02-common-errors.mdc
 .ai/rules-wizard-test2/03-mcp-configuration.mdc
 .ai/rules-wizard-test2/languages/JavaScript-Modern.mdc
-pnpm-lock.yaml
-pnpm-workspace.yaml
+
 tools/project-scanner/.ai/rules/00-core-agent.mdc
 tools/project-scanner/.ai/rules/01-project-context.mdc
 tools/project-scanner/.ai/rules/02-common-errors.mdc

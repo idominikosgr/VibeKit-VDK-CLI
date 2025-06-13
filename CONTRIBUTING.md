@@ -26,96 +26,31 @@ Before you begin contributing, please:
 git clone https://github.com/idominikosgr/VibeCodingRules.git
 cd VibeCodingRules
 
-# Install dependencies for the project scanner
-cd tools/project-scanner
+# Install dependencies
 npm install
 
-# Run tests to ensure everything is working
-npm test
+# Run the CLI to verify installation
+npm run setup
 ```
 
-## Testing Guidelines
+## Code Quality Guidelines
 
-We maintain a comprehensive test suite to ensure the reliability and functionality of Vibe Coding Rules. Please follow these guidelines when writing tests:
+We maintain high code quality standards for Vibe Coding Rules. Please follow these guidelines:
 
-### Test Coverage Requirements
+### Development Standards
 
-- All new features must include tests with at least 70% code coverage
-- Bug fixes must include tests that reproduce and confirm the fix
-- Core components require both unit and integration tests
+- All new features should be thoroughly tested manually
+- Bug fixes should include verification that the issue is resolved
+- Core components should be validated with the project scanner
 
-### Test Structure
+### Manual Testing
 
-Organize tests by module and functionality:
+Test your changes by:
 
-```
-src/__tests__/
-  core/              # Tests for core components
-    ComponentName.test.js
-  utils/             # Tests for utility functions
-    UtilityName.test.js
-  analyzers/         # Tests for language analyzers
-    LanguageName.test.js
-  fixtures/          # Test fixtures and mock data
-    test-project/    # Sample project structures
-```
-
-### Writing Tests
-
-Follow these principles when writing tests:
-
-1. **Test Isolation**: Each test should be independent and not rely on other tests
-2. **Clear Descriptions**: Use descriptive test names that explain the expected behavior
-3. **Arrange-Act-Assert**: Structure tests with clear setup, execution, and verification phases
-4. **Mock External Dependencies**: Use Jest mocks for file system operations, network calls, etc.
-5. **Test Edge Cases**: Include tests for error conditions and boundary cases
-
-Example test:
-
-```javascript
-describe('ComponentName', () => {
-  // Setup before tests
-  beforeEach(() => {
-    // Initialize test environment
-  });
-
-  describe('methodName', () => {
-    test('should handle normal input correctly', () => {
-      // Arrange
-      const input = 'test input';
-      const expected = 'expected result';
-
-      // Act
-      const result = component.methodName(input);
-
-      // Assert
-      expect(result).toBe(expected);
-    });
-
-    test('should handle edge cases', () => {
-      expect(() => {
-        component.methodName(null);
-      }).toThrow('Invalid input');
-    });
-  });
-});
-```
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests for a specific file
-npm test -- -t "ComponentName"
-
-# Run tests with watch mode (useful during development)
-npm run test:watch
-
-# Generate test coverage report
-npm run test:coverage
-```
+1. **Running the CLI**: `npm run setup`
+2. **Testing Project Scanning**: `npm run scan` on various project types
+3. **Validating Rules**: `npm run validate` to ensure rule format compliance
+4. **Checking CLI Commands**: Test all relevant CLI commands
 
 ## Code Style
 
@@ -131,9 +66,9 @@ We follow a consistent code style across the project:
 
 1. **Fork the Repository**: Create your own fork of the Vibe Coding Rules repository
 2. **Create a Branch**: Make your changes in a new git branch based on the main branch
-3. **Write Tests**: Add tests for your changes with adequate coverage
+3. **Test Your Changes**: Manually test your changes using the CLI commands
 4. **Follow Code Style**: Ensure your code follows the project's style guidelines
-5. **Run Tests**: Make sure all tests pass before submitting your PR
+5. **Validate**: Run `npm run validate` to ensure everything works correctly
 6. **Document Changes**: Update documentation as needed for your changes
 7. **Submit PR**: Create a pull request with a clear title and description
 
@@ -154,7 +89,7 @@ Fixes #[issue number]
 - [ ] Performance improvement
 
 ## Testing
-Describe tests added and how existing functionality was verified.
+Describe manual testing performed and how existing functionality was verified.
 
 ## Documentation
 Describe documentation updates made.
@@ -184,7 +119,7 @@ To add support for a new programming language:
    - `analyzeNamingConventions(files)`: Detect naming conventions
 3. Add language-specific rule templates in `tools/project-scanner/src/templates/languages/`
 4. Update the `TechnologyAnalyzer` to detect the new language
-5. Add tests for your analyzer in `tools/project-scanner/src/__tests__/analyzers/`
+5. Test your analyzer manually with sample projects to ensure it works correctly
 
 ### Creating New Rule Files
 

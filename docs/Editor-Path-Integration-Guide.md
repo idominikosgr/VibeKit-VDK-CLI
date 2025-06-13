@@ -18,7 +18,7 @@ The following diagram illustrates the flow of the editor path integration system
 
 The system consists of several key components:
 
-### 1. Editor Path Resolver (`shared/editor-path-resolver.js`)
+### 1. Editor Path Resolver (`src/shared/editor-path-resolver.js`)
 
 This module provides functions for:
 - Resolving global and project-specific editor configuration paths

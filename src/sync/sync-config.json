@@ -1,0 +1,565 @@
+{
+  "lastSync": "2025-06-13T18:44:42.606Z",
+  "remoteCommitSha": "7b0e5903b376f9af7ab8eba84ed250267890aeab",
+  "syncedFiles": {
+    ".ai/rules/00-core-agent-additions.md": {
+      "hash": "ef8786c9fe170b40b08c863ede125477cad75cc699c8d1f41196714974f5ce0d",
+      "lastSync": "2025-06-13T17:48:59.803Z",
+      "size": 1597
+    },
+    ".ai/rules/00-core-agent.mdc": {
+      "hash": "5cd3e742a81d89d090b506e5358efd74c1ea83f8db47b9270a9d093d7a1f7769",
+      "lastSync": "2025-06-13T18:44:17.342Z",
+      "size": 18642
+    },
+    ".ai/rules/01-project-context.mdc": {
+      "hash": "9a884b07ece480ca0155fd0d4ea8c3726bfe0788e9769fb4ac02239dd5c56480",
+      "lastSync": "2025-06-13T18:44:17.565Z",
+      "size": 6069
+    },
+    ".ai/rules/02-common-errors.mdc": {
+      "hash": "38a30b3b3ddebfec63bb54206db8d0d39d82a9fadcb218c931576a66aceb6f2a",
+      "lastSync": "2025-06-13T18:44:17.799Z",
+      "size": 12883
+    },
+    ".ai/rules/03-mcp-configuration.mdc": {
+      "hash": "c554c103dd6ddf2da0b881e6263a010da232d280e0e1090c24a7a8b0cd0564bc",
+      "lastSync": "2025-06-13T18:44:18.071Z",
+      "size": 9119
+    },
+    ".ai/rules/assistants/Claude.mdc": {
+      "hash": "648f01bf5cbb575713a77a45c8a5eaccb16495079a7b67d1d930e2d5d908cb2a",
+      "lastSync": "2025-06-13T18:44:18.297Z",
+      "size": 4416
+    },
+    ".ai/rules/assistants/Cursor.mdc": {
+      "hash": "b7203c0f388b3938784f2c87b19d2064b3153d2724bccff1006794254aec85de",
+      "lastSync": "2025-06-13T18:44:18.533Z",
+      "size": 6318
+    },
+    ".ai/rules/assistants/GitHub-Copilot.mdc": {
+      "hash": "8a6ed57c26beddf4b80b732276f9b474968d93297abbce1e0b823c9f54c2e30b",
+      "lastSync": "2025-06-13T18:44:18.780Z",
+      "size": 7345
+    },
+    ".ai/rules/assistants/JetBrains.mdc": {
+      "hash": "4412ebe81b6962a89de4de1b61c3fe7129e3c73e58e9cb51f21aed4d3e96ed94",
+      "lastSync": "2025-06-13T18:44:19.027Z",
+      "size": 5043
+    },
+    ".ai/rules/assistants/VS-Code.mdc": {
+      "hash": "ecfe90d85f75032535b8c2d66cc3b2e7209490f7140aa1843eba61d8bcc6eb74",
+      "lastSync": "2025-06-13T18:44:19.247Z",
+      "size": 4384
+    },
+    ".ai/rules/assistants/Windsurf.mdc": {
+      "hash": "e80521758a2cd324e156a9da4869a75d539baa43ebaf4e8ea09a37394f3f61b3",
+      "lastSync": "2025-06-13T18:44:19.571Z",
+      "size": 8029
+    },
+    ".ai/rules/assistants/Zed.mdc": {
+      "hash": "bbac09232eae1efdcbc1825f2e34dff02d9f253208ab5d3799ff12d6d724e706",
+      "lastSync": "2025-06-13T18:44:19.798Z",
+      "size": 4048
+    },
+    ".ai/rules/languages/CPP20.mdc": {
+      "hash": "efca1eb8cf5b9c5e586f2499611ac0643cdfc1dee863b28cafb7610043cdb530",
+      "lastSync": "2025-06-13T18:44:20.081Z",
+      "size": 11684
+    },
+    ".ai/rules/languages/Kotlin.mdc": {
+      "hash": "be82e8e652141f703188636d60e97e424aa3a5c1c695358d2dc92d3dae1eff12",
+      "lastSync": "2025-06-13T18:44:20.319Z",
+      "size": 7339
+    },
+    ".ai/rules/languages/Python3.mdc": {
+      "hash": "63e0f3fa0d4c6fefd03ce54d20868ef7eab66b0e9bd5cc1fa780d6eaef639373",
+      "lastSync": "2025-06-13T18:44:20.593Z",
+      "size": 6361
+    },
+    ".ai/rules/languages/Swift.mdc": {
+      "hash": "0e9aba76fc4028df35ccceb84ca1048869a45c9d831ff6f15be21bc82a82e8da",
+      "lastSync": "2025-06-13T18:44:20.867Z",
+      "size": 9299
+    },
+    ".ai/rules/languages/TypeScript-Modern.mdc": {
+      "hash": "2a1b03b8f6a8c1f26e8311e1798dd697e55e3340fcb55e0f5d65df49b2ddf4aa",
+      "lastSync": "2025-06-13T18:44:21.110Z",
+      "size": 7325
+    },
+    ".ai/rules/languages/TypeScript5.mdc": {
+      "hash": "d5a0d5b1f657ee6d968f0bca5b3ab9c47c8ff129e026e093856e4bfb55df70d5",
+      "lastSync": "2025-06-13T18:44:21.331Z",
+      "size": 4448
+    },
+    ".ai/rules/stacks/Astro-Content-Stack.mdc": {
+      "hash": "bbe47d8b97f142747d213e67abe1f267aa537aed0c2a888be6736105818fccd6",
+      "lastSync": "2025-06-13T18:44:21.547Z",
+      "size": 17990
+    },
+    ".ai/rules/stacks/Ecommerce-Stack.mdc": {
+      "hash": "bf2572ca25ab33367cad726100b45d874dc5c579e3dbb7492a7d93ea67016832",
+      "lastSync": "2025-06-13T18:44:21.783Z",
+      "size": 24197
+    },
+    ".ai/rules/stacks/NextJS-Enterprise-Stack.mdc": {
+      "hash": "85db30747d1b1b95080a37fd3aca73801df1622746c2fbb501f6008bc20a29d5",
+      "lastSync": "2025-06-13T18:44:22.029Z",
+      "size": 20259
+    },
+    ".ai/rules/stacks/ReactNative-Mobile-Stack.mdc": {
+      "hash": "390e00e9a911db964127401885d6b99923ae80f1d9cdfa8cb9f19f5025ff8d87",
+      "lastSync": "2025-06-13T18:44:22.260Z",
+      "size": 19464
+    },
+    ".ai/rules/stacks/Supabase-NextJS-Stack.mdc": {
+      "hash": "29586b6efe951805fffc2eba1d17f6873dbc3c86ebf0ec7debf84ae8ab2e1f6f",
+      "lastSync": "2025-06-13T18:44:22.468Z",
+      "size": 17119
+    },
+    ".ai/rules/stacks/TRPC-FullStack.mdc": {
+      "hash": "33f091dcbac9466df2c110ed8d742b80f56406a58c9e114371f92f4be9207542",
+      "lastSync": "2025-06-13T18:44:22.712Z",
+      "size": 11031
+    },
+    ".ai/rules/tasks/AI-Code-Review.mdc": {
+      "hash": "ada895633d4ecc68150a56ee74f8b71dc9c00d44b635a9f94fd5a089d338e361",
+      "lastSync": "2025-06-13T18:44:22.922Z",
+      "size": 6621
+    },
+    ".ai/rules/tasks/AI-Pair-Programming.mdc": {
+      "hash": "5484df492a0e23f9616128fe594b3aadbc773a3210ddce6208ab07aea9b7c4e3",
+      "lastSync": "2025-06-13T18:44:23.135Z",
+      "size": 7152
+    },
+    ".ai/rules/tasks/AI-Refactoring.mdc": {
+      "hash": "3f9d453ec1c84d79bbcfbec1899af44ab9f0308110778e8de465fd4abb55de36",
+      "lastSync": "2025-06-13T18:44:23.359Z",
+      "size": 7215
+    },
+    ".ai/rules/tasks/AI-Session-Handoff.mdc": {
+      "hash": "1a55151e2bb0272585ce77623c184421c0ef4c27b2e840e4c0e0fdc5298f88cc",
+      "lastSync": "2025-06-13T18:44:23.577Z",
+      "size": 7609
+    },
+    ".ai/rules/tasks/API-Docs.mdc": {
+      "hash": "f14fbac30160539202905ab0344f7b893fe9d4fdc8c999107023f0dd97490491",
+      "lastSync": "2025-06-13T18:44:23.801Z",
+      "size": 5894
+    },
+    ".ai/rules/tasks/API-Endpoints.mdc": {
+      "hash": "f8679f535dfb9efc73b83c050293c53ae9cef5369c604b0e5141ac92ec1c1dd2",
+      "lastSync": "2025-06-13T18:44:24.033Z",
+      "size": 9487
+    },
+    ".ai/rules/tasks/Accessibility-Review.mdc": {
+      "hash": "c0c876564d761d3215dcb80bdbf622f6e193724744786bd0233008717b29928f",
+      "lastSync": "2025-06-13T18:44:24.282Z",
+      "size": 7636
+    },
+    ".ai/rules/tasks/Analyze-Coverage.mdc": {
+      "hash": "8bf57fc4cca62d98b707edcb45ed3022b4164342046bc0b7b479c47611e6b91b",
+      "lastSync": "2025-06-13T18:44:24.507Z",
+      "size": 5875
+    },
+    ".ai/rules/tasks/Analyze-Data.mdc": {
+      "hash": "aa08af8e3adf222f0aa6a9300833e77f4ed6c91942329bcbd9f08af4bc9bfd09",
+      "lastSync": "2025-06-13T18:44:24.732Z",
+      "size": 2862
+    },
+    ".ai/rules/tasks/Analyze-Dependencies.mdc": {
+      "hash": "525699b0542747308703bcd4d75058ab82e93e66fdce6010aad4e90c5167859c",
+      "lastSync": "2025-06-13T18:44:24.955Z",
+      "size": 4734
+    },
+    ".ai/rules/tasks/Analyze-Logs.mdc": {
+      "hash": "775fdf480c17b181871df331bd33ec528cc79b673b8822b09e476c4488fc553b",
+      "lastSync": "2025-06-13T18:44:25.166Z",
+      "size": 3290
+    },
+    ".ai/rules/tasks/Analyze-Requirements.mdc": {
+      "hash": "b1a64013452cd0ca57df9ea153c2f0d3449ceb1ffda437401cec6d293cc6aec7",
+      "lastSync": "2025-06-13T18:44:25.381Z",
+      "size": 4871
+    },
+    ".ai/rules/tasks/App-Logic.mdc": {
+      "hash": "4d1c208530092f63fc96b6a196279407c9e2412e9df8fc24c60c340562c522dc",
+      "lastSync": "2025-06-13T18:44:25.586Z",
+      "size": 5009
+    },
+    ".ai/rules/tasks/Architecture-Design-Review.mdc": {
+      "hash": "c78e814872755153194ff6c01612eab9767aaca5e634a295cdba7b476d196a42",
+      "lastSync": "2025-06-13T18:44:25.940Z",
+      "size": 6415
+    },
+    ".ai/rules/tasks/Caching-Strategy.mdc": {
+      "hash": "6c0c1daa5f47899a08828ea7068f92ac8425ec91963bc01cafe1f5add3c9df16",
+      "lastSync": "2025-06-13T18:44:26.157Z",
+      "size": 7010
+    },
+    ".ai/rules/tasks/Code-Errors.mdc": {
+      "hash": "0e203dd9cb4a660ab21c81db15b5c9a6e7f67b220ec3d9be1a8439f19e70c783",
+      "lastSync": "2025-06-13T18:44:26.371Z",
+      "size": 4665
+    },
+    ".ai/rules/tasks/Code-Quality-Review.mdc": {
+      "hash": "0e6cfcf8f25912db7f7564201f92ade34f608e5afb146fc19981ce349394d3e0",
+      "lastSync": "2025-06-13T18:44:26.590Z",
+      "size": 6423
+    },
+    ".ai/rules/tasks/Compliance-Check.mdc": {
+      "hash": "41cb5a7bad688149848543f1409aaaf0e1a763b44979508705a88a5d916667bb",
+      "lastSync": "2025-06-13T18:44:26.825Z",
+      "size": 5884
+    },
+    ".ai/rules/tasks/Component-Interfaces.mdc": {
+      "hash": "29a5b48a34e72d81d3d3190519ccb21ebaef44082c30a9a3fd964e9bebd1368d",
+      "lastSync": "2025-06-13T18:44:27.052Z",
+      "size": 6171
+    },
+    ".ai/rules/tasks/Create-AI-Rule.mdc": {
+      "hash": "29f9c4c5acf08793ee97fa3a8b8dac0ffea3a7f5a0f4c8b5ee9bca752cf5744e",
+      "lastSync": "2025-06-13T18:44:27.271Z",
+      "size": 3406
+    },
+    ".ai/rules/tasks/Create-Cursor-Rule.mdc": {
+      "hash": "9f609184033f4cade32dd2f7d729cd473125413984d5c9988c94248cd4cdafb4",
+      "lastSync": "2025-06-13T18:44:27.495Z",
+      "size": 3406
+    },
+    ".ai/rules/tasks/Create-Plan.mdc": {
+      "hash": "cf90a62afd19cd80fa3848656418162551af61174ef625659de55a791b5bf8d8",
+      "lastSync": "2025-06-13T18:44:27.718Z",
+      "size": 7021
+    },
+    ".ai/rules/tasks/Cross-Browser-Compatibility.mdc": {
+      "hash": "8b56d52d63b6bc01496fff20e51aa5d4bf5c9401438a603061d4d250cfb2b429",
+      "lastSync": "2025-06-13T18:44:27.940Z",
+      "size": 5669
+    },
+    ".ai/rules/tasks/Data-Migration-Plan.mdc": {
+      "hash": "011c912feee22a4b168f26ae1251708383fcec17eb0660410cd86fdeb2dac9a0",
+      "lastSync": "2025-06-13T18:44:28.167Z",
+      "size": 6878
+    },
+    ".ai/rules/tasks/Database-Migration.mdc": {
+      "hash": "79776a4fff6f3c6e8863af8ac269d03b1bad03466320e56801adb7a2d4e6d003",
+      "lastSync": "2025-06-13T18:44:28.392Z",
+      "size": 6581
+    },
+    ".ai/rules/tasks/Database-Schema.mdc": {
+      "hash": "f2913b8795e2a889c7c11f5f457a60b06a8b046b31a771b2a1af93bc34f51f0e",
+      "lastSync": "2025-06-13T18:44:28.635Z",
+      "size": 6288
+    },
+    ".ai/rules/tasks/DevOps-Tasks.mdc": {
+      "hash": "d310eee573245bc26c1179ebb8b2ad4b9c6cd0f9c9f7a01044d430e3de9f0d5e",
+      "lastSync": "2025-06-13T18:44:28.853Z",
+      "size": 5578
+    },
+    ".ai/rules/tasks/Develop-Roadmap.mdc": {
+      "hash": "92ea6f8f5d780e9a832684147d0f5a8f08b7742b7d49a854a38c8391ff3eb862",
+      "lastSync": "2025-06-13T18:44:29.090Z",
+      "size": 4474
+    },
+    ".ai/rules/tasks/Enhance-Maintainability.mdc": {
+      "hash": "904f4ca00ec05f421e59397ed27f5746f0c6a0826785b1cf1eac599f8ddaf04d",
+      "lastSync": "2025-06-13T18:44:29.316Z",
+      "size": 6474
+    },
+    ".ai/rules/tasks/Enhance-Scalability.mdc": {
+      "hash": "82a4c5f9ed07cad042ffd0c761778de171e840611505224cb78d126aef8b2c04",
+      "lastSync": "2025-06-13T18:44:29.526Z",
+      "size": 6443
+    },
+    ".ai/rules/tasks/Estimate-Effort.mdc": {
+      "hash": "58f24410db89e97d27857fc486228861e5ae377dd8e73be1dd5b081513ae6ec9",
+      "lastSync": "2025-06-13T18:44:29.748Z",
+      "size": 4988
+    },
+    ".ai/rules/tasks/General-Writing.mdc": {
+      "hash": "37030c1ae9a0a7268cc798e69b391af486d30c6c323b767ff870b94f2eed57ee",
+      "lastSync": "2025-06-13T18:44:29.978Z",
+      "size": 3793
+    },
+    ".ai/rules/tasks/Generate-Boilerplate.mdc": {
+      "hash": "81c05aa419e5867dd2d9ec612b9a56230fab38ec7e4745a396130f112693f27b",
+      "lastSync": "2025-06-13T18:44:30.198Z",
+      "size": 3527
+    },
+    ".ai/rules/tasks/Generate-Config.mdc": {
+      "hash": "5277b2b057ad2599fa9cf2fb6f946a6a9ab382a94ea34cf7ad6630c39e0e786a",
+      "lastSync": "2025-06-13T18:44:30.554Z",
+      "size": 3966
+    },
+    ".ai/rules/tasks/Generate-LLM-Prompt.mdc": {
+      "hash": "d49d34a794283c327e5c0bdd2e76f7456ca0ce92ff4a7af7904b34cb59256955",
+      "lastSync": "2025-06-13T18:44:30.768Z",
+      "size": 4548
+    },
+    ".ai/rules/tasks/Generate-Onboarding.mdc": {
+      "hash": "842ec71002e4551fef401a8b9b3fe3c0e21a160557aad4602641fbceda6e7b69",
+      "lastSync": "2025-06-13T18:44:30.990Z",
+      "size": 6343
+    },
+    ".ai/rules/tasks/Generate-Types.mdc": {
+      "hash": "f4c21d4848bb77c2572cc0aba6e4a7748164fe52b4d468cb739517a098a8a925",
+      "lastSync": "2025-06-13T18:44:31.198Z",
+      "size": 4613
+    },
+    ".ai/rules/tasks/Git-Flow.mdc": {
+      "hash": "71c4108725ac310f880f2f7018e9bfdf84d5850f3ba92ca04ac7ce120548d3d0",
+      "lastSync": "2025-06-13T18:44:31.405Z",
+      "size": 5018
+    },
+    ".ai/rules/tasks/Integration-Problems.mdc": {
+      "hash": "30d8ebc6ae9e25a9228a25fd4d4f5f9ea872480167fc866220ab4cebaee924db",
+      "lastSync": "2025-06-13T18:44:31.679Z",
+      "size": 6180
+    },
+    ".ai/rules/tasks/Internationalization-Review.mdc": {
+      "hash": "4572d3112c75ee368f69abf3828e46b033733c4b65b4df84129fa38f90c8a236",
+      "lastSync": "2025-06-13T18:44:31.897Z",
+      "size": 5972
+    },
+    ".ai/rules/tasks/Mobile-Responsive-Design.mdc": {
+      "hash": "0da19abe28fa33cb4464e7db1a48b0e6863bee9c72f8cb6cb6831b047f011d95",
+      "lastSync": "2025-06-13T18:44:32.119Z",
+      "size": 6162
+    },
+    ".ai/rules/tasks/Optimize-Performance.mdc": {
+      "hash": "f3fbf971a1f5430b2d5f492202d0adab9de310b4005ccd7daf059da1dd5d1e31",
+      "lastSync": "2025-06-13T18:44:32.330Z",
+      "size": 5445
+    },
+    ".ai/rules/tasks/Performance-Issues.mdc": {
+      "hash": "01a6d1eb548ef3d0ac4041d88ef234077a07901b7319b9defc345b6e2d7d9a3a",
+      "lastSync": "2025-06-13T18:44:32.566Z",
+      "size": 5325
+    },
+    ".ai/rules/tasks/Refactor-Code.mdc": {
+      "hash": "dcf8edb615e0390d796022251b8c53378b16edb893b35833f37eb7777aff2503",
+      "lastSync": "2025-06-13T18:44:32.804Z",
+      "size": 4624
+    },
+    ".ai/rules/tasks/Release-Plan.mdc": {
+      "hash": "4e71719f9253e6d7fe0529b78cf773804464df111f388bb1583d95d36137449d",
+      "lastSync": "2025-06-13T18:44:33.044Z",
+      "size": 6242
+    },
+    ".ai/rules/tasks/SEO-Best-Practices-Review.mdc": {
+      "hash": "2cad1a9da53a9f0dd2d86f84b09d6add8b82d26672d5896d3df5b1b3d69f08f4",
+      "lastSync": "2025-06-13T18:44:33.295Z",
+      "size": 6732
+    },
+    ".ai/rules/tasks/Security-Audit.mdc": {
+      "hash": "6175373a84f3894eea7e8cdbd3fb18a417109b6fafea64f7ec009e83890bacc6",
+      "lastSync": "2025-06-13T18:44:33.499Z",
+      "size": 7870
+    },
+    ".ai/rules/tasks/Service-Integration.mdc": {
+      "hash": "5194dffe6c4aba104e30bc017081ff1dad925e4c6fbc67242298830177873fde",
+      "lastSync": "2025-06-13T18:44:33.719Z",
+      "size": 6562
+    },
+    ".ai/rules/tasks/System-Architecture.mdc": {
+      "hash": "8c56aab6fc83dec1794bfb18a76ea84f3fd935bc26cc05c668a179b26d91d36c",
+      "lastSync": "2025-06-13T18:44:33.945Z",
+      "size": 6614
+    },
+    ".ai/rules/tasks/Task-Breakdown.mdc": {
+      "hash": "5f24a81be791bc49fd64abf8ddf8217e1554884825a612bc3aac666a3773a276",
+      "lastSync": "2025-06-13T18:44:34.168Z",
+      "size": 5502
+    },
+    ".ai/rules/tasks/Technical-Blog.mdc": {
+      "hash": "a167089b3170b29e7a151a218f05792626cd61343519625e2f3a1dd6597b2549",
+      "lastSync": "2025-06-13T18:44:34.377Z",
+      "size": 4858
+    },
+    ".ai/rules/tasks/Technical-Docs.mdc": {
+      "hash": "d128443fdc887ff28bba14fa6e19a6b3b0f40cd7bcac5cc758b5ad1278724969",
+      "lastSync": "2025-06-13T18:44:34.611Z",
+      "size": 4024
+    },
+    ".ai/rules/tasks/UI-Component.mdc": {
+      "hash": "14ab4094e07a60fe1b23eb0a847214ea52469e323fe59d438397dd6690271643",
+      "lastSync": "2025-06-13T18:44:34.918Z",
+      "size": 5981
+    },
+    ".ai/rules/tasks/User-Guide.mdc": {
+      "hash": "fcaf6eb7ae3cd8b6eac742e8325caf32240f26172f7c4a7b6b347c6e54f1b762",
+      "lastSync": "2025-06-13T18:44:35.135Z",
+      "size": 5208
+    },
+    ".ai/rules/tasks/Write-Tests.mdc": {
+      "hash": "4dd81382684e8331313fa749c5645529136a371198ea7a4743a8a11524b87273",
+      "lastSync": "2025-06-13T18:44:35.442Z",
+      "size": 6114
+    },
+    ".ai/rules/technologies/AI-Workflow-Integration.mdc": {
+      "hash": "aba30721de3035dd4e9a6e3502665733aee0af083a718acd1820d3b64611fdbd",
+      "lastSync": "2025-06-13T18:44:35.852Z",
+      "size": 13186
+    },
+    ".ai/rules/technologies/Agentic-AI-Development.mdc": {
+      "hash": "4be06597249916c5e9cee31c0ae3a4731141b8ee50b6470f14baa4b8764a605c",
+      "lastSync": "2025-06-13T18:44:36.064Z",
+      "size": 13303
+    },
+    ".ai/rules/technologies/Astro4.mdc": {
+      "hash": "cedb970cf2957ed5622a2c1b761683a12be0da2b4d1b31e0e6798b98a0732df7",
+      "lastSync": "2025-06-13T18:44:36.277Z",
+      "size": 4140
+    },
+    ".ai/rules/technologies/Clerk.mdc": {
+      "hash": "2dc7d50b1386171f82a7023d4f797c17be5dcc57819dcc1d45051f9453cb9c98",
+      "lastSync": "2025-06-13T18:44:36.569Z",
+      "size": 4374
+    },
+    ".ai/rules/technologies/Docker-Kubernetes.mdc": {
+      "hash": "993c12fa02f58b387abb05938a93221f1ab2dc8ab93b909614547169c66822bc",
+      "lastSync": "2025-06-13T18:44:36.794Z",
+      "size": 6896
+    },
+    ".ai/rules/technologies/FastAPI.mdc": {
+      "hash": "80a01bb1864bd2011ec5828bb3dad4e8f7a97cd2b34f6f540060b110f25ba529",
+      "lastSync": "2025-06-13T18:44:37.018Z",
+      "size": 7507
+    },
+    ".ai/rules/technologies/Flutter.mdc": {
+      "hash": "7e036c1a1aaa8e9073eacb5f7af879a508e81f93107b63765d673d334836ba19",
+      "lastSync": "2025-06-13T18:44:37.268Z",
+      "size": 8107
+    },
+    ".ai/rules/technologies/GraphQL.mdc": {
+      "hash": "8468acc733ae6c5d400fbc671ae44850b124c26bc535328bce8e42102352f212",
+      "lastSync": "2025-06-13T18:44:37.593Z",
+      "size": 7234
+    },
+    ".ai/rules/technologies/MCP-Integration.mdc": {
+      "hash": "a0179b1cd938dca1d58f4659f00bb9d3bdc796d06df27416adf35aaf9331b347",
+      "lastSync": "2025-06-13T18:44:37.818Z",
+      "size": 13936
+    },
+    ".ai/rules/technologies/MCP-Servers.mdc": {
+      "hash": "9bf34e5e9332a240ab77a7272efc50e16453c4f18a7cc7a5c2cd3b8c82c7e58f",
+      "lastSync": "2025-06-13T18:44:38.043Z",
+      "size": 4668
+    },
+    ".ai/rules/technologies/Memory-MCP.mdc": {
+      "hash": "22e3fdeed341577e6bdd68238308ad9fbf95711e42359dd0324f6fa98713fc96",
+      "lastSync": "2025-06-13T18:44:38.259Z",
+      "size": 6715
+    },
+    ".ai/rules/technologies/Memory-Management.mdc": {
+      "hash": "137f6a75c4ada19f7c0fea4ac8e653eaec852ed3a8514d7371deeba5ce002b3e",
+      "lastSync": "2025-06-13T18:44:38.530Z",
+      "size": 9129
+    },
+    ".ai/rules/technologies/NextJS.mdc": {
+      "hash": "1f789db8af0fc7b9c51877db34a1594a61b6868b47266ee385e7eea9e1d75cc6",
+      "lastSync": "2025-06-13T18:44:38.754Z",
+      "size": 9765
+    },
+    ".ai/rules/technologies/NodeExpress.mdc": {
+      "hash": "8ea8d723b8d37d4696bc050b822f11e71ae2a17df019e5a03c0065599b17fa61",
+      "lastSync": "2025-06-13T18:44:38.964Z",
+      "size": 6807
+    },
+    ".ai/rules/technologies/PySideUI.mdc": {
+      "hash": "15bdd2bd367410617b41496e0519e07370ddbd2b1d2ed939c282155b1afd4eab",
+      "lastSync": "2025-06-13T18:44:39.204Z",
+      "size": 12662
+    },
+    ".ai/rules/technologies/React19.mdc": {
+      "hash": "82be4f35aecece2ba9e5428fab53e85f41f6ffcb7b68c047c8d2accd9e9d29ef",
+      "lastSync": "2025-06-13T18:44:39.419Z",
+      "size": 4635
+    },
+    ".ai/rules/technologies/Sequential-Thinking-Advanced.mdc": {
+      "hash": "0995a1b49cb195cfe7a6d2168286efd6ebb962fa1b20d3d2d9917002b4f11447",
+      "lastSync": "2025-06-13T18:44:39.643Z",
+      "size": 16457
+    },
+    ".ai/rules/technologies/Sequential-Thinking.mdc": {
+      "hash": "9612fedeee2215da1bac9a465e34b7453176865c9c4ea30c6b27868e544de7b1",
+      "lastSync": "2025-06-13T18:44:39.868Z",
+      "size": 5617
+    },
+    ".ai/rules/technologies/ShadcnUI-Integration.mdc": {
+      "hash": "8b2d78ede4aacb2f139dcbd3991218f680b2c2274b2139807f0a7c4c2a1dddcf",
+      "lastSync": "2025-06-13T18:44:40.079Z",
+      "size": 16362
+    },
+    ".ai/rules/technologies/ShadcnUI.mdc": {
+      "hash": "d58998bc76f61ee08e8424bd4bf81b6c58dcaf2c4b7f4df0cfbe436d9b7b445f",
+      "lastSync": "2025-06-13T18:44:40.298Z",
+      "size": 7517
+    },
+    ".ai/rules/technologies/Supabase.mdc": {
+      "hash": "8b894565817c60424cbd74fa44050ebdc49ee300e9f124d0e3d9bbff79a70734",
+      "lastSync": "2025-06-13T18:44:40.567Z",
+      "size": 8126
+    },
+    ".ai/rules/technologies/Svelte5.mdc": {
+      "hash": "f78ecbb4266f268cb421a4f54e1c7d8a1a445d3bdb177246fce0397944982537",
+      "lastSync": "2025-06-13T18:44:40.795Z",
+      "size": 4785
+    },
+    ".ai/rules/technologies/SwiftData.mdc": {
+      "hash": "e336f497f227cdcdee9d3e1075fc1e9997478a6523498bc7ea6372da958b6df9",
+      "lastSync": "2025-06-13T18:44:41.002Z",
+      "size": 9762
+    },
+    ".ai/rules/technologies/SwiftUI.mdc": {
+      "hash": "fe991439738727756a2e6ca4f568dd066ccf4de05f29705ce485bf53a25ac843",
+      "lastSync": "2025-06-13T18:44:41.266Z",
+      "size": 8647
+    },
+    ".ai/rules/technologies/Tailwind4.mdc": {
+      "hash": "75f603d1e7813bf82031c1b8b98cc5577b3800f4951c5e43cb2ebe4a263a42cc",
+      "lastSync": "2025-06-13T18:44:41.477Z",
+      "size": 4594
+    },
+    ".ai/rules/technologies/Tauri.mdc": {
+      "hash": "3984b0101d05613fe295389199d137a7af7a3528b2ddca8599aa3ecd79fcc6b2",
+      "lastSync": "2025-06-13T18:44:41.695Z",
+      "size": 7386
+    },
+    ".ai/rules/technologies/Vue3.mdc": {
+      "hash": "e59e5145f85dd166a3fba970e88ece6d021d775e1b2a8c408cfcc89ac1f5ea25",
+      "lastSync": "2025-06-13T18:44:41.911Z",
+      "size": 5130
+    },
+    ".ai/rules/tools/Code-Search.mdc": {
+      "hash": "22b6127939ed1dfe2af4208dc63c14d2fe8464098d5a85ef5311c01a8f94075e",
+      "lastSync": "2025-06-13T18:44:42.143Z",
+      "size": 13193
+    },
+    ".ai/rules/tools/Command-Execution.mdc": {
+      "hash": "deb472662ed2bae570db47f3fc2889d63bed422ed022782012d6eba8dc8c3f99",
+      "lastSync": "2025-06-13T18:44:42.384Z",
+      "size": 18346
+    },
+    ".ai/rules/tools/File-Operations.mdc": {
+      "hash": "b4d0a8a672501f347ee905be72e61ce123d76c9e332dde7916c8cde5b030d3c8",
+      "lastSync": "2025-06-13T18:44:42.606Z",
+      "size": 10186
+    }
+  },
+  "conflictResolution": "remote",
+  "autoSync": false,
+  "syncInterval": 86400000,
+  "excludePatterns": [
+    ".DS_Store",
+    "*.tmp",
+    "*.log"
+  ],
+  "includePatterns": [
+    "**/*.mdc",
+    "**/*.md"
+  ],
+  "initialized": true,
+  "initDate": "2025-06-13T17:48:58.360Z"
+}

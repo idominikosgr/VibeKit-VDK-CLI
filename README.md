@@ -159,21 +159,54 @@ git clone https://github.com/idominikosgr/CodePilotRules.git
 cd CodePilotRules
 ```
 
-2. Run the setup wizard:
+2. Install dependencies:
 
 ```bash
-node setup-wizard.js
+npm install
 ```
 
-3. Follow the interactive prompts to configure Vibe Coding Rules for your project:    - Enter your project path
-    - Select your IDE or AI coding tool (VS Code, Cursor AI, Windsurf, GitHub Copilot, Claude, JetBrains IDEs, Zed Editor, etc.)
-    - Choose your primary framework
+3. Run the setup wizard:
+
+```bash
+npm run wizard
+```
+
+4. Choose your setup mode:
+   - **☁️ Remote** - Download latest rules from [AI.rules repository](https://github.com/idominikosgr/AI.rules)
+   - **🔍 Automatic** - Scan your project and generate custom rules
+   - **🔧 Manual** - Select technologies and frameworks individually
+   - **🔄 Hybrid** - Combine automatic scanning with manual adjustments
+
+5. Follow the interactive prompts to configure Vibe Coding Rules for your project:
+   - Enter your project path
+   - Select your IDE or AI coding tool (VS Code, Cursor AI, Windsurf, GitHub Copilot, Claude, JetBrains IDEs, Zed Editor, etc.)
+   - Choose your primary framework
    - Select your programming language
    - Pick your technology stack
    - Select additional technologies
    - Choose AI tools to configure
 
 The wizard will automatically create the appropriate directory structure and copy the relevant rule files to your project.
+
+### Remote Rule Synchronization
+
+Keep your rules up-to-date with the latest improvements from the community:
+
+```bash
+# Sync with remote repository
+npm run sync
+
+# Check sync status
+npm run sync-status
+
+# Enable automatic sync
+npm run sync-init
+
+# Set up auto-sync service
+npm run install-sync-service
+```
+
+For detailed sync system documentation, see [docs/SYNC-SYSTEM.md](docs/SYNC-SYSTEM.md).
 
 ### Option 2: Manual Installation
 

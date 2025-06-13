@@ -47,9 +47,13 @@ export class RuleGenerator {
 
     this.generatedFiles = [];
 
+    // Use the outputPath from analysisData if provided, otherwise use the default
+    const outputPath = analysisData.outputPath || this.outputPath;
+    this.outputPath = outputPath; // Update the instance variable
+
     try {
       // Ensure output directory exists
-      await fs.mkdir(this.outputPath, { recursive: true });
+      await fs.mkdir(outputPath, { recursive: true });
 
       // Generate core rules
       await this.generateCoreRules(analysisData);
@@ -137,11 +141,18 @@ export class RuleGenerator {
     const ruleContent = template(templateData);
 
     // Write the rule file
-    await fs.writeFile(coreAgentPath, ruleContent, 'utf8');
-    this.generatedFiles.push(coreAgentPath);
-
-    if (this.verbose) {
-      console.log(chalk.gray(`Generated core agent rule at: ${coreAgentPath}`));
+    try {
+      await fs.writeFile(coreAgentPath, ruleContent, 'utf8');
+      this.generatedFiles.push(coreAgentPath);
+      
+      if (this.verbose) {
+        console.log(chalk.gray(`Generated core agent rule at: ${coreAgentPath}`));
+      } else {
+        console.log(`Generated core agent rule at: ${path.relative(process.cwd(), coreAgentPath)}`);
+      }
+    } catch (writeError) {
+      console.error(chalk.red(`Failed to write core agent rule: ${writeError.message}`));
+      throw writeError;
     }
   }
 
@@ -209,11 +220,18 @@ export class RuleGenerator {
     const ruleContent = template(templateData);
 
     // Write the rule file
-    await fs.writeFile(projectContextPath, ruleContent, 'utf8');
-    this.generatedFiles.push(projectContextPath);
-
-    if (this.verbose) {
-      console.log(chalk.gray(`Generated project context rule at: ${projectContextPath}`));
+    try {
+      await fs.writeFile(projectContextPath, ruleContent, 'utf8');
+      this.generatedFiles.push(projectContextPath);
+      
+      if (this.verbose) {
+        console.log(chalk.gray(`Generated project context rule at: ${projectContextPath}`));
+      } else {
+        console.log(`Generated project context rule at: ${path.relative(process.cwd(), projectContextPath)}`);
+      }
+    } catch (writeError) {
+      console.error(chalk.red(`Failed to write project context rule: ${writeError.message}`));
+      throw writeError;
     }
   }
 
@@ -586,5 +604,478 @@ export class RuleGenerator {
           }
       }
     }
+  }
+
+  /**
+   * Generates stack-specific rules based on detected technology stacks
+   * @param {Object} analysisData - Combined analysis results
+   */
+  async generateStackRules(analysisData) {
+    if (!analysisData.techStack || !analysisData.techStack.stacks || analysisData.techStack.stacks.length === 0) {
+      return;
+    }
+
+    const stackDirPath = path.join(this.outputPath, DIRECTORIES.STACKS);
+    await fs.mkdir(stackDirPath, { recursive: true });
+
+    for (const stack of analysisData.techStack.stacks) {
+      if (this.verbose) {
+        console.log(chalk.gray(`Generating rule for stack: ${stack}`));
+      }
+
+      const stackFileName = `${stack.toLowerCase().replace(/[^a-z0-9]/g, '-')}.mdc`;
+      const ruleFilePath = path.join(stackDirPath, stackFileName);
+      const templatePath = path.join(this.templatesDir, `stacks/${stackFileName}.hbs`);
+
+      try {
+        let templateContent = await this.getTemplateContent(templatePath, stack.toLowerCase());
+
+        const template = Handlebars.compile(templateContent);
+        const templateData = {
+          stack,
+          date: new Date().toISOString().split('T')[0],
+          frameworks: analysisData.techStack?.frameworks || [],
+          libraries: analysisData.techStack?.libraries || [],
+          primaryLanguages: analysisData.techStack?.primaryLanguages || []
+        };
+
+        const ruleContent = template(templateData);
+        await fs.writeFile(ruleFilePath, ruleContent, 'utf8');
+        this.generatedFiles.push(ruleFilePath);
+
+        if (this.verbose) {
+          console.log(chalk.gray(`Generated stack rule at: ${ruleFilePath}`));
+        }
+      } catch (error) {
+        if (this.verbose) {
+          console.log(chalk.yellow(`Could not generate stack rule for ${stack}: ${error.message}`));
+        }
+      }
+    }
+  }
+
+  /**
+   * Generates task-specific rules
+   * @param {Object} analysisData - Combined analysis results
+   */
+  async generateTaskRules(analysisData) {
+    // For now, this is a placeholder - tasks would be determined by user selection or project analysis
+    if (this.verbose) {
+      console.log(chalk.gray('Skipping task rule generation (not implemented)'));
+    }
+  }
+
+  /**
+   * Generates tool-specific rules
+   * @param {Object} analysisData - Combined analysis results
+   */
+  async generateToolRules(analysisData) {
+    // For now, this is a placeholder - tools would be determined by user selection or project analysis
+    if (this.verbose) {
+      console.log(chalk.gray('Skipping tool rule generation (not implemented)'));
+    }
+  }
+
+  /**
+   * Generates assistant-specific rules
+   * @param {Object} analysisData - Combined analysis results
+   */
+  async generateAssistantRules(analysisData) {
+    // For now, this is a placeholder - assistants would be determined by user selection or project analysis
+    if (this.verbose) {
+      console.log(chalk.gray('Skipping assistant rule generation (not implemented)'));
+    }
+  }
+
+  /**
+   * Gets default language template
+   * @param {string} language - Language type
+   * @returns {string} Default template content
+   */
+  getDefaultLanguageTemplate(language) {
+    return `---
+description: Rules and patterns for {{capitalize language}} development
+globs:
+alwaysApply: false
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["{{capitalize language}}", "Modern-Development"]
+---
+
+# {{capitalize language}} Development Rules
+
+## Language-Specific Patterns
+
+### Naming Conventions
+- Use appropriate {{language}} naming conventions
+- Follow community standards and best practices
+
+### Code Organization
+- Structure code according to {{language}} conventions
+- Use appropriate module/package organization
+
+### Best Practices
+- Follow {{language}}-specific best practices
+- Use modern language features appropriately
+- Implement proper error handling
+
+## Integration Guidelines
+
+When working with {{language}}:
+1. Follow established patterns in the codebase
+2. Use appropriate tooling and linting
+3. Maintain consistency with existing code style
+4. Document complex logic appropriately
+
+---
+NOTE TO AI: Apply these rules when working with {{language}} files in this project.
+`;
+  }
+
+  /**
+   * Gets default framework template
+   * @param {string} framework - Framework type
+   * @returns {string} Default template content
+   */
+  getDefaultFrameworkTemplate(framework) {
+    return `---
+description: Rules and patterns for {{capitalize framework}} development
+globs:
+alwaysApply: false
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["{{capitalize framework}}", "Modern-Development"]
+---
+
+# {{capitalize framework}} Development Rules
+
+## Framework-Specific Patterns
+
+### Component Structure
+- Follow {{framework}} component patterns
+- Use appropriate lifecycle methods
+- Implement proper state management
+
+### Best Practices
+- Follow {{framework}} best practices
+- Use framework-specific tooling
+- Implement proper testing patterns
+
+## Integration Guidelines
+
+When working with {{framework}}:
+1. Follow established patterns in the codebase
+2. Use appropriate {{framework}} conventions
+3. Maintain consistency with existing architecture
+4. Document component interfaces appropriately
+
+---
+NOTE TO AI: Apply these rules when working with {{framework}} components in this project.
+`;
+  }
+
+  /**
+   * Gets default stack template
+   * @param {string} stack - Stack type
+   * @returns {string} Default template content
+   */
+  getDefaultStackTemplate(stack) {
+    return `---
+description: Rules and patterns for {{stack}} development
+globs:
+alwaysApply: false
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["{{stack}}", "Full-Stack-Development"]
+---
+
+# {{stack}} Development Rules
+
+## Stack-Specific Patterns
+
+### Architecture
+- Follow {{stack}} architectural patterns
+- Implement proper separation of concerns
+- Use appropriate data flow patterns
+
+### Integration
+- Ensure proper integration between stack components
+- Use appropriate communication patterns
+- Implement proper error handling across the stack
+
+## Best Practices
+
+When working with {{stack}}:
+1. Follow established patterns for this stack
+2. Maintain consistency across all layers
+3. Use appropriate tooling for the entire stack
+4. Document integration points appropriately
+
+---
+NOTE TO AI: Apply these rules when working with {{stack}} architecture in this project.
+`;
+  }
+
+  /**
+   * Gets default task template
+   * @param {string} task - Task type
+   * @returns {string} Default template content
+   */
+  getDefaultTaskTemplate(task) {
+    return `---
+description: Rules for {{task}} tasks
+globs:
+alwaysApply: false
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["{{capitalize task}}", "Task-Management"]
+---
+
+# {{capitalize task}} Task Rules
+
+## Task-Specific Guidelines
+
+### Approach
+- Follow systematic approach for {{task}}
+- Break down complex tasks into manageable steps
+- Document progress and decisions
+
+### Best Practices
+- Use appropriate tools and methodologies
+- Maintain code quality throughout the task
+- Test thoroughly before completion
+
+---
+NOTE TO AI: Apply these rules when performing {{task}} tasks in this project.
+`;
+  }
+
+  /**
+   * Gets default tool template
+   * @param {string} tool - Tool type
+   * @returns {string} Default template content
+   */
+  getDefaultToolTemplate(tool) {
+    return `---
+description: Rules for {{tool}} tool usage
+globs:
+alwaysApply: false
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["{{capitalize tool}}", "Tool-Integration"]
+---
+
+# {{capitalize tool}} Tool Rules
+
+## Tool-Specific Guidelines
+
+### Usage
+- Use {{tool}} according to best practices
+- Follow tool-specific conventions
+- Integrate properly with existing workflow
+
+### Configuration
+- Maintain consistent tool configuration
+- Document tool-specific settings
+- Ensure compatibility with project requirements
+
+---
+NOTE TO AI: Apply these rules when using {{tool}} in this project.
+`;
+  }
+
+  /**
+   * Gets default assistant template
+   * @param {string} assistant - Assistant type
+   * @returns {string} Default template content
+   */
+  getDefaultAssistantTemplate(assistant) {
+    return `---
+description: Rules for {{assistant}} assistant integration
+globs:
+alwaysApply: false
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["{{capitalize assistant}}", "AI-Assistant"]
+---
+
+# {{capitalize assistant}} Assistant Rules
+
+## Assistant-Specific Guidelines
+
+### Integration
+- Use {{assistant}} according to project needs
+- Follow assistant-specific best practices
+- Maintain consistency with project workflow
+
+### Interaction
+- Provide clear context and requirements
+- Use appropriate assistant capabilities
+- Document assistant interactions when needed
+
+---
+NOTE TO AI: Apply these rules when working with {{assistant}} in this project.
+`;
+  }
+
+  /**
+   * Gets default core agent template
+   * @returns {string} Default template content
+   */
+  getDefaultCoreAgentTemplate() {
+    return `---
+description: Core agent behavior and fundamental rules for AI assistance
+globs:
+alwaysApply: true
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["All-AI-Assistants", "Core-Behavior"]
+---
+
+# Core Agent Rules
+
+## Fundamental Behavior
+
+### Code Quality Standards
+- Always write clean, readable, and maintainable code
+- Follow established patterns and conventions in the project
+- Implement proper error handling and edge case management
+- Use meaningful variable and function names
+
+### Project Integration
+- Understand the project context before making changes
+- Maintain consistency with existing codebase patterns
+- Consider the impact of changes on the entire system
+- Follow the project's architectural decisions
+
+### Communication
+- Provide clear explanations for code changes
+- Document complex logic and architectural decisions
+- Ask for clarification when requirements are ambiguous
+- Suggest improvements while respecting project constraints
+
+## Development Principles
+
+1. **Backward Compatibility**: Maintain compatibility unless explicitly told otherwise
+2. **Security First**: Always consider security implications of code changes
+3. **Performance Awareness**: Write efficient code and consider performance impact
+4. **Testing**: Include appropriate tests for new functionality
+5. **Documentation**: Keep documentation up to date with code changes
+
+---
+NOTE TO AI: These are the fundamental rules that apply to all interactions in this project.
+`;
+  }
+
+  /**
+   * Gets default common errors template
+   * @returns {string} Default template content
+   */
+  getDefaultCommonErrorsTemplate() {
+    return `---
+description: Common errors and anti-patterns to avoid in this project
+globs:
+alwaysApply: true
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["Error-Prevention", "Code-Quality"]
+---
+
+# Common Errors and Anti-Patterns
+
+## General Anti-Patterns
+
+### Code Quality Issues
+- Avoid hardcoded values without proper configuration
+- Don't ignore error handling or use empty catch blocks
+- Avoid deeply nested code structures
+- Don't use magic numbers or unclear variable names
+
+### Architecture Issues
+- Avoid tight coupling between modules
+- Don't bypass established patterns without good reason
+- Avoid circular dependencies
+- Don't mix concerns in single functions or classes
+
+### Security Issues
+- Never expose sensitive information in logs or error messages
+- Don't trust user input without validation
+- Avoid using deprecated or insecure libraries
+- Don't hardcode credentials or API keys
+
+## Project-Specific Patterns to Avoid
+
+### Common Mistakes
+- Review existing code patterns before implementing new features
+- Follow the established error handling patterns
+- Use the project's logging and monitoring conventions
+- Maintain consistency with existing API patterns
+
+## Prevention Strategies
+
+1. **Code Review**: Always review code for these common issues
+2. **Testing**: Include tests that catch these error patterns
+3. **Linting**: Use appropriate linting tools to catch issues early
+4. **Documentation**: Document patterns to avoid for future reference
+
+---
+NOTE TO AI: Always check for these common errors before suggesting or implementing code changes.
+`;
+  }
+
+  /**
+   * Gets default MCP configuration template
+   * @returns {string} Default template content
+   */
+  getDefaultMcpConfigTemplate() {
+    return `---
+description: Model Context Protocol (MCP) server configuration and capabilities
+globs:
+alwaysApply: false
+version: "2.1.0"
+lastUpdated: "{{date}}"
+compatibleWith: ["MCP-Integration", "AI-Tools"]
+---
+
+# MCP Server Configuration
+
+## Available MCP Servers
+
+This project may use Model Context Protocol (MCP) servers to enhance AI capabilities.
+
+### Configuration Locations
+
+Different editors and AI tools store MCP configurations in different locations:
+
+- **Cursor**: \`.cursor/mcp.json\` or global config
+- **Claude Desktop**: \`~/Library/Application Support/Claude/claude_desktop_config.json\`
+- **VS Code**: \`.vscode/mcp.json\`
+- **Generic**: \`.ai/mcp.json\`
+
+### Common MCP Servers
+
+#### Memory Management
+- **Purpose**: Persistent memory across sessions
+- **Capabilities**: Note-taking, context preservation, session handoff
+
+#### File Operations
+- **Purpose**: Enhanced file system operations
+- **Capabilities**: Advanced file search, content analysis, batch operations
+
+#### Development Tools
+- **Purpose**: Development-specific utilities
+- **Capabilities**: Code analysis, testing utilities, deployment tools
+
+## Integration Guidelines
+
+When working with MCP servers:
+1. Check available server capabilities before suggesting features
+2. Use appropriate MCP commands for enhanced functionality
+3. Document MCP server dependencies for project setup
+4. Consider fallback options when MCP servers are unavailable
+
+---
+NOTE TO AI: Check for available MCP servers and use their capabilities when appropriate.
+`;
   }
 }

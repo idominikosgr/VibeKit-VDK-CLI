@@ -638,4 +638,113 @@ export class TechnologyAnalyzer {
     this.linters = [...new Set(this.linters)];
     this.testingFrameworks = [...new Set(this.testingFrameworks)];
   }
+
+  /**
+   * Detects common technology stacks based on identified frameworks and libraries
+   * This method analyzes the combination of detected technologies to identify
+   * well-known technology stacks and patterns
+   */
+  detectTechnologyStacks() {
+    if (this.verbose) {
+      console.log(chalk.gray('Detecting technology stacks...'));
+    }
+
+    this.stacks = [];
+
+    // MERN Stack (MongoDB, Express, React, Node.js)
+    if (this.frameworks.includes('React') && 
+        this.frameworks.includes('Express.js') && 
+        this.libraries.includes('mongodb')) {
+      this.stacks.push('MERN Stack');
+    }
+
+    // MEAN Stack (MongoDB, Express, Angular, Node.js)
+    if (this.frameworks.includes('Angular') && 
+        this.frameworks.includes('Express.js') && 
+        this.libraries.includes('mongodb')) {
+      this.stacks.push('MEAN Stack');
+    }
+
+    // Next.js Enterprise Stack
+    if (this.frameworks.includes('Next.js') && 
+        (this.libraries.includes('typescript') || this.primaryLanguages.includes('typescript'))) {
+      this.stacks.push('NextJS Enterprise Stack');
+    }
+
+    // Supabase + Next.js Stack (already detected in framework indicators)
+    if (this.frameworks.includes('Supabase-Next.js Stack')) {
+      this.stacks.push('Supabase + Next.js');
+    }
+
+    // tRPC Full-Stack
+    if (this.libraries.includes('@trpc/server') || 
+        this.libraries.includes('@trpc/client') || 
+        this.libraries.includes('@trpc/react-query')) {
+      this.stacks.push('tRPC Full-Stack');
+    }
+
+    // Laravel + Vue Stack
+    if (this.frameworks.includes('Laravel') && this.frameworks.includes('Vue.js')) {
+      this.stacks.push('Laravel + Vue');
+    }
+
+    // Django REST + React Stack
+    if (this.frameworks.includes('Django') && 
+        this.frameworks.includes('React') &&
+        this.libraries.includes('djangorestframework')) {
+      this.stacks.push('Django REST + React');
+    }
+
+    // Spring Boot + React Stack
+    if (this.frameworks.includes('Spring Boot') && this.frameworks.includes('React')) {
+      this.stacks.push('Spring Boot + React');
+    }
+
+    // Astro Content Stack
+    if (this.frameworks.includes('Astro')) {
+      this.stacks.push('Astro Content Stack');
+    }
+
+    // React Native Mobile Stack
+    if (this.frameworks.includes('React Native')) {
+      this.stacks.push('React Native Mobile');
+    }
+
+    // E-commerce Stack indicators
+    const ecommerceIndicators = [
+      'stripe', 'shopify', 'woocommerce', 'magento', 
+      'commerce.js', '@stripe/stripe-js', 'paypal'
+    ];
+    if (ecommerceIndicators.some(indicator => this.libraries.includes(indicator))) {
+      this.stacks.push('Ecommerce Stack');
+    }
+
+    // JAMstack (JavaScript, APIs, Markup)
+    const jamstackFrameworks = ['Gatsby', 'Next.js', 'Nuxt.js', 'Astro', 'Eleventy'];
+    if (jamstackFrameworks.some(framework => this.frameworks.includes(framework))) {
+      this.stacks.push('JAMstack');
+    }
+
+    // Serverless Stack
+    const serverlessIndicators = [
+      'aws-lambda', 'vercel', 'netlify-functions', 
+      '@vercel/node', 'serverless', 'aws-cdk'
+    ];
+    if (serverlessIndicators.some(indicator => this.libraries.includes(indicator))) {
+      this.stacks.push('Serverless Stack');
+    }
+
+    // Full-Stack TypeScript
+    if (this.primaryLanguages.includes('typescript') && 
+        this.frameworks.length > 1) {
+      this.stacks.push('Full-Stack TypeScript');
+    }
+
+    // Remove duplicates
+    this.stacks = [...new Set(this.stacks)];
+
+    if (this.verbose && this.stacks.length > 0) {
+      console.log(chalk.gray(`Technology stacks detected: ${this.stacks.join(', ')}`));
+    }
+  }
 }

@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "description": "Vibe Coding Rules - Source of truth for rules used in AI assistants",
   "scripts": {
+    "setup": "cd tools/project-scanner && npm install",
+    "wizard": "node setup-wizard.js",
+    "scan": "cd tools/project-scanner && node src/index.js",
+    "sync": "node tools/sync/rule-sync.js sync",
+    "sync-init": "node tools/sync/rule-sync.js init",
+    "sync-status": "node tools/sync/rule-sync.js status",
+    "sync-force": "node tools/sync/rule-sync.js sync --force",
+    "auto-sync": "node tools/sync/auto-sync.js check",
+    "auto-sync-daemon": "node tools/sync/auto-sync.js daemon",
+    "auto-sync-status": "node tools/sync/auto-sync.js status",
+    "install-sync-service": "node tools/sync/auto-sync.js install-service",
     "validate-rules": "node tools/validation/validate-rules.js",
     "check-duplicate-rules": "node tools/validation/check-duplicates.js",
     "preview-rule": "node tools/preview/preview-rule.js",
@@ -28,15 +39,18 @@
   },
   "homepage": "https://github.com/idominikosgr/CodePilotRules#readme",
   "dependencies": {
+    "acorn": "^8.15.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "chalk": "^5.4.1",
-    "fast-glob": "^3.3.3",
-    "gray-matter": "^4.0.3",
-    "octokit": "^4.1.3"
+    "commander": "^14.0.0",
+    "eslint": "^9.28.0",
+    "inquirer": "^12.6.3",
+    "ora": "^8.2.0",
+    "readline": "^1.3.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^30.0.0"
   },
-  "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977"
+  "packageManager": "pnpm@10.12.1"
 }

@@ -1,149 +1,4 @@
-// Run the wizard
-runSetupWizard().catch(err => {
-  console.error(`${colors.red}Error:${colors.reset}`, err);
-  rl.close();
-});// Function to run the project scanner for automatic configuration
-async function runProjectScanner() {
-  console.log(`
-${colors.bright}${colors.blue}=== Running Project Scanner ===${colors.reset}`);
-  console.log(`Analyzing your project structure and code patterns...
-`);
-
-  // Show spinner while scanning
-  const spinner = ora('Scanning project...').start();
-
-  try {
-    // Path to the project scanner tool
-    const scannerPath = path.join(__dirname, 'tools', 'project-scanner');
-
-    // Get the current working directory (where the user is running the script from)
-    const projectPath = process.cwd();
-
-    // Get the rule output path from the selected IDE
-    const ideId = userSelections.ideTool;
-    const rulePath = ideConfig.ensureRuleDirectory(ideId, projectPath);
-
-    // Execute the project scanner with the correct path and output to the selected IDE's rules directory
-    const { stdout, stderr } = await execPromise(`cd ${scannerPath} && node src/index.js --path ${projectPath} --output ${rulePath} --verbose`);
-
-    spinner.succeed('Project scan completed successfully!');
-    console.log(`${colors.green}✓${colors.reset} Generated customized rules based on your project structure`);
-    console.log(`${colors.green}✓${colors.reset} Rules installed in ${colors.cyan}${rulePath}${colors.reset}`);
-
-    // If we need to display any detailed output
-    if (userSelections.verbose) {
-      console.log(`
-${colors.dim}Scanner output:${colors.reset}`);
-      console.log(stdout);
-    }
-
-    return true;
-  } catch (error) {
-    spinner.fail('Project scan failed');
-    console.error(`${colors.red}Error running project scanner:${colors.reset} ${error.message}`);
-    console.log(`
-${colors.yellow}Falling back to manual configuration...${colors.reset}`);
-    return false;
-  }
-}// Helper function for executing commands with promises
-function execPromise(command) {
-  return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve({ stdout, stderr });
-    });
-  });
-}
-
-// Main function to run the setup wizard
-async function runSetupWizard() {
-  console.log(`
-${colors.bright}${colors.magenta}=== CodePilotRules Setup Wizard ===${colors.reset}
-`);
-  console.log(`${colors.bright}Welcome to the interactive setup for CodePilotRules!${colors.reset}`);
-  console.log(`This wizard will guide you through configuring AI development rules for your project.`);
-  console.log(`
-You can choose between automatic project scanning or manual configuration:`);
-  console.log(` • Automatic: We'll scan your project and detect frameworks, languages, and patterns`);
-  console.log(` • Manual: You'll select your frameworks, languages, and technologies`);
-  console.log(` • Hybrid: We'll scan your project but let you make adjustments`);
-  console.log(`
-This will create a customized rule structure optimized for your development environment.`);
-
-  try {
-    // First, select whether to use automatic or manual setup
-    await selectSetupMode();
-
-    // Always get IDE/Tool selection regardless of mode
-    await selectIDETool();
-
-    // Handle setup based on selected mode
-    if (userSelections.setupMode === 'automatic') {
-      // Run the project scanner for automatic configuration
-      const scanSuccess = await runProjectScanner();
-
-      // If scanning fails, fall back to manual configuration
-      if (!scanSuccess) {
-        await selectFramework();
-        await selectLanguage();
-        await selectStack();
-        await selectTechnologies();
-      }
-    } else if (userSelections.setupMode === 'manual') {
-      // Proceed with manual configuration
-      await selectFramework();
-      await selectLanguage();
-      await selectStack();
-      await selectTechnologies();
-    } else if (userSelections.setupMode === 'hybrid') {
-      // Run automatic scan first, then allow manual adjustments
-      await runProjectScanner();
-
-      const { makeAdjustments } = await inquirer.prompt([
-        {
-          type: 'confirm',
-          name: 'makeAdjustments',
-          message: 'Would you like to make manual adjustments to the detected settings?',
-          default: true
-        }
-      ]);
-
-      if (makeAdjustments) {
-        await selectFramework();
-        await selectLanguage();
-        await selectStack();
-        await selectTechnologies();
-      }
-    }
-
-    // Always select tools regardless of mode
-    await selectTools();
-
-    // Confirm selections
-    const confirmed = await confirmSelections();
-    if (!confirmed) {
-      console.log(`\n${colors.yellow}Setup cancelled. Please run the wizard again.${colors.reset}`);
-      rl.close();
-      return;
-    }
-
-    // Copy rule files based on selections
-    await copyRuleFiles();
-
-    console.log(`
-${colors.bright}${colors.green}Setup Complete!${colors.reset}
-Your CodePilotRules have been configured for ${colors.cyan}${userSelections.ideToolName}${colors.reset}.
-${colors.bright}To start using them, restart your IDE/AI assistant.${colors.reset}
-    `);
-  } catch (error) {
-    console.error(`${colors.red}Error:${colors.reset} ${error.message}`);
-  } finally {
-    rl.close();
-  }
-}#!/usr/bin/env node
+#!/usr/bin/env node
 
 /**
  * CodePilotRules Setup Wizard
@@ -158,9 +13,9 @@ ${colors.bright}To start using them, restart your IDE/AI assistant.${colors.rese
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
-const inquirer = require('inquirer');
+const prompt = require('inquirer').createPromptModule();
 const { exec } = require('child_process');
-const ora = require('ora');
+const ora = require('ora').default;
 
 // Setup colors for CLI
 const colors = {
@@ -190,6 +45,11 @@ const ideConfig = require('./shared/ide-configuration');
  * Import the editor path resolver for managing MCP configuration
  */
 const editorPathResolver = require('./shared/editor-path-resolver');
+
+/**
+ * Import the sync functionality for remote rule management
+ */
+const ruleSync = require('./tools/sync/rule-sync');
 
 /**
  * Available IDE/Tool options with their corresponding directory structures
@@ -305,7 +165,8 @@ const userSelections = {
   technologies: [],
   tools: [],
   verbose: false,
-  setupMode: 'automatic'
+  setupMode: 'automatic',
+  syncRules: false
 };
 
 // Function to ask a question and get input
@@ -356,7 +217,7 @@ async function selectIDETool() {
     }
   }
 
-  const { ideTool } = await inquirer.prompt([{
+  const { ideTool } = await prompt([{
     type: 'list',
     name: 'ideTool',
     message: 'Select the IDE or tool you\'re using:',
@@ -381,7 +242,7 @@ async function selectFramework() {
   console.log(`\n${colors.bright}${colors.cyan}Step 2: Select your framework:${colors.reset}`);
   console.log('This determines which framework-specific patterns and best practices will be applied.');
 
-  const { framework } = await inquirer.prompt([{
+  const { framework } = await prompt([{
     type: 'list',
     name: 'framework',
     message: 'Select your primary framework:',
@@ -403,7 +264,7 @@ async function selectLanguage() {
   console.log(`\n${colors.bright}${colors.cyan}Step 3: Select your primary language:${colors.reset}`);
   console.log('This determines which language-specific patterns and best practices will be applied.');
 
-  const { language } = await inquirer.prompt([{
+  const { language } = await prompt([{
     type: 'list',
     name: 'language',
     message: 'Select your primary programming language:',
@@ -425,7 +286,7 @@ async function selectStack() {
   console.log(`\n${colors.bright}${colors.cyan}Step 4: Select your project stack (optional):${colors.reset}`);
   console.log('This determines which pre-configured stack templates will be applied.');
 
-  const { stack } = await inquirer.prompt([{
+  const { stack } = await prompt([{
     type: 'list',
     name: 'stack',
     message: 'Select your project stack:',
@@ -454,7 +315,7 @@ async function selectTechnologies() {
   console.log(`\n${colors.bright}${colors.cyan}Step 5: Select additional technologies:${colors.reset}`);
   console.log('Multiple selections allowed. These determine which technology-specific patterns will be applied.');
 
-  const { selectedTechs } = await inquirer.prompt([{
+  const { selectedTechs } = await prompt([{
     type: 'checkbox',
     name: 'selectedTechs',
     message: 'Select additional technologies (use space to select, enter to confirm):',
@@ -484,7 +345,7 @@ async function selectTools() {
   console.log(`\n${colors.bright}${colors.cyan}Step 6: Select AI assistant tools:${colors.reset}`);
   console.log('Multiple selections allowed. These determine which AI assistant capabilities will be enabled.');
 
-  const { selectedTools } = await inquirer.prompt([{
+  const { selectedTools } = await prompt([{
     type: 'checkbox',
     name: 'selectedTools',
     message: 'Select AI assistant tools (use space to select, enter to confirm):',
@@ -535,7 +396,7 @@ async function confirmSelections() {
     });
   }
 
-  const { confirmed } = await inquirer.prompt([{
+  const { confirmed } = await prompt([{
     type: 'confirm',
     name: 'confirmed',
     message: 'Is this configuration correct?',
@@ -712,18 +573,41 @@ async function copyToolRules(targetDir) {
 async function createRuleFilesFromScanner(targetDir) {
   console.log(`${colors.blue}Running Project Scanner to analyze your codebase...${colors.reset}`);
 
+  const scannerPath = path.join(__dirname, 'tools', 'project-scanner');
+  
+  // Check if scanner dependencies are installed
+  const scannerNodeModules = path.join(scannerPath, 'node_modules');
+  if (!fs.existsSync(scannerNodeModules)) {
+    console.log(`${colors.yellow}→${colors.reset} Installing project scanner dependencies...`);
+    const installSpinner = ora('Installing scanner dependencies...').start();
+    
+    try {
+      // Install scanner dependencies
+      await execPromise(`cd "${scannerPath}" && npm install`);
+      installSpinner.succeed('Scanner dependencies installed');
+    } catch (error) {
+      installSpinner.fail('Failed to install scanner dependencies');
+      console.error(`${colors.red}Error installing scanner dependencies:${colors.reset} ${error.message}`);
+      console.log(`${colors.yellow}Falling back to template-based rule generation${colors.reset}`);
+      return false;
+    }
+  }
+
   const spinner = ora('Scanning project...').start();
 
   // The scanner target directory should be the .ai/rules folder or equivalent
   const projectPath = userSelections.projectPath;
-  const scannerPath = path.join(__dirname, 'tools', 'project-scanner');
 
   try {
     // Execute the scanner with proper arguments
     const outputPath = targetDir;
-    const { stdout } = await execPromise(
-      `cd ${scannerPath} && node src/index.js --path ${projectPath} --output ${outputPath} ${userSelections.verbose ? '--verbose' : ''}`
-    );
+    const command = `cd "${scannerPath}" && node src/index.js --path "${projectPath}" --output "${outputPath}" ${userSelections.verbose ? '--verbose' : ''}`;
+    
+    if (userSelections.verbose) {
+      console.log(`${colors.dim}Running command: ${command}${colors.reset}`);
+    }
+    
+    const { stdout, stderr } = await execPromise(command);
 
     spinner.succeed('Project scan completed successfully!');
     console.log(`${colors.green}✓${colors.reset} Successfully generated rule files using Project Scanner`);
@@ -731,12 +615,20 @@ async function createRuleFilesFromScanner(targetDir) {
     if (userSelections.verbose) {
       console.log(`\n${colors.dim}Scanner output:${colors.reset}`);
       console.log(stdout);
+      if (stderr) {
+        console.log(`\n${colors.dim}Scanner warnings:${colors.reset}`);
+        console.log(stderr);
+      }
     }
 
     return true;
   } catch (error) {
     spinner.fail('Project scan failed');
     console.error(`${colors.red}Error running Project Scanner:${colors.reset} ${error.message}`);
+    if (userSelections.verbose) {
+      console.error(`${colors.red}Error details:${colors.reset}`);
+      console.error(error);
+    }
     console.log(`${colors.yellow}Falling back to template-based rule generation${colors.reset}`);
     return false;
   }
@@ -798,7 +690,7 @@ async function createRuleFilesFromTemplates(targetDir) {
 async function selectSetupMode() {
   console.log(`\n${colors.bright}${colors.magenta}Setup Configuration${colors.reset}`);
 
-  const { setupMode } = await inquirer.prompt([
+  const { setupMode } = await prompt([
     {
       type: 'list',
       name: 'setupMode',
@@ -806,7 +698,8 @@ async function selectSetupMode() {
       choices: [
         { name: '🔍 Automatic (Scan project and generate rules)', value: 'automatic' },
         { name: '🔧 Manual (Select options individually)', value: 'manual' },
-        { name: '🔄 Hybrid (Auto-scan with manual adjustments)', value: 'hybrid' }
+        { name: '🔄 Hybrid (Auto-scan with manual adjustments)', value: 'hybrid' },
+        { name: '☁️ Remote (Download latest rules from repository)', value: 'remote' }
       ],
       default: 'automatic'
     }
@@ -814,19 +707,72 @@ async function selectSetupMode() {
 
   userSelections.setupMode = setupMode;
 
-  const { verbose } = await inquirer.prompt([
+  const { verbose, syncRules } = await prompt([
     {
       type: 'confirm',
       name: 'verbose',
       message: 'Enable verbose output for detailed information?',
       default: false,
       when: () => setupMode !== 'manual'
+    },
+    {
+      type: 'confirm',
+      name: 'syncRules',
+      message: 'Sync with remote rules repository before setup?',
+      default: true,
+      when: () => setupMode !== 'remote'
     }
   ]);
 
   userSelections.verbose = verbose || false;
+  userSelections.syncRules = syncRules || (setupMode === 'remote');
 
-  console.log(`${colors.green}✓${colors.reset} Selected ${colors.cyan}${setupMode}${colors.reset} setup mode${userSelections.verbose ? ' with verbose output' : ''}`);
+  console.log(`${colors.green}✓${colors.reset} Selected ${colors.cyan}${setupMode}${colors.reset} setup mode${userSelections.verbose ? ' with verbose output' : ''}${userSelections.syncRules ? ' with remote sync' : ''}`);
+}
+
+/**
+ * Synchronize with remote rules repository
+ * Downloads the latest rules from the remote repository
+ */
+async function syncWithRemoteRules() {
+  console.log(`\n${colors.bright}${colors.blue}Synchronizing with remote rules repository...${colors.reset}`);
+  console.log(`Repository: ${colors.cyan}https://github.com/idominikosgr/AI.rules${colors.reset}`);
+
+  try {
+    // Check if sync is initialized
+    const syncConfig = ruleSync.loadSyncConfig();
+    if (!syncConfig.initialized) {
+      console.log(`${colors.yellow}→${colors.reset} Initializing sync configuration...`);
+      
+      // Auto-initialize with sensible defaults for wizard usage
+      const autoConfig = {
+        ...syncConfig,
+        conflictResolution: 'remote', // Always use remote in wizard context
+        autoSync: false,
+        initialized: true,
+        initDate: new Date().toISOString()
+      };
+      
+      ruleSync.saveSyncConfig(autoConfig);
+    }
+
+    // Perform the sync
+    const result = await ruleSync.performSync({ force: false });
+    
+    if (result.status === 'up_to_date') {
+      console.log(`${colors.green}✓${colors.reset} Rules are already up to date`);
+      return true;
+    } else if (result.status === 'completed') {
+      console.log(`${colors.green}✓${colors.reset} Successfully synchronized ${result.filesProcessed} rule files`);
+      return true;
+    }
+    
+    return false;
+  } catch (error) {
+    console.log(`${colors.yellow}→${colors.reset} Remote sync failed: ${error.message}`);
+    console.log(`${colors.yellow}→${colors.reset} Continuing with local templates...`);
+    return false;
+  }
 }
 
 /**
@@ -881,4 +827,163 @@ This file documents the Model Context Protocol (MCP) servers available in your e
     console.log(`${colors.yellow}→${colors.reset} Error updating MCP configuration: ${error.message}`);
     return false;
   }
+}
+
+// Helper function to promisify exec
+function execPromise(command) {
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        // Only reject if there's an actual error (non-zero exit code)
+        reject(error);
+      } else {
+        // Success - stderr might contain warnings but that's OK
+        resolve({ stdout, stderr });
+      }
+    });
+  });
+}
+
+// Main execution flow
+async function main() {
+  try {
+    // Display welcome banner
+    console.log(`\n${colors.bright}${colors.cyan}╔══════════════════════════════════════════════════════════════╗${colors.reset}`);
+    console.log(`${colors.bright}${colors.cyan}║                    CodePilotRules Setup Wizard              ║${colors.reset}`);
+    console.log(`${colors.bright}${colors.cyan}║              Configure AI Rules for Your Project            ║${colors.reset}`);
+    console.log(`${colors.bright}${colors.cyan}╚══════════════════════════════════════════════════════════════╝${colors.reset}`);
+    console.log(`\nWelcome! This wizard will help you set up CodePilotRules for your project.`);
+    console.log(`We'll analyze your codebase and generate custom AI assistant rules.\n`);
+
+    // Step 1: Select setup mode
+    await selectSetupMode();
+
+    // Step 2: Sync with remote rules if requested
+    if (userSelections.syncRules) {
+      await syncWithRemoteRules();
+    }
+
+    if (userSelections.setupMode === 'remote') {
+      // Remote mode: Just sync and use remote rules with minimal user input
+      console.log(`\n${colors.bright}${colors.cyan}Running Remote Setup...${colors.reset}`);
+      
+      // Auto-detect IDE
+      const detectedIDEs = ideConfig.detectIDEs(process.cwd());
+      if (detectedIDEs.length > 0) {
+        userSelections.ideTool = detectedIDEs[0].id;
+        userSelections.ideToolName = detectedIDEs[0].name;
+        console.log(`${colors.green}✓${colors.reset} Auto-detected IDE: ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
+      } else {
+        await selectIDETool();
+      }
+
+      // Copy rules using templates (which are now synced from remote)
+      await copyRuleFiles();
+
+    } else if (userSelections.setupMode === 'automatic') {
+      // Automatic mode: Use project scanner with minimal user input
+      console.log(`\n${colors.bright}${colors.cyan}Running Automatic Setup...${colors.reset}`);
+      
+      // Auto-detect IDE
+      const detectedIDEs = ideConfig.detectIDEs(process.cwd());
+      if (detectedIDEs.length > 0) {
+        userSelections.ideTool = detectedIDEs[0].id;
+        userSelections.ideToolName = detectedIDEs[0].name;
+        console.log(`${colors.green}✓${colors.reset} Auto-detected IDE: ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
+      } else {
+        userSelections.ideTool = 'generic';
+        userSelections.ideToolName = 'Generic AI Tool';
+        console.log(`${colors.yellow}→${colors.reset} No IDE detected, using generic configuration`);
+      }
+
+      // Generate rules using project scanner
+      await copyRuleFiles();
+
+    } else if (userSelections.setupMode === 'hybrid') {
+      // Hybrid mode: Auto-scan first, then allow manual adjustments
+      console.log(`\n${colors.bright}${colors.cyan}Running Hybrid Setup...${colors.reset}`);
+      
+      // Auto-detect IDE
+      const detectedIDEs = ideConfig.detectIDEs(process.cwd());
+      if (detectedIDEs.length > 0) {
+        userSelections.ideTool = detectedIDEs[0].id;
+        userSelections.ideToolName = detectedIDEs[0].name;
+        console.log(`${colors.green}✓${colors.reset} Auto-detected IDE: ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
+      } else {
+        await selectIDETool();
+      }
+
+      // Generate rules using project scanner first
+      const scannerSuccess = await copyRuleFiles();
+      
+      if (!scannerSuccess) {
+        console.log(`\n${colors.yellow}Project scanner failed. Let's configure manually...${colors.reset}`);
+        await selectFramework();
+        await selectLanguage();
+        await selectStack();
+        await selectTechnologies();
+        await selectTools();
+        
+        const confirmed = await confirmSelections();
+        if (confirmed) {
+          await copyRuleFiles();
+        } else {
+          console.log(`${colors.red}Setup cancelled.${colors.reset}`);
+          process.exit(0);
+        }
+      }
+
+    } else {
+      // Manual mode: Full interactive setup
+      console.log(`\n${colors.bright}${colors.cyan}Running Manual Setup...${colors.reset}`);
+      
+      await selectIDETool();
+      await selectFramework();
+      await selectLanguage();
+      await selectStack();
+      await selectTechnologies();
+      await selectTools();
+      
+      const confirmed = await confirmSelections();
+      if (confirmed) {
+        await copyRuleFiles();
+      } else {
+        console.log(`${colors.red}Setup cancelled.${colors.reset}`);
+        process.exit(0);
+      }
+    }
+
+    // Success message
+    console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
+    console.log(`\nCodePilotRules has been configured for your project.`);
+    console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
+    
+    const ideTool = ideConfig.getIDEConfigById(userSelections.ideTool);
+    if (ideTool) {
+      console.log(`\n${colors.bright}Next Steps:${colors.reset}`);
+      console.log(`1. Check the generated rules in: ${colors.cyan}${ideTool.rulesFolder}${colors.reset}`);
+      console.log(`2. Customize any rules as needed for your project`);
+      console.log(`3. Restart your AI assistant to load the new rules`);
+      console.log(`4. Start coding with enhanced AI assistance! 🚀`);
+    }
+
+  } catch (error) {
+    console.error(`\n${colors.red}❌ Setup failed:${colors.reset} ${error.message}`);
+    if (userSelections.verbose) {
+      console.error(`\n${colors.dim}Stack trace:${colors.reset}`);
+      console.error(error.stack);
+    }
+    process.exit(1);
+  } finally {
+    // Clean up readline interface
+    rl.close();
+  }
+}
+
+// Run the main function if this script is executed directly
+if (require.main === module) {
+  main().catch(error => {
+    console.error(`\n${colors.red}❌ Unhandled error:${colors.reset} ${error.message}`);
+    process.exit(1);
+  });
 }

@@ -129,18 +129,37 @@ if [ "$RUN_WIZARD" = true ]; then
   if [ -f "$TEMP_DIR/cli.js" ]; then
     chmod +x "$TEMP_DIR/cli.js"
 
-    # Run the CLI from the temporary directory
+    # Install dependencies before running CLI
+    echo "📦 Installing dependencies..."
+    cd "$TEMP_DIR"
+    if command -v npm >/dev/null 2>&1; then
+      if ! npm install --silent; then
+        echo "❌ Failed to install dependencies with npm. Falling back to direct installation."
+        RUN_WIZARD=false
+      fi
+    elif command -v pnpm >/dev/null 2>&1; then
+      if ! pnpm install --silent; then
+        echo "❌ Failed to install dependencies with pnpm. Falling back to direct installation."
+        RUN_WIZARD=false
+      fi
+    else
+      echo "❌ Neither npm nor pnpm found. Falling back to direct installation."
+      RUN_WIZARD=false
+    fi
+
+    # Run the CLI from the temporary directory only if dependencies were installed
     # The CLI will determine the target directory based on IDE selection
     # and copy the appropriate files
-    cd "$TEMP_DIR"
-    node cli.js
+    if [ "$RUN_WIZARD" = true ]; then
+      node cli.js
 
-    WIZARD_EXIT=$?
-    if [ $WIZARD_EXIT -ne 0 ]; then
-      echo "⚠️ CLI encountered an error, falling back to direct installation"
-      RUN_WIZARD=false
-    else
-      echo "✅ Vibe Coding Rules installed successfully via CLI"
+      WIZARD_EXIT=$?
+      if [ $WIZARD_EXIT -ne 0 ]; then
+        echo "⚠️ CLI encountered an error, falling back to direct installation"
+        RUN_WIZARD=false
+      else
+        echo "✅ Vibe Coding Rules installed successfully via CLI"
+      fi
     fi
   else
     echo "⚠️ CLI not found in repository, falling back to direct installation"

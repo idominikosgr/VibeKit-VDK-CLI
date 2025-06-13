@@ -1,12 +1,12 @@
 # 🗺️ Vibe Coding Rules - Roadmap & Feature Plan
 
-[![Development Status](https://img.shields.io/badge/Development-Active-brightgreen)](https://github.com/idominikosgr/VibeCodingRules)
-[![Version](https://img.shields.io/badge/Version-2025.1-blue)](https://github.com/idominikosgr/VibeCodingRules)
-[![Next Milestone](https://img.shields.io/badge/Next%20Milestone-Q2%202025-orange)](https://github.com/idominikosgr/VibeCodingRules/milestones)
+[![Development Status](https://img.shields.io/badge/Development-Active-brightgreen)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Version](https://img.shields.io/badge/Version-2025.1-blue)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Next Milestone](https://img.shields.io/badge/Next%20Milestone-Q2%202025-orange)](https://github.com/idominikosgr/Vibe-Coding-Rules/milestones)
 
-> **Strategic roadmap for transforming AI-assisted development through intelligent context management**
+> **roadmap for transforming AI-assisted development through intelligent context management**
 
-This document outlines the development roadmap, feature priorities, and strategic direction for Vibe Coding Rules from 2025 onwards.
+This document outlines the development roadmap, feature priorities, and direction for Vibe Coding Rules from 2025 onwards.
 
 ## 📊 Current Status & Progress Tracker
 
@@ -306,7 +306,7 @@ This document outlines the development roadmap, feature priorities, and strategi
 
 <div align="center">
 
-**Stay Updated**: [Watch the Repository](https://github.com/idominikosgr/VibeCodingRules) • [Join Discussions](https://github.com/idominikosgr/VibeCodingRules/discussions) • [Follow Progress](https://github.com/idominikosgr/VibeCodingRules/projects)
+**Stay Updated**: [Watch the Repository](https://github.com/idominikosgr/Vibe-Coding-Rules) • [Join Discussions](https://github.com/idominikosgr/Vibe-Coding-Rules/discussions) • [Follow Progress](https://github.com/idominikosgr/Vibe-Coding-Rules/projects)
 
 *Roadmap last updated: January 2025 | Next update: March 2025*
 

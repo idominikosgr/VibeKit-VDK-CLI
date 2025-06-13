@@ -1,12 +1,12 @@
 #!/bin/sh
 # Vibe Coding Rules Installer
 # A universal shell script to install Vibe Coding Rules into any project with interactive setup
-# Usage: curl -fsSL https://raw.githubusercontent.com/idominikosgr/VibeCodingRules/main/install.sh | sh
+# Usage: curl -fsSL https://raw.githubusercontent.com/idominikosgr/Vibe-Coding-Rules/main/install.sh | sh
 
 set -e
 
 # Default values
-REPO_URL="https://github.com/idominikosgr/VibeCodingRules"
+REPO_URL="https://github.com/idominikosgr/Vibe-Coding-Rules"
 TEMP_DIR="/tmp/VibeCodingRules-$(date +%s)"
 BRANCH="main"
 METHOD="git"
@@ -242,5 +242,5 @@ echo "3. Configure MCP paths with the update tool: ./update-mcp-config.sh"
 echo "4. Start using the specialized rules in your development"
 echo ""
 echo "For updates, run:"
-echo "curl -fsSL https://raw.githubusercontent.com/idominikosgr/VibeCodingRules/main/install.sh | sh -s -- --upgrade"
+echo "curl -fsSL https://raw.githubusercontent.com/idominikosgr/Vibe-Coding-Rules/main/install.sh | sh -s -- --upgrade"
 echo "====================================="

@@ -40,8 +40,8 @@ The setup wizard provides the easiest and most comprehensive installation experi
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/idominikosgr/VibeCodingRules.git
-cd VibeCodingRules
+git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
+cd Vibe-Coding-Rules
 
 # 2. Install dependencies
 npm install
@@ -85,7 +85,7 @@ For minimal setups or integration into existing projects:
 
 ```bash
 # 1. Clone into your project's .ai directory
-git clone https://github.com/idominikosgr/VibeCodingRules.git .ai
+git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git .ai
 
 # 2. Install dependencies
 cd .ai && npm install
@@ -664,8 +664,8 @@ After successful installation and setup:
 ## 🆘 Getting Help
 
 - **Documentation**: Check the `docs/` directory for detailed guides
-- **GitHub Issues**: [Report problems](https://github.com/idominikosgr/VibeCodingRules/issues)
-- **Discussions**: [Community support](https://github.com/idominikosgr/VibeCodingRules/discussions)
+- **GitHub Issues**: [Report problems](https://github.com/idominikosgr/Vibe-Coding-Rules/issues)
+- **Discussions**: [Community support](https://github.com/idominikosgr/Vibe-Coding-Rules/discussions)
 - **Email**: [Contact maintainer](mailto:idominikosgr@example.com)
 
 ---

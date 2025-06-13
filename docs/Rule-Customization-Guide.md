@@ -352,7 +352,7 @@ export default function UserForm({ onSubmit }) {
 
 If you encounter issues with your rules, try:
 1. Validating rule syntax with the project-scanner validation tool
-2. Checking the documentation at https://github.com/yourusername/VibeCodingRules
+2. Checking the documentation at https://github.com/idominikosgr/Vibe-Coding-Rules
 3. Joining the community Discord for assistance
 
 ## Conclusion

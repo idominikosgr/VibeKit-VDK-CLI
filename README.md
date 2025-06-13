@@ -1,6 +1,6 @@
 # 🎯 Vibe Coding Rules
 
-[![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-brightgreen)](https://github.com/idominikosgr/VibeCodingRules)
+[![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-brightgreen)](https://github.com/idominikosgr/Vibe-Coding-Rules)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
 
@@ -254,8 +254,8 @@ We welcome contributions! Here's how to get started:
 
 ### Development Setup
 ```bash
-git clone https://github.com/idominikosgr/VibeCodingRules.git
-cd VibeCodingRules
+git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
+cd Vibe-Coding-Rules
 npm install
 npm run dev
 ```
@@ -270,8 +270,8 @@ npm run dev
 
 ## 🌍 Community
 
-- **GitHub Discussions**: [Join the conversation](https://github.com/idominikosgr/VibeCodingRules/discussions)
-- **Issues**: [Report bugs or request features](https://github.com/idominikosgr/VibeCodingRules/issues)
+- **GitHub Discussions**: [Join the conversation](https://github.com/idominikosgr/Vibe-Coding-Rules/discussions)
+- **Issues**: [Report bugs or request features](https://github.com/idominikosgr/Vibe-Coding-Rules/issues)
 - **Discord**: [Community chat](https://discord.gg/vibe-coding-rules) *(Coming Soon)*
 
 ## 🏆 Recognition
@@ -298,7 +298,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 [![Get Started](https://img.shields.io/badge/Get%20Started-brightgreen?style=for-the-badge)](INSTALLATION.md)
 [![View Docs](https://img.shields.io/badge/View%20Docs-blue?style=for-the-badge)](docs/)
-[![Join Community](https://img.shields.io/badge/Join%20Community-purple?style=for-the-badge)](https://github.com/idominikosgr/VibeCodingRules/discussions)
+[![Join Community](https://img.shields.io/badge/Join%20Community-purple?style=for-the-badge)](https://github.com/idominikosgr/Vibe-Coding-Rules/discussions)
 
 ⭐ **Star this repo** if it makes your AI coding assistant smarter!
 

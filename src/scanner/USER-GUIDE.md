@@ -2,11 +2,11 @@
 
 <div align="center">
 
-![Project Scanner Logo](https://raw.githubusercontent.com/idominikosgr/VibeCodingRules/main/docs/assets/project-scanner-logo.png)
+![Project Scanner Logo](https://raw.githubusercontent.com/idominikosgr/Vibe-Coding-Rules/main/docs/assets/project-scanner-logo.png)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/idominikosgr/VibeCodingRules)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-orange.svg)](https://github.com/idominikosgr/VibeCodingRules)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-May%202025-orange.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
 
 *A powerful tool for analyzing project structures and generating customized coding rules*
 
@@ -53,10 +53,10 @@ Currently, the Project Scanner is not published to npm. You'll need to clone the
 
 ```bash
 # Clone the repository
-git clone https://github.com/idominikosgr/VibeCodingRules.git
+git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
 
 # Navigate to the project scanner directory
-cd VibeCodingRules/tools/project-scanner
+cd Vibe-Coding-Rules/tools/project-scanner
 
 # Install dependencies
 npm install
@@ -82,7 +82,7 @@ For easier usage, you can create a shell alias in your `.bashrc`, `.zshrc`, or e
 
 ```bash
 # Add this to your .bashrc or .zshrc
-alias vibe-coding-rules-scan="node /path/to/VibeCodingRules/tools/project-scanner/src/index.js"
+alias vibe-coding-rules-scan="node /path/to/Vibe-Coding-Rules/tools/project-scanner/src/index.js"
 
 # Then you can use
 vibe-coding-rules-scan /path/to/your/project
@@ -106,7 +106,7 @@ Create a `.vibecodingrc.json` file in your project root to configure the scanner
 
 ```javascript
 // Import directly from the local project
-import { scanProject } from './path/to/VibeCodingRules/tools/project-scanner/src/index.js';
+import { scanProject } from './path/to/Vibe-Coding-Rules/tools/project-scanner/src/index.js';
 
 async function run() {
   try {
@@ -374,7 +374,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelin
 
 <div align="center">
 
-**Project Scanner** • Part of the [Vibe Coding Rules](https://github.com/idominikosgr/VibeCodingRules) project
+**Project Scanner** • Part of the [Vibe Coding Rules](https://github.com/idominikosgr/Vibe-Coding-Rules) project
 
 MIT License • © 2025
 

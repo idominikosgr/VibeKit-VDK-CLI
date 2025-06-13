@@ -17,14 +17,14 @@ Before you begin contributing, please:
 
 1. Familiarize yourself with the [Vibe Coding Rules documentation](./docs/)
 2. Read our [Code of Conduct](./CODE_OF_CONDUCT.md)
-3. Check the [Issues](https://github.com/idominikosgr/VibeCodingRules/issues) for open tasks or create a new issue to discuss your proposed changes
+3. Check the [Issues](https://github.com/idominikosgr/Vibe-Coding-Rules/issues) for open tasks or create a new issue to discuss your proposed changes
 
 ## Development Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/idominikosgr/VibeCodingRules.git
-cd VibeCodingRules
+git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
+cd Vibe-Coding-Rules
 
 # Install dependencies
 npm install

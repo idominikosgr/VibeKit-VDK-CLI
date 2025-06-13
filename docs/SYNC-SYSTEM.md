@@ -1,6 +1,6 @@
-# VibeCodingRules Sync System
+# Vibe Coding Rules Sync System
 
-The VibeCodingRules Sync System allows you to automatically download and synchronize AI rules from the remote repository at [https://github.com/idominikosgr/AI.rules](https://github.com/idominikosgr/AI.rules). This ensures you always have the latest, most up-to-date rules for your AI assistants.
+The Vibe Coding Rules Sync System allows you to automatically download and synchronize AI rules from the remote repository at [https://github.com/idominikosgr/AI.rules](https://github.com/idominikosgr/AI.rules). This ensures you always have the latest, most up-to-date rules for your AI assistants.
 
 ## Overview
 
@@ -217,7 +217,7 @@ This will:
 ### Local Files
 
 ```
-VibeCodingRules/
+Vibe-Coding-Rules/
 ├── templates/                    # Local rule templates (synced from remote)
 │   ├── rules/                   # Core rule files
 │   ├── languages/               # Language-specific rules
@@ -426,4 +426,4 @@ To contribute to the sync system:
 
 ## License
 
-The sync system is part of VibeCodingRules and follows the same MIT license. Remote rules from [AI.rules repository](https://github.com/idominikosgr/AI.rules) may have their own licensing terms. 
+The sync system is part of Vibe Coding Rules and follows the same MIT license. Remote rules from [AI.rules repository](https://github.com/idominikosgr/AI.rules) may have their own licensing terms. 

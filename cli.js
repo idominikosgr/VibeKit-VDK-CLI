@@ -12,7 +12,6 @@
 
 import fs from 'fs';
 import path from 'path';
-import readline from 'readline';
 import inquirer from 'inquirer';
 import { exec } from 'child_process';
 import ora from 'ora';
@@ -21,8 +20,6 @@ import { fileURLToPath } from 'url';
 // Get directory paths for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const prompt = inquirer.createPromptModule();
 
 // Setup colors for CLI
 const colors = {
@@ -35,12 +32,6 @@ const colors = {
   cyan: '\x1b[36m',
   magenta: '\x1b[35m'
 };
-
-// Create readline interface
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 /**
  * Import the centralized IDE configuration from the shared module
@@ -176,15 +167,6 @@ const userSelections = {
   syncRules: false
 };
 
-// Function to ask a question and get input
-function askQuestion(question) {
-  return new Promise((resolve) => {
-    rl.question(question, (answer) => {
-      resolve(answer);
-    });
-  });
-}
-
 /**
  * Select the IDE or tool to use for AI-assisted development
  * This will determine where rule files are stored and how they're structured
@@ -224,7 +206,7 @@ async function selectIDETool() {
     }
   }
 
-  const { ideTool } = await prompt([{
+  const { ideTool } = await inquirer.prompt([{
     type: 'list',
     name: 'ideTool',
     message: 'Select the IDE or tool you\'re using:',
@@ -249,7 +231,7 @@ async function selectFramework() {
   console.log(`\n${colors.bright}${colors.cyan}Step 2: Select your framework:${colors.reset}`);
   console.log('This determines which framework-specific patterns and best practices will be applied.');
 
-  const { framework } = await prompt([{
+  const { framework } = await inquirer.prompt([{
     type: 'list',
     name: 'framework',
     message: 'Select your primary framework:',
@@ -271,7 +253,7 @@ async function selectLanguage() {
   console.log(`\n${colors.bright}${colors.cyan}Step 3: Select your primary language:${colors.reset}`);
   console.log('This determines which language-specific patterns and best practices will be applied.');
 
-  const { language } = await prompt([{
+  const { language } = await inquirer.prompt([{
     type: 'list',
     name: 'language',
     message: 'Select your primary programming language:',
@@ -293,7 +275,7 @@ async function selectStack() {
   console.log(`\n${colors.bright}${colors.cyan}Step 4: Select your project stack (optional):${colors.reset}`);
   console.log('This determines which pre-configured stack templates will be applied.');
 
-  const { stack } = await prompt([{
+  const { stack } = await inquirer.prompt([{
     type: 'list',
     name: 'stack',
     message: 'Select your project stack:',
@@ -322,7 +304,7 @@ async function selectTechnologies() {
   console.log(`\n${colors.bright}${colors.cyan}Step 5: Select additional technologies:${colors.reset}`);
   console.log('Multiple selections allowed. These determine which technology-specific patterns will be applied.');
 
-  const { selectedTechs } = await prompt([{
+  const { selectedTechs } = await inquirer.prompt([{
     type: 'checkbox',
     name: 'selectedTechs',
     message: 'Select additional technologies (use space to select, enter to confirm):',
@@ -352,7 +334,7 @@ async function selectTools() {
   console.log(`\n${colors.bright}${colors.cyan}Step 6: Select AI assistant tools:${colors.reset}`);
   console.log('Multiple selections allowed. These determine which AI assistant capabilities will be enabled.');
 
-  const { selectedTools } = await prompt([{
+  const { selectedTools } = await inquirer.prompt([{
     type: 'checkbox',
     name: 'selectedTools',
     message: 'Select AI assistant tools (use space to select, enter to confirm):',
@@ -403,7 +385,7 @@ async function confirmSelections() {
     });
   }
 
-  const { confirmed } = await prompt([{
+  const { confirmed } = await inquirer.prompt([{
     type: 'confirm',
     name: 'confirmed',
     message: 'Is this configuration correct?',
@@ -678,44 +660,58 @@ async function createRuleFilesFromTemplates(targetDir) {
 async function selectSetupMode() {
   console.log(`\n${colors.bright}${colors.magenta}Setup Configuration${colors.reset}`);
 
-  const { setupMode } = await prompt([
-    {
-      type: 'list',
-      name: 'setupMode',
-      message: 'How would you like to configure Vibe Coding Rules?',
-      choices: [
-        { name: '🔍 Automatic (Scan project and generate rules)', value: 'automatic' },
-        { name: '🔧 Manual (Select options individually)', value: 'manual' },
-        { name: '🔄 Hybrid (Auto-scan with manual adjustments)', value: 'hybrid' },
-        { name: '☁️ Remote (Download latest rules from repository)', value: 'remote' }
-      ],
-      default: 'automatic'
+  try {
+    const answers = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'setupMode',
+        message: 'How would you like to configure Vibe Coding Rules?',
+        choices: [
+          { name: '🔍 Automatic (Scan project and generate rules)', value: 'automatic' },
+          { name: '🔧 Manual (Select options individually)', value: 'manual' },
+          { name: '🔄 Hybrid (Auto-scan with manual adjustments)', value: 'hybrid' },
+          { name: '☁️ Remote (Download latest rules from repository)', value: 'remote' }
+        ],
+        default: 'automatic'
+      }
+    ]);
+
+    userSelections.setupMode = answers.setupMode;
+
+    // Only ask additional questions if we got a valid setup mode
+    if (answers.setupMode) {
+      const additionalAnswers = await inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'verbose',
+          message: 'Enable verbose output for detailed information?',
+          default: false,
+          when: () => answers.setupMode !== 'manual'
+        },
+        {
+          type: 'confirm',
+          name: 'syncRules',
+          message: 'Sync with remote rules repository before setup?',
+          default: true,
+          when: () => answers.setupMode !== 'remote'
+        }
+      ]);
+
+      userSelections.verbose = additionalAnswers.verbose || false;
+      userSelections.syncRules = additionalAnswers.syncRules || (answers.setupMode === 'remote');
+
+      console.log(`${colors.green}✓${colors.reset} Selected ${colors.cyan}${answers.setupMode}${colors.reset} setup mode${userSelections.verbose ? ' with verbose output' : ''}${userSelections.syncRules ? ' with remote sync' : ''}`);
     }
-  ]);
-
-  userSelections.setupMode = setupMode;
-
-  const { verbose, syncRules } = await prompt([
-    {
-      type: 'confirm',
-      name: 'verbose',
-      message: 'Enable verbose output for detailed information?',
-      default: false,
-      when: () => setupMode !== 'manual'
-    },
-    {
-      type: 'confirm',
-      name: 'syncRules',
-      message: 'Sync with remote rules repository before setup?',
-      default: true,
-      when: () => setupMode !== 'remote'
+  } catch (error) {
+    if (error.isTtyError) {
+      console.log(`${colors.yellow}→${colors.reset} TTY not available, using automatic mode`);
+      userSelections.setupMode = 'automatic';
+      userSelections.verbose = false;
+      userSelections.syncRules = true;
+    } else {
+      throw error;
     }
-  ]);
-
-  userSelections.verbose = verbose || false;
-  userSelections.syncRules = syncRules || (setupMode === 'remote');
-
-  console.log(`${colors.green}✓${colors.reset} Selected ${colors.cyan}${setupMode}${colors.reset} setup mode${userSelections.verbose ? ' with verbose output' : ''}${userSelections.syncRules ? ' with remote sync' : ''}`);
+  }
 }
 
 /**
@@ -832,9 +828,43 @@ function execPromise(command) {
   });
 }
 
+// Handle process interruption gracefully
+process.on('SIGINT', () => {
+  console.log(`\n${colors.yellow}⚠️ Setup cancelled by user${colors.reset}`);
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  console.log(`\n${colors.yellow}⚠️ Setup terminated${colors.reset}`);
+  process.exit(0);
+});
+
 // Main execution flow
 async function main() {
   try {
+    // Check if running in non-interactive environment
+    const isInteractive = process.stdin.isTTY && process.stdout.isTTY;
+    
+    if (!isInteractive) {
+      console.log(`\n${colors.yellow}⚠️ Non-interactive environment detected${colors.reset}`);
+      console.log(`${colors.cyan}→${colors.reset} Using automatic setup with default options...`);
+      
+      // Use automatic setup with defaults
+      userSelections.setupMode = 'automatic';
+      userSelections.verbose = false;
+      userSelections.syncRules = true;
+      userSelections.ideTool = 'generic';
+      userSelections.ideToolName = 'Generic AI Tool';
+      
+      await copyRuleFiles();
+      
+      console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
+      console.log(`\nVibe-Coding-Rules has been configured with default settings.`);
+      console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
+      
+      return;
+    }
+
     // Display welcome banner
     console.log(`\n${colors.bright}${colors.cyan}╔══════════════════════════════════════════════════════════════╗${colors.reset}`);
     console.log(`${colors.bright}${colors.cyan}║                    Vibe Coding Rules Setup Wizard              ║${colors.reset}`);
@@ -956,15 +986,34 @@ async function main() {
     }
 
   } catch (error) {
-    console.error(`\n${colors.red}❌ Setup failed:${colors.reset} ${error.message}`);
-    if (userSelections.verbose) {
-      console.error(`\n${colors.dim}Stack trace:${colors.reset}`);
-      console.error(error.stack);
+    if (error.isTtyError) {
+      console.error(`\n${colors.yellow}⚠️ TTY not available:${colors.reset} Running in non-interactive mode`);
+      console.log(`${colors.cyan}→${colors.reset} Using automatic setup with default options...`);
+      
+      // Fallback to automatic setup
+      userSelections.setupMode = 'automatic';
+      userSelections.verbose = false;
+      userSelections.syncRules = true;
+      userSelections.ideTool = 'generic';
+      userSelections.ideToolName = 'Generic AI Tool';
+      
+      await copyRuleFiles();
+      
+      console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
+      console.log(`\nVibe-Coding-Rules has been configured with default settings.`);
+      console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
+      
+    } else if (error.name === 'ExitPromptError' || error.message.includes('force closed')) {
+      console.error(`\n${colors.yellow}⚠️ Setup cancelled by user${colors.reset}`);
+      process.exit(0);
+    } else {
+      console.error(`\n${colors.red}❌ Setup failed:${colors.reset} ${error.message}`);
+      if (userSelections.verbose) {
+        console.error(`\n${colors.dim}Stack trace:${colors.reset}`);
+        console.error(error.stack);
+      }
+      process.exit(1);
     }
-    process.exit(1);
-  } finally {
-    // Clean up readline interface
-    rl.close();
   }
 }
 

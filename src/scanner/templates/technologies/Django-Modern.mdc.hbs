@@ -5,18 +5,15 @@ version: "1.0.0"
 lastUpdated: "{{date}}"
 ---
 
-<div align="center">
 
-# ud83dudc0a Django Best Practices
+# Django Best Practices
 
 [![Framework](https://img.shields.io/badge/Framework-Django-092E20)](https://www.djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB)](https://www.python.org/)
 
 **Modern Django coding standards and patterns for {{projectName}}**
 
-</div>
-
-## ud83dudcda Overview
+## Overview
 
 This rule file contains best practices and patterns for developing web applications with Django in the {{projectName}} project.
 
@@ -26,7 +23,7 @@ As a high-complexity Django project, this codebase requires careful attention to
 As a medium-complexity Django project, this codebase follows established patterns while maintaining a reasonable level of abstraction.
 {{/eq}}{{/eq}}{{/if}}
 
-## ud83eudde9 Architecture
+## Architecture
 
 ### Project Structure
 
@@ -35,30 +32,30 @@ As a medium-complexity Django project, this codebase follows established pattern
 {{projectStructure.overview}}
 {{else}}
 {{projectName}}/
-u251cu2500u2500 config/               # Project-wide settings
-u2502   u251cu2500u2500 settings/
-u2502   u2502   u251cu2500u2500 base.py       # Base settings
-u2502   u2502   u251cu2500u2500 local.py      # Development settings
-u2502   u2502   u2514u2500u2500 production.py # Production settings
-u2502   u251cu2500u2500 urls.py           # Project URLs
-u2502   u2514u2500u2500 wsgi.py           # WSGI configuration
-u251cu2500u2500 apps/                # Application modules
-u2502   u251cu2500u2500 users/           # User-related functionality
-u2502   u2502   u251cu2500u2500 migrations/    # Database migrations
-u2502   u2502   u251cu2500u2500 templates/     # App-specific templates
-u2502   u2502   u251cu2500u2500 admin.py       # Admin configuration
-u2502   u2502   u251cu2500u2500 apps.py        # App configuration
-u2502   u2502   u251cu2500u2500 models.py      # Data models
-u2502   u2502   u251cu2500u2500 urls.py        # URL routing
-u2502   u2502   u251cu2500u2500 views.py       # View functions/classes
-u2502   u2502   u2514u2500u2500 serializers.py # API serializers (if using DRF)
-u2502   u2514u2500u2500 other_app/       # Other application module
-u251cu2500u2500 templates/           # Project-wide templates
-u251cu2500u2500 static/              # Static files (CSS, JS, images)
-u251cu2500u2500 media/               # User-uploaded files
-u251cu2500u2500 utils/               # Utility functions and classes
-u251cu2500u2500 manage.py            # Django management script
-u2514u2500u2500 requirements/        # Dependencies
+    config/               # Project-wide settings
+    settings/
+        base.py       # Base settings
+        local.py      # Development settings
+        production.py # Production settings
+    urls.py           # Project URLs
+    wsgi.py           # WSGI configuration
+    apps/                # Application modules
+    users/           # User-related functionality
+    migrations/    # Database migrations
+    templates/     # App-specific templates
+    admin.py       # Admin configuration
+    apps.py        # App configuration
+    models.py      # Data models
+    urls.py        # URL routing
+    views.py       # View functions/classes
+    serializers.py # API serializers (if using DRF)
+    other_app/       # Other application module
+    templates/           # Project-wide templates
+    static/              # Static files (CSS, JS, images)
+    media/               # User-uploaded files
+    utils/               # Utility functions and classes
+    manage.py            # Django management script
+    requirements/        # Dependencies
     u251cu2500u2500 base.txt         # Base requirements
     u251cu2500u2500 local.txt        # Development requirements
     u2514u2500u2500 production.txt  # Production requirements
@@ -97,7 +94,7 @@ This project follows standard Django conventions:
 - Minimize dependencies between apps
 {{/if}}
 
-## ud83dudc0a Models
+## Models
 
 ### Model Best Practices
 
@@ -177,7 +174,7 @@ class Product(BaseModel):
 - Add database indexes for frequently queried fields
 - Leverage Django model validation
 
-## ud83duddb1 Views
+## Views
 
 ### Class-Based Views
 
@@ -290,7 +287,7 @@ This project uses a hybrid approach with class-based views for CRUD operations a
 - **Context Processors**: Use for template variables needed across many views
 {{/if}}
 
-## ud83cudf10 URLs and Routing
+## URLs and Routing
 
 ```python
 # project/urls.py
@@ -333,7 +330,7 @@ urlpatterns = [
 - Organize URLs hierarchically
 - Use include() to split URLs by app or functionality
 
-## ud83duddd1 Forms and Validation
+## Forms and Validation
 
 ```python
 from django import forms
@@ -386,27 +383,27 @@ class ProductForm(forms.ModelForm):
 - Use clean() method for cross-field validation
 - Consider form inheritance for reusable validation logic
 
-## ud83dudcbe Templates and Frontend
+## Templates and Frontend
 
 ### Template Structure
 
 ```
 templates/
-u251cu2500u2500 base.html           # Base template with common structure
-u251cu2500u2500 includes/           # Reusable template fragments
-u2502   u251cu2500u2500 header.html
-u2502   u251cu2500u2500 footer.html
-u2502   u251cu2500u2500 pagination.html
-u2502   u2514u2500u2500 messages.html
-u251cu2500u2500 layouts/            # Page layout variations
-u2502   u251cu2500u2500 full_width.html
-u2502   u2514u2500u2500 sidebar.html
-u251cu2500u2500 products/           # App-specific templates
-u2502   u251cu2500u2500 product_list.html
-u2502   u251cu2500u2500 product_detail.html
-u2502   u2514u2500u2500 product_form.html
-u251cu2500u2500 users/              # Another app's templates
-u2514u2500u2500 errors/             # Error pages (404, 500, etc.)
+base.html           # Base template with common structure
+includes/           # Reusable template fragments
+header.html
+footer.html
+pagination.html
+messages.html
+layouts/            # Page layout variations
+full_width.html
+sidebar.html
+products/           # App-specific templates
+product_list.html
+product_detail.html
+product_form.html
+users/              # Another app's templates
+errors/             # Error pages (404, 500, etc.)
 ```
 
 ### Template Structure Example
@@ -464,7 +461,7 @@ u2514u2500u2500 errors/             # Error pages (404, 500, etc.)
 - Use context processors for variables needed in many templates
 - Create custom template tags for complex logic
 
-## ud83cudf1a Django REST Framework (DRF)
+## Django REST Framework (DRF)
 
 {{#if drf}}
 ### API Structure
@@ -522,7 +519,7 @@ urlpatterns = router.urls
 - Apply filtering, ordering, and pagination
 - Use throttling for API rate limiting
 
-## ud83dudcdd Admin Interface
+## Admin Interface
 
 ```python
 from django.contrib import admin
@@ -631,7 +628,7 @@ class ProductAdmin(admin.ModelAdmin):
 - Use Django Debug Toolbar to identify bottlenecks
 {{/if}}
 
-## ud83dudd12 Security Best Practices
+## Security Best Practices
 
 - Keep Django and dependencies up-to-date
 - Use environment variables for sensitive settings
@@ -643,7 +640,7 @@ class ProductAdmin(admin.ModelAdmin):
 - Follow the principle of least privilege
 - Set proper security headers (HSTS, CSP, etc.)
 
-## ud83dudcac Testing
+## Testing
 
 ```python
 from django.test import TestCase, Client
@@ -720,7 +717,7 @@ class ProductViewTest(TestCase):
 - Aim for high test coverage of business logic
 - Use mocking for external services
 
-## ud83duded6 Deployment
+## Deployment
 
 - Use environment-specific settings
 - Implement proper logging configuration
@@ -733,8 +730,4 @@ class ProductViewTest(TestCase):
 
 ---
 
-<div align="center">
-
-**Generated on {{date}} u2022 [VibeCodingRules](https://github.com/idominikosgr/Vibe-Coding-Rules)**
-
-</div>
+**Generated on {{date}} • [VibeKit VDK CLI](https://github.com/idominikosgr/VibeKit-VDK-CLI)**

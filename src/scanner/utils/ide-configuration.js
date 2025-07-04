@@ -121,7 +121,7 @@ export const IDE_CONFIGURATIONS = [
     configFolder: '.ai',
     rulesFolder: '.ai/rules',
     configFiles: ['.ai/config.json'],
-    description: 'Works with most AI coding assistants and is the VibeCodingRules standard.'
+    description: 'Works with most AI coding assistants and is the VDK standard.'
   }
 ];
 

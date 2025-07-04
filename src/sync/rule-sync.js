@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * VibeCodingRules Sync Tool
+ * VDK Rules Sync Tool
  * ------------------------
  * Synchronizes local rule files with the remote repository
  * Supports initial download, updates, and conflict resolution
  * 
- * Repository: https://github.com/idominikosgr/AI.rules
+ * Repository: https://github.com/idominikosgr/VibeKit-VDK-AI-rules
  */
 
 import fs from 'fs';
@@ -23,10 +23,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Configuration
-const REMOTE_REPO = 'https://api.github.com/repos/idominikosgr/AI.rules';
-const REMOTE_RAW_BASE = 'https://raw.githubusercontent.com/idominikosgr/AI.rules/main';
+const REMOTE_REPO = 'https://api.github.com/repos/idominikosgr/VibeKit-VDK-AI-rules';
+const REMOTE_RAW_BASE = 'https://raw.githubusercontent.com/idominikosgr/VibeKit-VDK-AI-rules/main';
 const LOCAL_RULES_BASE = path.join(__dirname, '..', '..', 'templates');
-const SYNC_CONFIG_FILE = path.join(__dirname, 'sync-config.json');
+const SYNC_CONFIG_FILE = path.resolve(__dirname, '../../vdk.config.json');
 const SYNC_LOG_FILE = path.join(__dirname, 'sync.log');
 
 // Colors for CLI output
@@ -110,7 +110,7 @@ function httpRequest(url, options = {}) {
   return new Promise((resolve, reject) => {
     const req = https.request(url, {
       headers: {
-        'User-Agent': 'VibeCodingRules-Sync/1.0.0',
+        'User-Agent': 'VDK-Sync/1.0.0',
         'Accept': 'application/vnd.github.v3+json',
         ...options.headers
       },
@@ -503,7 +503,7 @@ async function checkSyncStatus() {
  * Initialize sync configuration
  */
 async function initializeSync() {
-  console.log(`${colors.bright}${colors.cyan}Initializing VibeCodingRules Sync${colors.reset}`);
+  console.log(`${colors.bright}${colors.cyan}Initializing VDK Rules Sync${colors.reset}`);
   
   const prompt = inquirer.createPromptModule();
   
@@ -569,7 +569,7 @@ async function main() {
         
       case 'help':
       default:
-        console.log(`${colors.bright}VibeCodingRules Sync Tool${colors.reset}`);
+        console.log(`${colors.bright}VDK Rules Sync Tool${colors.reset}`);
         console.log(`\nUsage: node rule-sync.js [command] [options]`);
         console.log(`\nCommands:`);
         console.log(`  init     Initialize sync configuration`);

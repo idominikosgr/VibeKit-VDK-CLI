@@ -1,12 +1,13 @@
-# 🎯 Vibe Coding Rules
+# VibeKit VDK CLI
 
-[![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-brightgreen)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-brightgreen)](https://github.com/idominikosgr/VibeKit-VDK-CLI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
+[![Homepage](https://img.shields.io/badge/Homepage-vdk.tools/cli-blue)](https://vdk.tools/cli)
 
-> **Transform your AI coding assistant from generic helper to project-aware expert**
+> **The world's first Vibe Development Kit - Make your AI assistant project-aware**
 
-Vibe Coding Rules is an intelligent framework that automatically analyzes your codebase and generates tailored rule files (.mdc) that provide context-aware guidance to AI coding assistants. Stop explaining your project structure every time—let your AI understand your codebase like a senior developer.
+**VibeKit VDK CLI** is an advanced command-line toolkit that analyzes your codebase and deploys project-aware rules to any AI coding assistant. VDK is the world's first Vibe Development Kit, designed to make your AI assistant a true expert on your project.
 
 ## ✨ What Makes This Special
 
@@ -19,13 +20,11 @@ Vibe Coding Rules is an intelligent framework that automatically analyzes your c
 ## 🚀 Quick Start
 
 ```bash
-# Clone and setup
-git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
-cd Vibe-Coding-Rules
-npm install
+# Install from npm
+npm install -g @vibekit/vdk-cli
 
-# Run interactive setup
-npm run wizard
+# Initialize in your project
+vdk init
 ```
 
 **That's it!** Your AI assistant now understands your project structure, naming conventions, and architectural patterns.
@@ -34,13 +33,13 @@ For detailed installation and configuration options, see the **[📖 Complete Gu
 
 ## 🎬 See It In Action
 
-**Before Vibe Coding Rules:**
+**Before VibeKit VDK CLI:**
 ```
 👤 "Create a new user component"
 🤖 "Here's a generic React component..."
 ```
 
-**After Vibe Coding Rules:**
+**After VibeKit VDK:**
 ```
 👤 "Create a new user component"
 🤖 "Based on your project's patterns, I'll create a component following your:
@@ -126,7 +125,7 @@ npm run check-duplicates
 
 ## 📊 Real Impact
 
-Teams using Vibe Coding Rules report:
+Teams using VibeKit VDK CLI report:
 - **60% faster** initial AI suggestions
 - **85% more relevant** code completions
 - **40% fewer** back-and-forth clarifications
@@ -141,11 +140,18 @@ Teams using Vibe Coding Rules report:
 - **[🔍 Scanner Guide](src/scanner/USER-GUIDE.md)** - Project scanner documentation
 
 ### Advanced Guides
-- **[🎨 Rule Customization](docs/Rule-Customization-Guide.md)** - Creating custom rules
-- **[🔄 Sync System](docs/SYNC-SYSTEM.md)** - Community rule synchronization
-- **[🌐 Web App Implementation](docs/Web-App-Implementation-Guide.md)** - Web interface setup
-- **[📝 Rule Authoring](docs/Rule-Authoring-Guide.md)** - Writing effective rules
-- **[📊 Analytics & Feedback](docs/Analytics-Feedback-Guide.md)** - Usage analytics
+- **[📚 Complete Documentation Index](docs/Master-Documentation-Index.md)** - Central hub for all documentation
+- **[🚀 Getting Started Guide](docs/Getting-Started-Guide.md)** - Quick 5-minute setup
+- **[📝 Rule Authoring Guide](docs/Rule-Authoring-Guide.md)** - Complete guide for creating custom rules
+- **[🖥️ CLI Reference](docs/CLI-Reference.md)** - Command-line interface documentation
+- **[🔧 Troubleshooting Guide](docs/Troubleshooting-Guide.md)** - Common issues and solutions
+- **[🔄 Sync System](docs/Sync-System.md)** - Community rule synchronization
+- **[🎯 Task System Guide](docs/Task-System-Guide.md)** - 51+ specialized development workflows
+- **[🧠 Memory Management Guide](docs/Memory-Management-Guide.md)** - Session continuity and context preservation
+- **[📝 MDC Schema Documentation](docs/MDC-Schema-Documentation.md)** - Technical format specification
+- **[🔌 Editor Path Integration](docs/Editor-Path-Integration-Guide.md)** - IDE integration guide
+- **[🌐 Hub Integration](docs/Hub-Integration.md)** - Web application integration
+- **[📜 Project History & Attribution](docs/Project-History-Attribution.md)** - Evolution from DevRules to VibeKit VDK CLI
 
 ## 🧩 Extensibility
 
@@ -182,9 +188,12 @@ export class CustomAnalyzer {
 ## 🤖 AI Assistant Integration
 
 ### Memory & Context Management
-- **Session Continuity**: Maintains context across development sessions
-- **Decision History**: Remembers architectural decisions and patterns
-- **Code Evolution**: Tracks how your codebase patterns evolve
+- **Session Continuity**: Maintains context across development sessions with AI-to-AI handoff protocols
+- **Decision History**: Remembers architectural decisions and patterns with ADR (Architecture Decision Records)
+- **Code Evolution**: Tracks how your codebase patterns evolve over time
+- **Team Memory**: Shared context for collaborative development
+- **Pattern Learning**: AI learns from your project's unique patterns and conventions
+- **MCP Integration**: Model Context Protocol servers for persistent memory across sessions
 
 ### Enhanced Capabilities
 - **Context-Aware Completions**: Suggestions based on your actual codebase
@@ -194,20 +203,32 @@ export class CustomAnalyzer {
 
 ## 🌐 Community
 
-- **[GitHub Repository](https://github.com/idominikosgr/Vibe-Coding-Rules)** - Source code and issues
-- **[Community Hub](https://vibecodingrules.rocks)** - Share and discover rules
+- **[GitHub Repository](https://github.com/idominikosgr/VibeKit-VDK-CLI)** - Source code and issues
+- **[VDK Hub](https://vdk.tools)** - Browse, customize, and generate VDK rules
 - **[Contributing Guidelines](CONTRIBUTING.md)** - How to get involved
 
-## 📝 License
+## 📝 License & Attribution
 
 MIT License - see [LICENSE](LICENSE) for details.
+
+### Project Evolution & Attribution
+
+VibeKit VDK is the evolution of a rich history of AI-assisted development tooling:
+
+- **Original DevRules** by [Seth Rose](https://github.com/TheSethRose) - Established the foundational concept of structured AI assistant rules
+- **AIRules** - Major enhancement adding 51+ specialized tasks, memory management, and multi-platform support  
+- **VibeKit VDK** - The current evolution, a comprehensive toolkit for making AI assistants project-aware, including the **VDK CLI**, **VDK Hub**, and **VDK Rules**.
+
+For detailed history and contributions, see [📜 Project History & Attribution](docs/Project-History-Attribution.md).
+
+We gratefully acknowledge all contributors who have helped evolve this project from concept to comprehensive AI development framework.
 
 ---
 
 <div align="center">
 
-**Made with ❤️ by the Vibe Coding Rules community**
+**Made with ❤️ by the VibeKit VDK community**
 
-[⭐ Star on GitHub](https://github.com/idominikosgr/Vibe-Coding-Rules) • [🐛 Report Bug](https://github.com/idominikosgr/Vibe-Coding-Rules/issues) • [💡 Request Feature](https://github.com/idominikosgr/Vibe-Coding-Rules/issues)
+[⭐ Star on GitHub](https://github.com/idominikosgr/VibeKit-VDK-CLI) • [🐛 Report Bug](https://github.com/idominikosgr/VibeKit-VDK-CLI/issues) • [💡 Request Feature](https://github.com/idominikosgr/VibeKit-VDK-CLI/issues)
 
 </div>

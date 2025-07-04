@@ -1,8 +1,8 @@
-# Vibe Coding Rules .mdc Schema Documentation
+# VibeKit VDK CLI .mdc Schema Documentation
 
 ## Overview
 
-This document provides a formal specification for the Markdown Customization (.mdc) file format used in Vibe Coding Rules. The .mdc format is designed to provide structured guidance to AI coding assistants while maintaining human readability.
+This document provides a formal specification for the Markdown Customization (.mdc) file format used in VibeKit VDK CLI. The .mdc format is designed to provide structured guidance to AI coding assistants while maintaining human readability.
 
 ## File Structure
 
@@ -244,4 +244,4 @@ async function fetchUserById(id: number): Promise<User | null> {
 
 ## Conclusion
 
-This schema documentation provides a standardized structure for creating and validating .mdc files in the Vibe Coding Rules framework. Following this schema ensures consistency and compatibility across different AI tools and platforms while maintaining the flexibility to express a wide range of guidance and instructions.
+This schema documentation provides a standardized structure for creating and validating .mdc files in the VibeKit VDK CLI framework. Following this schema ensures consistency and compatibility across different AI tools and platforms while maintaining the flexibility to express a wide range of guidance and instructions.

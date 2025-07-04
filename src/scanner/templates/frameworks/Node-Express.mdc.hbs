@@ -5,18 +5,15 @@ version: "1.0.0"
 lastUpdated: "{{date}}"
 ---
 
-<div align="center">
 
-# ud83cudfc1 Node.js with Express.js Best Practices
+# Node.js with Express.js Best Practices
 
 [![Framework](https://img.shields.io/badge/Framework-Express-000000)](https://expressjs.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-Runtime-339933)](https://nodejs.org/)
 
 **Modern Node.js and Express.js coding standards for {{projectName}}**
 
-</div>
-
-## ud83dudcda Overview
+## Overview
 
 This rule file contains best practices and patterns for developing Node.js applications with Express.js in the {{projectName}} project.
 
@@ -26,7 +23,7 @@ As a high-complexity Node.js application, this codebase requires careful attenti
 As a medium-complexity Node.js application, this codebase follows established patterns while maintaining a reasonable level of abstraction.
 {{/eq}}{{/eq}}{{/if}}
 
-## ud83eudde9 Architecture
+## Architecture
 
 ### Project Structure
 
@@ -79,7 +76,7 @@ This project is organized as microservices:
 - **Data Access Layer**: Database operations and models
 {{/if}}
 
-## ud83cudfc1 Express.js Implementation
+## Express.js Implementation
 
 ### Application Setup
 
@@ -221,7 +218,7 @@ exports.deleteUser = async (id) => {
 };
 ```
 
-## ud83dudde1 Middleware Implementation
+## Middleware Implementation
 
 ### Custom Error Handler
 
@@ -236,3 +233,6 @@ const handleCastErrorDB = (err) => {
 
 const handleDuplicateFieldsDB = (err) => {
   const value = err.errmsg.match(/(\
+
+  **Generated on {{date}} • [VibeKit VDK CLI](https://github.com/idominikosgr/VibeKit-VDK-CLI)**
+

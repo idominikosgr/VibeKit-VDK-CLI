@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * VibeCoding Project Scanner
+ * VibeKit VDK Project Scanner
  * Main entry point for the project scanner utility.
  * 
  * This utility analyzes a codebase to generate custom rules tailored to the project.
@@ -28,7 +28,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Greeting banner
 const displayBanner = () => {
   console.log(chalk.cyan('\n============================================='));
-  console.log(chalk.cyan(`  🔍 VibeCoding Project Scanner v${getVersion()}`));
+  console.log(chalk.cyan(`  🔍 VibeKit VDK Project Scanner v${getVersion()}`));
   console.log(chalk.cyan('  Intelligent rule generation for AI assistance'));
   console.log(chalk.cyan('=============================================\n'));
 };
@@ -36,8 +36,8 @@ const displayBanner = () => {
 const program = new Command();
 
 program
-  .name('vibe-coding-rules-scanner')
-  .description('Analyzes project structure and patterns to generate custom Vibe Coding Rules')
+  .name('vibekit-vdk-rules-scanner')
+  .description('Analyzes project structure and patterns to generate custom VibeKit VDK CLI')
   .version(getVersion())
   .option('-p, --path <path>', 'Path to the project to scan', process.cwd())
   .option('-o, --output <path>', 'Path where generated rules should be saved', './.ai/rules')

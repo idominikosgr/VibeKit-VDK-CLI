@@ -5,18 +5,14 @@ version: "1.0.0"
 lastUpdated: "{{date}}"
 ---
 
-<div align="center">
-
-# ud83dudd35 Vue.js Best Practices
+# Vue.js Best Practices
 
 [![Framework](https://img.shields.io/badge/Framework-Vue.js-42b883)](https://vuejs.org/)
 [![Version](https://img.shields.io/badge/Vue-3.x-42b883)](https://vuejs.org/)
 
 **Modern Vue.js coding standards and patterns for {{projectName}}**
 
-</div>
-
-## ud83dudcda Overview
+## Overview
 
 This rule file contains best practices and patterns for developing with Vue.js in the {{projectName}} project.
 
@@ -26,7 +22,7 @@ As a high-complexity Vue project, this codebase requires careful attention to co
 As a medium-complexity Vue project, this codebase follows established Vue.js patterns while maintaining a reasonable level of abstraction.
 {{/eq}}{{/eq}}{{/if}}
 
-## ud83eudde9 Architecture
+## Architecture
 
 ### Project Structure
 
@@ -35,18 +31,18 @@ As a medium-complexity Vue project, this codebase follows established Vue.js pat
 {{projectStructure.overview}}
 {{else}}
 src/
-u251cu2500 assets/          # Static assets
-u251cu2500 components/      # Reusable components
-u2502  u251cu2500 common/      # App-wide shared components
-u2502  u2514u2500 features/    # Feature-specific components
-u251cu2500 composables/     # Composition functions
-u251cu2500 directives/      # Custom directives
-u251cu2500 plugins/         # Vue plugins
-u251cu2500 router/          # Vue Router config
-u251cu2500 stores/          # Pinia/Vuex store modules
-u251cu2500 utils/           # Utility functions
-u251cu2500 views/           # Route-level components
-u251cu2500 App.vue          # Root component
+ assets/          # Static assets
+ components/      # Reusable components
+ common/      # App-wide shared components
+ features/    # Feature-specific components
+ composables/     # Composition functions
+ directives/      # Custom directives
+ plugins/         # Vue plugins
+ router/          # Vue Router config
+ stores/          # Pinia/Vuex store modules
+ utils/           # Utility functions
+ views/           # Route-level components
+ App.vue          # Root component
 u2514u2500 main.js          # Entry point
 {{/if}}
 ```
@@ -96,7 +92,7 @@ This project uses a mix of Options API and Composition API:
 - **Options API**: Simpler for beginners, more structured for straightforward components
 {{/if}}{{/if}}
 
-## ud83dudd35 Component Implementation
+## Component Implementation
 
 ### Composition API (Recommended for Vue 3)
 
@@ -243,7 +239,7 @@ export function useCounter(initialValue = 0) {
 }
 ```
 
-## ud83dudd10 State Management
+## State Management
 
 {{#if stateManagement}}
 ### {{stateManagement.type}} for State Management
@@ -404,7 +400,7 @@ export const useCounterStore = defineStore('counter', {
 ```
 {{/if}}{{/if}}
 
-## ud83dudee0ufe0f Performance Optimization
+## Performance Optimization
 
 {{#if complexity.level}}{{#eq complexity.level "high"}}
 ### Critical Performance Optimizations
@@ -456,7 +452,7 @@ const routes = [
 - Avoid expensive operations in computed properties
 {{/if}}
 
-## u2b50 Recommended Patterns
+## Recommended Patterns
 
 ### Props and Events
 
@@ -619,7 +615,7 @@ describe('useCounter', () => {
 });
 ```
 
-## u267fufe0f Accessibility
+## Accessibility
 
 - Use semantic HTML elements
 - Implement ARIA attributes when necessary
@@ -628,7 +624,7 @@ describe('useCounter', () => {
 - Support screen readers with appropriate text alternatives
 - Test with accessibility tools
 
-## ud83dudccc Naming Conventions
+## Naming Conventions
 
 {{#with namingConventions}}
 {{#if components.dominant}}
@@ -664,7 +660,7 @@ describe('useCounter', () => {
 {{/if}}
 {{/with}}
 
-## u26a1 Error Handling
+## Error Handling
 
 - Implement global error handling
 - Use try/catch with async/await
@@ -672,7 +668,7 @@ describe('useCounter', () => {
 - Log errors for debugging
 - Consider an error boundary component for critical sections
 
-## ud83dudd12 Security Considerations
+## Security Considerations
 
 - Avoid using `v-html` with untrusted content (XSS risk)
 - Use Vue's built-in protections against XSS
@@ -683,8 +679,4 @@ describe('useCounter', () => {
 
 ---
 
-<div align="center">
-
-**Generated on {{date}} u2022 [VibeCodingRules](https://github.com/idominikosgr/Vibe-Coding-Rules)**
-
-</div>
+**Generated on {{date}} • [VibeKit VDK CLI](https://github.com/idominikosgr/VibeKit-VDK-CLI)**

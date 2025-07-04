@@ -4,7 +4,7 @@
  * Rule Preview Tool
  *
  * This script generates a preview of how a rule will appear in the
- * VibeCodingRulesHub web application.
+ * VDK Web Application.
  */
 
 const fs = require('fs').promises;

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * VibeCodingRules Auto-Sync Service
+ * VDK Auto-Sync Service
  * --------------------------------
  * Automatically checks for and applies rule updates from the remote repository
  * Can be run as a scheduled task or daemon process
  * 
- * Repository: https://github.com/idominikosgr/AI.rules
+ * Repository: https://github.com/idominikosgr/VibeKit-VDK-AI-rules
  */
 
 const fs = require('fs');
@@ -186,7 +186,7 @@ async function runSingleCheck() {
  */
 function createSystemdService() {
   const serviceContent = `[Unit]
-Description=VibeCodingRules Auto-Sync Service
+Description=VDK Rules Auto-Sync Service
 After=network.target
 
 [Service]
@@ -294,7 +294,7 @@ async function main() {
         
       case 'help':
       default:
-        console.log(`${colors.bright}VibeCodingRules Auto-Sync Service${colors.reset}`);
+        console.log(`${colors.bright}VDK Rules Auto-Sync Service${colors.reset}`);
         console.log(`\nUsage: node auto-sync.js [command] [options]`);
         console.log(`\nCommands:`);
         console.log(`  check              Run a single sync check`);

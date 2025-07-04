@@ -1,6 +1,6 @@
 # Editor Path Integration Guide
 
-This document provides information about the Editor Path Integration system in Vibe Coding Rules.
+This document provides information about the Editor Path Integration system in VibeKit VDK CLI.
 
 ## Overview
 

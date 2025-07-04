@@ -1,19 +1,20 @@
-# 📖 Vibe Coding Rules - Complete Installation & Usage Guide
+# 📖 VibeKit VDK CLI - Complete Installation & Usage Guide
 
 > **Transform your development workflow with intelligent AI assistance**
 
-This comprehensive guide covers everything you need to know about installing, configuring, and using Vibe Coding Rules to enhance your AI-assisted development experience.
+This comprehensive guide covers everything you need to know about installing, configuring, and using VibeKit VDK CLI to enhance your AI-assisted development experience.
 
 ## 📋 Table of Contents
 
 1. [Prerequisites](#-prerequisites)
-2. [Installation Methods](#-installation-methods)
+2. [Installation](#-installation)
 3. [Setup Wizard](#-setup-wizard)
-4. [Configuration](#-configuration)
-5. [Usage Patterns](#-usage-patterns)
-6. [Advanced Features](#-advanced-features)
+4. [CLI Commands](#-cli-commands)
+5. [Configuration](#-configuration)
+6. [Best Practices](#-best-practices)
 7. [Troubleshooting](#-troubleshooting)
-8. [Best Practices](#-best-practices)
+8. [Keeping Up to Date](#-keeping-up-to-date)
+
 
 ## 🔧 Prerequisites
 
@@ -32,51 +33,29 @@ This comprehensive guide covers everything you need to know about installing, co
 - JetBrains IDEs (IntelliJ, WebStorm, PyCharm, etc.)
 - Zed Editor
 
-## 🚀 Installation Methods
+## 🚀 Installation
 
 ### Method 1: Interactive Setup Wizard (Recommended)
 
 The setup wizard provides the easiest and most comprehensive installation experience:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
-cd Vibe-Coding-Rules
+# Install the CLI globally from npm
+npm install -g @vibekit/vdk-cli
 
-# 2. Install dependencies
-npm install
-# or with pnpm
-pnpm install
-
-# 3. Run the interactive setup wizard
-npm run wizard
+# Or with pnpm
+pnpm add -g @vdk/cli
 ```
 
-### Method 2: Direct Project Scanning
+Once installed, you can use the `vdk` command from any directory.
 
-For advanced users who want immediate scanning without configuration:
+## ⚙️ Setup Wizard
 
-```bash
-# Install dependencies
-npm install
-
-# Basic project scan
-npm run scan
-
-# Advanced scanning with options
-npm run scan -- --path /path/to/your/project \
-                --output ./.ai/rules \
-                --deep \
-                --verbose \
-                --use-gitignore
-```
-
-### Method 3: Global Installation (Coming Soon)
+To get started, navigate to your project's root directory and run the interactive setup wizard:
 
 ```bash
-# Future global installation
-npm install -g vibe-coding-rules
-vibe-rules init my-project
+# Initialize in your project
+vdk init
 ```
 
 ### Method 4: Manual Integration
@@ -85,7 +64,7 @@ For minimal setups or integration into existing projects:
 
 ```bash
 # 1. Clone into your project's .ai directory
-git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git .ai
+git clone https://github.com/idominikosgr/VibeKit-VDK-CLI.git .vdk
 
 # 2. Install dependencies
 cd .ai && npm install
@@ -103,7 +82,7 @@ The interactive setup wizard guides you through four different configuration mod
 When you run `npm run wizard`, you'll be presented with setup options:
 
 ```
-🎯 Welcome to Vibe Coding Rules Setup
+🎯 Welcome to VibeKit VDK CLI Setup
 
 Choose your setup mode:
 ❯ ☁️  Remote Sync     - Download latest community rules
@@ -186,6 +165,41 @@ Provides full control over technology selection:
 - Complex or unique project setups
 - Custom technology combinations
 - Teams with specific requirements
+
+## 📝 Rule Format & Structure
+
+VibeKit VDK CLI generates `.mdc` (Markdown) files with YAML frontmatter headers. Understanding this format helps you customize and extend the generated rules.
+
+### Rule File Format
+
+Each rule file follows this structure:
+
+```yaml
+---
+description: "Brief description of the rule's purpose and when it should be applied"
+globs: "**/*.py,*.js,*config*"  # File patterns for auto-activation
+alwaysApply: false              # Whether to always consider this rule
+version: "1.0.0"               # Rule version for tracking
+lastUpdated: "2025-01-14"     # Last modification date
+tags: ["python", "api", "testing"]  # Categorization tags
+---
+
+# Rule Content in Markdown
+
+## Guidelines
+- Use clear, actionable instructions
+- Provide concrete examples
+- Include do's and don'ts
+- Reference related files with @path/to/file.ext
+```
+
+### Rule Activation Mechanisms
+
+**Automatic Activation**: Rules activate when working files match the `globs` patterns
+**Semantic Activation**: AI selects rules based on `description` relevance to current context
+**Explicit Activation**: Direct invocation via `@path/to/rule.mdc` or user request
+
+For complete technical details, see the **[📝 MDC Schema Documentation](docs/MDC-Schema-Documentation.md)**.
 
 ### 4. 🔄 Hybrid Mode
 
@@ -664,8 +678,8 @@ After successful installation and setup:
 ## 🆘 Getting Help
 
 - **Documentation**: Check the `docs/` directory for detailed guides
-- **GitHub Issues**: [Report problems](https://github.com/idominikosgr/Vibe-Coding-Rules/issues)
-- **Discussions**: [Community support](https://github.com/idominikosgr/Vibe-Coding-Rules/discussions)
+- **GitHub Issues**: [Report problems](https://github.com/idominikosgr/VibeKit-VDK-CLI/issues)
+- **Discussions**: [Community support](https://github.com/idominikosgr/VibeKit-VDK-CLI/discussions)
 - **Email**: [Contact maintainer](mailto:idominikosgr@example.com)
 
 ---

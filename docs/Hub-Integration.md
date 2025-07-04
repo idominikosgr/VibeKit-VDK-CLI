@@ -1,6 +1,6 @@
-# Vibe Coding Rules Hub Integration
+# VibeKit VDK CLI Hub Integration
 
-This document explains the integration between the Vibe Coding Rules GitHub repository and the Vibe Coding RulesHub web application.
+This document explains the integration between the VibeKit VDK CLI GitHub repository and the Vibe Coding RulesHub web application.
 
 ## Architecture Overview
 
@@ -10,7 +10,7 @@ The integration uses a GitHub API-driven synchronization system with Supabase as
 
 ### Key Components
 
-1. **Vibe Coding Rules Repository**: The canonical source of truth for all rule content, containing MDC files organized in a structured way.
+1. **VibeKit VDK CLI Repository**: The canonical source of truth for all rule content, containing MDC files organized in a structured way.
 
 2. **Vibe Coding RulesHub**: The frontend application that provides a user interface for browsing, searching, and downloading rules.
 
@@ -111,7 +111,7 @@ Administrators can:
 
 Contributors can submit new rules or modifications through the GitHub repository:
 
-1. Fork the Vibe Coding Rules repository
+1. Fork the VibeKit VDK CLI repository
 2. Add or modify rules following the [Rule Authoring Guide](docs/Rule-Authoring-Guide.md)
 3. Submit a pull request
 4. Once merged, the changes will be synchronized to the hub automatically

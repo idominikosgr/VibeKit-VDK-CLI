@@ -195,4 +195,4 @@ try {
 
 console.log(`\n${colors.bright}${colors.green}Demo completed successfully!${colors.reset}`);
 console.log(`You can now use the editor path integration in your projects.`);
-console.log(`Run ./update-mcp-config.sh in your Vibe Coding Rules project to update the MCP configuration.\n`);
+console.log(`Run ./update-mcp-config.sh in your VibeKit VDK CLI project to update the MCP configuration.\n`);

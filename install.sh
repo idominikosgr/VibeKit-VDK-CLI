@@ -1,23 +1,25 @@
 #!/bin/sh
-# Vibe Coding Rules Installer
-# A universal shell script to install Vibe Coding Rules into any project with interactive setup
-# Usage: curl -fsSL https://raw.githubusercontent.com/idominikosgr/Vibe-Coding-Rules/main/install.sh | sh
+# VibeKit VDK CLI Installer
+# A universal shell script to install VibeKit VDK CLI into any project with interactive setup
+# Usage: curl -fsSL https://raw.githubusercontent.com/idominikosgr/VibeKit-VDK-CLI/main/install.sh | sh
 
 set -e
 
 # Default values
-REPO_URL="https://github.com/idominikosgr/Vibe-Coding-Rules"
-TEMP_DIR="/tmp/Vibe-Coding-Rules-$(date +%s)"
+REPO_URL="https://github.com/idominikosgr/VibeKit-VDK-CLI"
+TEMP_DIR="/tmp/vibekit-vdk-cli-$(date +%s)"
 BRANCH="main"
 METHOD="git"
 UPGRADE=false
 RUN_WIZARD=true
 QUIET=false
 TARGET_DIR=".ai/rules"
+# Save the original working directory before changing to temp
+ORIGINAL_PWD="$PWD"
 
 # Banner
 echo "====================================="
-echo "Vibe Coding Rules Installer"
+echo "VibeKit VDK CLI Installer"
 echo "Interactive AI Rules Setup"
 echo "====================================="
 echo "A comprehensive collection of AI prompt engineering rules"
@@ -81,7 +83,7 @@ if [ "$QUIET" = true ]; then
 fi
 
 # Download the repository
-echo "📦 Downloading Vibe Coding Rules..."
+echo "📦 Downloading VibeKit VDK CLI..."
 
 rm -rf "$TEMP_DIR"
 mkdir -p "$TEMP_DIR"
@@ -148,17 +150,16 @@ if [ "$RUN_WIZARD" = true ]; then
     fi
 
     # Run the CLI from the temporary directory only if dependencies were installed
-    # The CLI will determine the target directory based on IDE selection
-    # and copy the appropriate files
+    # Pass the original working directory to the CLI so it knows where to install
     if [ "$RUN_WIZARD" = true ]; then
-      node cli.js
+      node cli.js --target-dir "$ORIGINAL_PWD"
 
       WIZARD_EXIT=$?
       if [ $WIZARD_EXIT -ne 0 ]; then
         echo "⚠️ CLI encountered an error, falling back to direct installation"
         RUN_WIZARD=false
       else
-        echo "✅ Vibe Coding Rules installed successfully via CLI"
+        echo "✅ VibeKit VDK CLI installed successfully via CLI"
       fi
     fi
   else
@@ -169,8 +170,11 @@ fi
 
 # Perform direct installation if wizard was skipped or failed
 if [ "$RUN_WIZARD" = false ]; then
-  echo "📋 Installing Vibe Coding Rules directly to $TARGET_DIR..."
+  echo "📋 Installing VibeKit VDK CLI directly to $TARGET_DIR..."
 
+  # Use the original working directory for direct installation
+  cd "$ORIGINAL_PWD"
+  
   # Create the target directory if it doesn't exist
   if ! mkdir -p "$TARGET_DIR"; then
     echo "❌ Failed to create target directory: $TARGET_DIR"
@@ -233,7 +237,7 @@ if [ "$RUN_WIZARD" = false ]; then
     cp -r "$TEMP_DIR/.ai/rules/"* "$TARGET_DIR/"
   fi
 
-  echo "✅ Vibe Coding Rules installed successfully to $TARGET_DIR"
+  echo "✅ VibeKit VDK CLI installed successfully to $TARGET_DIR"
 fi
 
 # Make the update-mcp-config.sh script executable
@@ -261,5 +265,5 @@ echo "3. Configure MCP paths with the update tool: ./update-mcp-config.sh"
 echo "4. Start using the specialized rules in your development"
 echo ""
 echo "For updates, run:"
-echo "curl -fsSL https://raw.githubusercontent.com/idominikosgr/Vibe-Coding-Rules/main/install.sh | sh -s -- --upgrade"
+echo "curl -fsSL https://raw.githubusercontent.com/idominikosgr/VibeKit-VDK-CLI/main/install.sh | sh -s -- --upgrade"
 echo "====================================="

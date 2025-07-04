@@ -1,37 +1,27 @@
-# Publishing Guide for Vibe Coding Rules
+# Publishing Guide for VibeKit VDK CLI
 
-This project is structured as a **single comprehensive npm package** that includes both rule templates and project analysis capabilities.
+This project is published as a single npm package named `@vdk/cli`.
 
 ## Package Structure
 
 ```
-vibe-coding-rules/
-├── .ai/                           # Core rule templates
-├── templates/                     # Rule templates for setup
-├── tools/
-│   ├── project-scanner/           # Project analysis engine
-│   ├── validation/                # Rule validation tools
-│   └── sync/                      # Rule synchronization
-├── src/                           # Source code
-│   ├── shared/                    # Shared utilities
-│   ├── scanner/                   # Project scanner
-│   ├── validation/                # Rule validation
-│   ├── sync/                      # Remote sync system
-│   ├── preview/                   # Rule preview tools
-│   └── utils/                     # Utility tools
-├── cli.js                        # Main CLI entry point
-└── package.json
+VibeKit-VDK-CLI/
+├── docs/                          # Documentation files
+├── src/                           # Source code for rules and templates
+├── templates/                     # Default rule templates
+├── cli.js                         # Main CLI entry point
+├── package.json                   # Project metadata and dependencies
+└── GUIDE.md                       # Main user guide
 ```
 
 ## What Users Get
 
-When users install `vibe-coding-rules`, they get:
+When users install `@vdk/cli`, they get the `vdk` command-line tool, which provides:
 
-- **🧙‍♂️ Interactive Setup Wizard** (`vibe-rules` or `vibe-setup`)
-- **🔍 Project Scanner** (`vibe-scan`) - Analyzes codebases automatically
-- **✅ Rule Validator** (`validate-rules`) - Ensures rule quality
-- **🔄 Rule Sync** (`sync-rules`) - Keeps rules updated
-- **📚 Comprehensive Rule Templates** - For all major frameworks/languages
+- **✨ Interactive Setup Wizard** (`vdk init`)
+- **📊 Configuration Status Checker** (`vdk status`)
+- **🚀 Rule Deployment System** (`vdk deploy`)
+- **🔄 Update Mechanism** (`vdk update`)
 
 ## Publishing Steps
 
@@ -41,117 +31,71 @@ When users install `vibe-coding-rules`, they get:
 # Install dependencies
 npm install
 
-# Run validation
-npm run validate
-
-# Run tests
-npm test
-
-# Check linting
+# Run linting to check for style issues
 npm run lint
 
-# Test the CLI commands
-npm run setup --help
-npm run scan --help
+# Manually test the CLI commands in a test project
+npm link
+cd ../my-test-project
+vdk init
+vdk status
 ```
 
 ### 2. Version Management
 
-Update version in `package.json`:
+Update the version in `package.json` following semantic versioning.
+
 ```json
 {
-  "version": "1.0.0"  // Semantic versioning
+  "name": "@vdk/cli",
+  "version": "1.0.1" 
 }
 ```
 
-### 3. Publishing Commands
+### 3. Publishing to npm
 
 ```bash
+# Login to npm (if not already logged in)
+npm login
+
 # Dry run to see what will be published
 npm publish --dry-run
 
-# Publish to npm
-npm publish
-
-# Or publish with specific tag
-npm publish --tag beta
-```
-
-## Installation & Usage
-
-### For End Users
-
-```bash
-# Global installation (recommended)
-npm install -g vibe-coding-rules
-
-# Use the setup wizard
-vibe-rules
-
-# Or scan a project directly
-vibe-scan --path ./my-project
-```
-
-### For Developers
-
-```bash
-# Local installation
-npm install vibe-coding-rules
-
-# Use via npx
-npx vibe-rules
-npx vibe-scan
+# Publish to npm with public access
+npm publish --access public
 ```
 
 ## CLI Commands Available After Installation
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `vibe-rules` | Interactive setup wizard | `vibe-rules` |
-| `vibe-setup` | Alias for setup wizard | `vibe-setup` |
-| `vibe-scan` | Direct project scanning | `vibe-scan --path ./src` |
-| `validate-rules` | Validate rule files | `validate-rules` |
-| `sync-rules` | Sync with remote rules | `sync-rules sync` |
-
-## Package Distribution Strategy
-
-### Single Package Benefits
-- ✅ **Simplified Installation** - One command gets everything
-- ✅ **Integrated Workflow** - Scanner and templates work together seamlessly
-- ✅ **Consistent Versioning** - All components stay in sync
-- ✅ **Easier Maintenance** - Single release cycle
-- ✅ **Better User Experience** - No confusion about which package to install
-
-### Target Audiences
-1. **Individual Developers** - Want quick setup for personal projects
-2. **Development Teams** - Need consistent rules across team members
-3. **Enterprise Users** - Require comprehensive analysis and customization
+| Command      | Description                                                 |
+|--------------|-------------------------------------------------------------|
+| `vdk init`   | Starts the interactive setup wizard to configure a project. |
+| `vdk deploy` | Deploys rules to the AI assistant (coming soon).            |
+| `vdk update` | Updates the CLI and rule templates (coming soon).           |
+| `vdk status` | Checks the current VDK configuration status.                |
 
 ## Release Process
 
-1. **Development** → Test locally with `npm link`
-2. **Testing** → Run full test suite and validation
-3. **Documentation** → Update README and guides
-4. **Versioning** → Follow semantic versioning
-5. **Publishing** → Publish to npm registry
-6. **Announcement** → Update repository and notify users
+1.  **Development** → Test locally with `npm link`.
+2.  **Testing** → Run a full manual test suite for all commands.
+3.  **Documentation** → Update `GUIDE.md` and other docs.
+4.  **Versioning** → Increment the version in `package.json`.
+5.  **Publishing** → Publish the new version to npm.
+6.  **Tagging** → Create a new git tag for the release.
 
 ## Post-Publishing
 
-After publishing, users can immediately:
+After publishing, users can immediately install or update the CLI:
 
 ```bash
 # Install globally
-npm install -g vibe-coding-rules
+npm install -g @vdk/cli
 
-# Run setup wizard
-vibe-rules
+# Or update an existing installation
+npm update -g @vdk/cli
 
-# The wizard will:
-# 1. Detect their IDE/editor
-# 2. Analyze their project (if they choose)
-# 3. Generate custom rules
-# 4. Configure their AI assistant
+# Run the setup wizard in a project
+vdk init
 ```
 
-This approach provides a **complete solution in one package** while maintaining the flexibility and power of the integrated scanner and template system. 
+This approach provides a complete, easy-to-use toolkit in a single package.

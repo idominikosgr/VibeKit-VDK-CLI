@@ -5,18 +5,14 @@ version: "1.0.0"
 lastUpdated: "{{date}}"
 ---
 
-<div align="center">
-
-# u269bufe0f Angular Best Practices
+# Angular Best Practices
 
 [![Framework](https://img.shields.io/badge/Framework-Angular-DD0031)](https://angular.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Required-3178C6)](https://www.typescriptlang.org/)
 
 **Modern Angular coding standards and patterns for {{projectName}}**
 
-</div>
-
-## ud83dudcda Overview
+## Overview
 
 This rule file contains best practices and patterns for developing with Angular in the {{projectName}} project.
 
@@ -26,7 +22,7 @@ As a high-complexity Angular project, this codebase requires careful attention t
 As a medium-complexity Angular project, this codebase follows established Angular patterns while maintaining a reasonable level of abstraction.
 {{/eq}}{{/eq}}{{/if}}
 
-## ud83eudde9 Architecture
+## Architecture
 
 ### Project Structure
 
@@ -99,7 +95,7 @@ Components are organized by feature domain, with each feature potentially having
   - Minimal to no dependencies on services
 {{/if}}
 
-## ud83duddd2ufe0f Component Implementation
+## Component Implementation
 
 ### Component Declaration
 
@@ -146,7 +142,7 @@ ngOnDestroy(): void {
 - Use async pipe in templates to handle observables
 - Avoid logic in templates; move to component class or services
 
-## ud83cudf10 State Management
+## State Management
 
 {{#if stateManagement}}
 ### {{stateManagement.type}} for State Management
@@ -263,7 +259,7 @@ export class DataService {
 - **Complex Apps**: NgRx with Actions, Reducers, Selectors, and Effects
 {{/if}}{{/if}}
 
-## ud83dudee0ufe0f Performance Optimization
+## Performance Optimization
 
 {{#if complexity.level}}{{#eq complexity.level "high"}}
 ### Critical Performance Optimizations
@@ -301,7 +297,7 @@ export class DataService {
 - Optimize change detection with pure pipes
 {{/if}}
 
-## u2b50 Recommended Patterns
+## Recommended Patterns
 
 ### Reactive Forms
 
@@ -367,7 +363,7 @@ providers: [
 constructor(@Inject(CONFIG_TOKEN) private config: AppConfig) {}
 ```
 
-## ud83dudcac Testing Guidelines
+## Testing Guidelines
 
 ### Component Testing
 
@@ -439,7 +435,7 @@ describe('DataService', () => {
 });
 ```
 
-## u267fufe0f Accessibility
+## Accessibility
 
 - Use semantic HTML elements
 - Implement ARIA attributes when necessary
@@ -448,7 +444,7 @@ describe('DataService', () => {
 - Maintain color contrast ratios 
 - Test with accessibility tools like axe-core
 
-## ud83dudccc Naming Conventions
+## Naming Conventions
 
 {{#with namingConventions}}
 {{#if components.dominant}}
@@ -488,7 +484,7 @@ describe('DataService', () => {
 {{/if}}
 {{/with}}
 
-## u26a1 Error Handling
+## Error Handling
 
 - Implement global error handling with ErrorHandler
 - Use catchError operator for HTTP requests
@@ -496,7 +492,7 @@ describe('DataService', () => {
 - Log errors for debugging
 - Implement retry mechanisms for transient failures
 
-## ud83dudd12 Security Considerations
+## Security Considerations
 
 - Protect against XSS with Angular's built-in sanitization
 - Use HttpClient for automatic XSRF protection
@@ -507,8 +503,4 @@ describe('DataService', () => {
 
 ---
 
-<div align="center">
-
-**Generated on {{date}} u2022 [VibeCodingRules](https://github.com/idominikosgr/Vibe-Coding-Rules)**
-
-</div>
+**Generated on {{date}} • [VibeKit VDK CLI](https://github.com/idominikosgr/VibeKit-VDK-CLI)**

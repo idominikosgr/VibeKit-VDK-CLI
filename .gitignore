@@ -90,3 +90,6 @@ src/scanner/.ai/rules/01-project-context.mdc
 src/scanner/.ai/rules/02-common-errors.mdc
 src/scanner/.ai/rules/03-mcp-configuration.mdc
 src/scanner/.ai/rules/languages/JavaScript-Modern.mdc
+.env.example
+ide and mcp paths.md
+PUBLISHING.md

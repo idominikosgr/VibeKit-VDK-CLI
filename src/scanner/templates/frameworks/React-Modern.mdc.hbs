@@ -5,22 +5,18 @@ version: "1.0.0"
 lastUpdated: "{{date}}"
 ---
 
-<div align="center">
-
-# u269bufe0f React Best Practices
+# React Best Practices
 
 [![Framework](https://img.shields.io/badge/Framework-React-61DAFB)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Supported-3178C6)](https://www.typescriptlang.org/)
 
 **Modern React coding standards and patterns for {{projectName}}**
 
-</div>
-
-## ud83dudcda Overview
+## Overview
 
 This rule file contains best practices and patterns for developing with React in the {{projectName}} project.
 
-## ud83eudde9 Component Structure
+## Component Structure
 
 ### Component Organization
 
@@ -35,7 +31,7 @@ This rule file contains best practices and patterns for developing with React in
 - Implement higher-order components (HOCs) for cross-cutting concerns
 - Use render props pattern when appropriate for component composition
 
-## ud83dudcdd Naming Conventions
+## Naming Conventions
 
 {{#with namingConventions}}
 {{#if components.dominant}}
@@ -64,7 +60,7 @@ This rule file contains best practices and patterns for developing with React in
 - **Custom Hooks**: Use camelCase with "use" prefix
   - Example: `useWindowSize`
 
-## ud83dudd10 State Management
+## State Management
 
 ### Local State
 
@@ -95,7 +91,7 @@ This rule file contains best practices and patterns for developing with React in
 - Consider React Query or SWR for server state management
 {{/if}}
 
-## ud83dudcac Props Management
+## Props Management
 
 - Use destructuring to access props
 - Define prop types with TypeScript interfaces or PropTypes
@@ -103,7 +99,7 @@ This rule file contains best practices and patterns for developing with React in
 - Avoid passing too many props (use composition instead)
 - Pass callbacks wrapped in useCallback when appropriate
 
-## ud83dudee0ufe0f Hooks Best Practices
+## Hooks Best Practices
 
 - Follow the Rules of Hooks (only call at the top level, only call from React functions)
 - Use the dependency array correctly in useEffect/useCallback/useMemo
@@ -111,28 +107,29 @@ This rule file contains best practices and patterns for developing with React in
 - Memoize expensive calculations with useMemo
 - Memoize callbacks with useCallback when they're passed to child components
 
-## ud83dudcda Libraries and Ecosystem
+## Libraries and Ecosystem
 
 {{#if libraries}}
-### ud83dudcd3 Common Libraries
+### Common Libraries
 {{#each libraries}}
 - **{{this}}**
 {{/each}}
 {{/if}}
 
 {{#if testingFrameworks}}
-### ud83euddea Testing
+### Testing
 {{#each testingFrameworks}}
 - **{{this}}**
 {{/each}}
 {{else}}
-### ud83euddea Testing
+
+### Testing
 - Use React Testing Library for component testing
 - Use Jest or Vitest as the test runner
 - Test user interactions rather than implementation details
 {{/if}}
 
-## u26a1 Performance Optimizations
+## Performance Optimizations
 
 - Use React.memo for pure functional components that render often
 - Implement virtualization for long lists (react-window or react-virtualized)
@@ -140,7 +137,7 @@ This rule file contains best practices and patterns for developing with React in
 - Avoid unnecessary re-renders with proper dependency arrays
 - Implement proper key props for list items (avoid using array index)
 
-## u267bufe0f Styling Approaches
+## Styling Approaches
 
 {{#if libraries}}
 {{#each libraries}}
@@ -160,7 +157,7 @@ This rule file contains best practices and patterns for developing with React in
 - Use CSS-in-JS for dynamic styling based on props/state
 {{/if}}
 
-## u267fufe0f Accessibility
+## Accessibility
 
 - Use semantic HTML elements
 - Implement proper ARIA attributes when needed
@@ -170,8 +167,4 @@ This rule file contains best practices and patterns for developing with React in
 
 ---
 
-<div align="center">
-
-**Generated on {{date}} u2022 [VibeCodingRules](https://github.com/idominikosgr/Vibe-Coding-Rules)**
-
-</div>
+**Generated on {{date}} • [VibeKit VDK CLI](https://github.com/idominikosgr/VibeKit-VDK-CLI)**

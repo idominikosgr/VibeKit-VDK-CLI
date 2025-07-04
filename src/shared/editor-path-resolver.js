@@ -1,5 +1,5 @@
 /**
- * Editor Path Resolver for Vibe Coding Rules
+ * Editor Path Resolver for VibeKit VDK CLI
  * -----------------------
  * ES module to standardize access to editor configuration paths
  * and MCP server settings across different editor environments.

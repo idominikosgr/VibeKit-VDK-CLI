@@ -1,15 +1,11 @@
 {
-  "name": "vibe-coding-rules",
+  "name": "@vibekit/vdk-cli",
   "version": "1.0.0",
   "type": "module",
-  "description": "Comprehensive framework for vibe coding rules and templates for modern development with integrated project analysis",
+  "description": "Advanced Command-line toolkit that analyzes your codebase and deploys project-aware rules to any AI coding assistant - VDK is the world's first Vibe Development Kit",
   "main": "cli.js",
   "bin": {
-    "vibe-rules": "./cli.js",
-    "vibe-setup": "./cli.js",
-    "vibe-scan": "./src/scanner/index.js",
-    "validate-rules": "./src/validation/validate-rules.js",
-    "sync-rules": "./src/sync/rule-sync.js"
+    "vdk": "./cli.js"
   },
   "files": [
     ".ai/",
@@ -19,7 +15,6 @@
     "cli.js"
   ],
   "scripts": {
-    "setup": "node cli.js",
     "wizard": "node cli.js",
     "scan": "node src/scanner/index.js",
     "validate": "node src/validation/validate-rules.js",
@@ -33,22 +28,16 @@
     "prepublishOnly": "npm run validate"
   },
   "keywords": [
-    "ai",
-    "coding-rules",
-    "cursor",
-    "claude",
-    "github-copilot",
-    "templates",
-    "project-analysis",
-    "static-analysis",
-    "code-patterns",
-    "rule-generation",
-    "mcp",
-    "model-context-protocol"
+    "ai-assistant",
+    "developer-tools",
+    "cli",
+    "vibe-coding",
+    "context-aware",
+    "vdk"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idominikosgr/Vibe-Coding-Rules.git"
+    "url": "git+https://github.com/idominikosgr/VibeKit-VDK-CLI.git"
   },
   "author": "Dominikos Pritis",
   "license": "MIT",
@@ -67,7 +56,7 @@
     "eslint": "^9.29.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "publishConfig": {
     "access": "public"

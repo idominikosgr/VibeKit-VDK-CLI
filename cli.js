@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * VibeCodingRules Setup Wizard
+ * VibeKit VDK Setup Wizard
  * -----------------------
- * This interactive script helps configure VibeCodingRules for your development project.
+ * This interactive script helps configure VibeKit VDK for your development project.
  * It creates a custom rule structure based on your selected IDE/tools, frameworks,
  * languages, and technologies.
  *
- * Repository: https://github.com/idominikosgr/Vibe-Coding-Rules
+ * Repository: https://github.com/idominikosgr/VibeKit-VDK-CLI
  */
 
 import fs from 'fs';
@@ -32,6 +32,119 @@ const colors = {
   cyan: '\x1b[36m',
   magenta: '\x1b[35m'
 };
+
+/**
+ * Check if a directory appears to be a valid project directory
+ * @param {string} dirPath - Path to check
+ * @returns {Object} - { isProject: boolean, indicators: string[] }
+ */
+function validateProjectDirectory(dirPath) {
+  const indicators = [];
+  const projectFiles = [
+    'package.json',       // Node.js/JavaScript projects
+    'requirements.txt',   // Python projects
+    'Cargo.toml',        // Rust projects
+    'go.mod',            // Go projects
+    'pom.xml',           // Java Maven projects
+    'build.gradle',      // Java Gradle projects
+    'Gemfile',           // Ruby projects
+    'composer.json',     // PHP projects
+    'pubspec.yaml',      // Dart/Flutter projects
+    'Project.swift',     // Swift projects
+    'CMakeLists.txt',    // C/C++ projects
+    '.csproj',           // C# projects
+    'mix.exs',           // Elixir projects
+    'deno.json',         // Deno projects
+    'pyproject.toml',    // Modern Python projects
+  ];
+
+  const projectDirs = [
+    '.git',              // Git repository
+    '.svn',              // SVN repository
+    '.hg',               // Mercurial repository
+    'node_modules',      // Node.js dependencies
+    '.venv',             // Python virtual environment
+    'venv',              // Python virtual environment
+    'target',            // Rust/Java build directory
+    'build',             // Common build directory
+  ];
+
+  // Check for project files
+  for (const file of projectFiles) {
+    if (file.endsWith('.csproj')) {
+      // Special case for .csproj files - check for any .csproj file
+      const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.csproj'));
+      if (files.length > 0) {
+        indicators.push(`${files[0]} (C# project)`);
+      }
+    } else {
+      const filePath = path.join(dirPath, file);
+      if (fs.existsSync(filePath)) {
+        indicators.push(file);
+      }
+    }
+  }
+
+  // Check for project directories
+  for (const dir of projectDirs) {
+    const dirFullPath = path.join(dirPath, dir);
+    if (fs.existsSync(dirFullPath) && fs.statSync(dirFullPath).isDirectory()) {
+      indicators.push(`${dir}/ (directory)`);
+    }
+  }
+
+  return {
+    isProject: indicators.length > 0,
+    indicators
+  };
+}
+
+/**
+ * Parse command line arguments
+ * @returns {Object} - Parsed arguments
+ */
+function parseArguments() {
+  const args = process.argv.slice(2);
+  const parsed = {
+    targetDir: null,
+    help: false
+  };
+
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg === '--target-dir' && i + 1 < args.length) {
+      parsed.targetDir = args[i + 1];
+      i++; // Skip next argument as it's the value
+    } else if (arg.startsWith('--target-dir=')) {
+      parsed.targetDir = arg.split('=')[1];
+    } else if (arg === '--help' || arg === '-h') {
+      parsed.help = true;
+    }
+  }
+
+  return parsed;
+}
+
+/**
+ * Show help message
+ */
+function showHelp() {
+  console.log(`
+${colors.bright}${colors.cyan}VibeKit VDK CLI Setup Wizard${colors.reset}
+
+${colors.bright}Usage:${colors.reset}
+  node cli.js [options]
+
+${colors.bright}Options:${colors.reset}
+  --target-dir <path>   Target directory for installation (default: current directory)
+  --help, -h           Show this help message
+
+${colors.bright}Examples:${colors.reset}
+  node cli.js                           # Install in current directory
+  node cli.js --target-dir /path/to/my-project
+  node cli.js --target-dir=~/my-project
+`);
+}
 
 /**
  * Import the centralized IDE configuration from the shared module
@@ -154,7 +267,7 @@ const tools = [
 
 // User selections
 const userSelections = {
-  projectPath: process.cwd(),
+  projectPath: null, // Will be set based on arguments or user input
   ideTool: null,
   ideToolName: null,
   framework: null,
@@ -177,7 +290,7 @@ async function selectIDETool() {
   console.log('This determines where the rules will be stored and how they integrate with your AI assistant.');
 
   // Detect IDEs in the current project directory
-  const detectedIDEs = ideConfig.detectIDEs(process.cwd());
+  const detectedIDEs = ideConfig.detectIDEs(userSelections.projectPath);
 
   if (detectedIDEs.length > 0) {
     console.log(`\n${colors.bright}${colors.green}Detected IDE configurations:${colors.reset}`);
@@ -665,7 +778,7 @@ async function selectSetupMode() {
       {
         type: 'list',
         name: 'setupMode',
-        message: 'How would you like to configure Vibe Coding Rules?',
+        message: 'How would you like to configure VibeKit VDK CLI?',
         choices: [
           { name: '🔍 Automatic (Scan project and generate rules)', value: 'automatic' },
           { name: '🔧 Manual (Select options individually)', value: 'manual' },
@@ -720,7 +833,7 @@ async function selectSetupMode() {
  */
 async function syncWithRemoteRules() {
   console.log(`\n${colors.bright}${colors.blue}Synchronizing with remote rules repository...${colors.reset}`);
-  console.log(`Repository: ${colors.cyan}https://github.com/idominikosgr/AI.rules${colors.reset}`);
+  console.log(`Repository: ${colors.cyan}https://github.com/idominikosgr/VibeKit-VDK-AI-rules${colors.reset}`);
 
   try {
     // Check if sync is initialized
@@ -842,6 +955,60 @@ process.on('SIGTERM', () => {
 // Main execution flow
 async function main() {
   try {
+    // Parse command line arguments
+    const args = parseArguments();
+    
+    if (args.help) {
+      showHelp();
+      return;
+    }
+
+    // Set project path from arguments or use current directory
+    const targetProjectPath = args.targetDir || process.cwd();
+    
+    // Validate that the target directory exists
+    if (!fs.existsSync(targetProjectPath)) {
+      console.error(`${colors.red}❌ Error: Target directory does not exist: ${targetProjectPath}${colors.reset}`);
+      process.exit(1);
+    }
+
+    // Validate if this looks like a project directory
+    const validation = validateProjectDirectory(targetProjectPath);
+    
+    if (!validation.isProject) {
+      console.log(`${colors.yellow}⚠️ Warning: The target directory doesn't appear to be a project directory.${colors.reset}`);
+      console.log(`${colors.cyan}Directory: ${targetProjectPath}${colors.reset}`);
+      console.log(`${colors.yellow}No common project files were found (package.json, .git, requirements.txt, etc.)${colors.reset}`);
+      
+      // Check if running in non-interactive environment
+      const isInteractive = process.stdin.isTTY && process.stdout.isTTY;
+      
+      if (!isInteractive) {
+        console.log(`${colors.yellow}→ Non-interactive mode: Installing anyway...${colors.reset}`);
+      } else {
+        // Ask user if they want to continue
+        const { continueAnyway } = await inquirer.prompt([
+          {
+            type: 'confirm',
+            name: 'continueAnyway',
+            message: 'Do you want to continue installing in this directory?',
+            default: false
+          }
+        ]);
+        
+        if (!continueAnyway) {
+          console.log(`${colors.cyan}Installation cancelled. Please run this in a project directory or specify a different target with --target-dir${colors.reset}`);
+          process.exit(0);
+        }
+      }
+    } else {
+      console.log(`${colors.green}✓ Project directory detected${colors.reset}`);
+      console.log(`${colors.cyan}Found indicators: ${validation.indicators.slice(0, 3).join(', ')}${validation.indicators.length > 3 ? ` and ${validation.indicators.length - 3} more` : ''}${colors.reset}`);
+    }
+
+    // Set the validated project path
+    userSelections.projectPath = path.resolve(targetProjectPath);
+
     // Check if running in non-interactive environment
     const isInteractive = process.stdin.isTTY && process.stdout.isTTY;
     
@@ -859,7 +1026,7 @@ async function main() {
       await copyRuleFiles();
       
       console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
-      console.log(`\nVibe-Coding-Rules has been configured with default settings.`);
+      console.log(`\nVibeKit VDK CLI has been configured with default settings.`);
       console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
       
       return;
@@ -867,10 +1034,10 @@ async function main() {
 
     // Display welcome banner
     console.log(`\n${colors.bright}${colors.cyan}╔══════════════════════════════════════════════════════════════╗${colors.reset}`);
-    console.log(`${colors.bright}${colors.cyan}║                    Vibe Coding Rules Setup Wizard              ║${colors.reset}`);
+    console.log(`${colors.bright}${colors.cyan}║                    VibeKit VDK CLI Setup Wizard              ║${colors.reset}`);
     console.log(`${colors.bright}${colors.cyan}║              Configure AI Rules for Your Project            ║${colors.reset}`);
     console.log(`${colors.bright}${colors.cyan}╚══════════════════════════════════════════════════════════════╝${colors.reset}`);
-    console.log(`\nWelcome! This wizard will help you set up Vibe Coding Rules for your project.`);
+    console.log(`\nWelcome! This wizard will help you set up VibeKit VDK CLI for your project.`);
     console.log(`We'll analyze your codebase and generate custom AI assistant rules.\n`);
 
     // Step 1: Select setup mode
@@ -886,7 +1053,7 @@ async function main() {
       console.log(`\n${colors.bright}${colors.cyan}Running Remote Setup...${colors.reset}`);
       
       // Auto-detect IDE
-      const detectedIDEs = ideConfig.detectIDEs(process.cwd());
+      const detectedIDEs = ideConfig.detectIDEs(userSelections.projectPath);
       if (detectedIDEs.length > 0) {
         userSelections.ideTool = detectedIDEs[0].id;
         userSelections.ideToolName = detectedIDEs[0].name;
@@ -903,7 +1070,7 @@ async function main() {
       console.log(`\n${colors.bright}${colors.cyan}Running Automatic Setup...${colors.reset}`);
       
       // Auto-detect IDE
-      const detectedIDEs = ideConfig.detectIDEs(process.cwd());
+      const detectedIDEs = ideConfig.detectIDEs(userSelections.projectPath);
       if (detectedIDEs.length > 0) {
         userSelections.ideTool = detectedIDEs[0].id;
         userSelections.ideToolName = detectedIDEs[0].name;
@@ -922,7 +1089,7 @@ async function main() {
       console.log(`\n${colors.bright}${colors.cyan}Running Hybrid Setup...${colors.reset}`);
       
       // Auto-detect IDE
-      const detectedIDEs = ideConfig.detectIDEs(process.cwd());
+      const detectedIDEs = ideConfig.detectIDEs(userSelections.projectPath);
       if (detectedIDEs.length > 0) {
         userSelections.ideTool = detectedIDEs[0].id;
         userSelections.ideToolName = detectedIDEs[0].name;
@@ -973,7 +1140,7 @@ async function main() {
 
     // Success message
     console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
-    console.log(`\nVibe-Coding-Rules has been configured for your project.`);
+    console.log(`\nVibeKit VDK CLI has been configured for your project.`);
     console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
     
     const ideTool = ideConfig.getIDEConfigById(userSelections.ideTool);
@@ -1000,7 +1167,7 @@ async function main() {
       await copyRuleFiles();
       
       console.log(`\n${colors.bright}${colors.green}🎉 Setup Complete!${colors.reset}`);
-      console.log(`\nVibe-Coding-Rules has been configured with default settings.`);
+      console.log(`\nvdk-cli has been configured with default settings.`);
       console.log(`Rules have been installed for ${colors.cyan}${userSelections.ideToolName}${colors.reset}`);
       
     } else if (error.name === 'ExitPromptError' || error.message.includes('force closed')) {

@@ -5,18 +5,15 @@ version: "1.0.0"
 lastUpdated: "{{date}}"
 ---
 
-<div align="center">
 
-# ud83dudc0a Django Best Practices
+# Django Best Practices
 
 [![Framework](https://img.shields.io/badge/Framework-Django-092E20)](https://www.djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB)](https://www.python.org/)
 
 **Modern Django coding standards and patterns for {{projectName}}**
 
-</div>
-
-## ud83dudcda Overview
+## Overview
 
 This rule file contains best practices and patterns for developing web applications with Django in the {{projectName}} project.
 
@@ -26,7 +23,7 @@ As a high-complexity Django project, this codebase requires careful attention to
 As a medium-complexity Django project, this codebase follows established patterns while maintaining a reasonable level of abstraction.
 {{/eq}}{{/eq}}{{/if}}
 
-## ud83eudde9 Architecture
+## Architecture
 
 ### Project Structure
 
@@ -35,33 +32,33 @@ As a medium-complexity Django project, this codebase follows established pattern
 {{projectStructure.overview}}
 {{else}}
 {{projectName}}/
-u251cu2500u2500 config/               # Project-wide settings
-u2502   u251cu2500u2500 settings/
-u2502   u2502   u251cu2500u2500 base.py       # Base settings
-u2502   u2502   u251cu2500u2500 local.py      # Development settings
-u2502   u2502   u2514u2500u2500 production.py # Production settings
-u2502   u251cu2500u2500 urls.py           # Project URLs
-u2502   u2514u2500u2500 wsgi.py           # WSGI configuration
-u251cu2500u2500 apps/                # Application modules
-u2502   u251cu2500u2500 users/           # User-related functionality
-u2502   u2502   u251cu2500u2500 migrations/    # Database migrations
-u2502   u2502   u251cu2500u2500 templates/     # App-specific templates
-u2502   u2502   u251cu2500u2500 admin.py       # Admin configuration
-u2502   u2502   u251cu2500u2500 apps.py        # App configuration
-u2502   u2502   u251cu2500u2500 models.py      # Data models
-u2502   u2502   u251cu2500u2500 urls.py        # URL routing
-u2502   u2502   u251cu2500u2500 views.py       # View functions/classes
-u2502   u2502   u2514u2500u2500 serializers.py # API serializers (if using DRF)
-u2502   u2514u2500u2500 other_app/       # Other application module
-u251cu2500u2500 templates/           # Project-wide templates
-u251cu2500u2500 static/              # Static files (CSS, JS, images)
-u251cu2500u2500 media/               # User-uploaded files
-u251cu2500u2500 utils/               # Utility functions and classes
-u251cu2500u2500 manage.py            # Django management script
-u2514u2500u2500 requirements/        # Dependencies
-    u251cu2500u2500 base.txt         # Base requirements
-    u251cu2500u2500 local.txt        # Development requirements
-    u2514u2500u2500 production.txt  # Production requirements
+config/               # Project-wide settings
+settings/
+base.py       # Base settings
+local.py      # Development settings
+production.py # Production settings
+urls.py           # Project URLs
+wsgi.py           # WSGI configuration
+apps/                # Application modules
+users/           # User-related functionality
+migrations/    # Database migrations
+templates/     # App-specific templates
+admin.py       # Admin configuration
+apps.py        # App configuration
+models.py      # Data models
+urls.py        # URL routing
+views.py       # View functions/classes
+serializers.py # API serializers (if using DRF)
+other_app/       # Other application module
+templates/           # Project-wide templates
+static/              # Static files (CSS, JS, images)
+media/               # User-uploaded files
+utils/               # Utility functions and classes
+manage.py            # Django management script
+requirements/        # Dependencies
+base.txt         # Base requirements
+local.txt        # Development requirements
+production.txt  # Production requirements
 {{/if}}
 ```
 
@@ -735,6 +732,6 @@ class ProductViewTest(TestCase):
 
 <div align="center">
 
-**Generated on {{date}} u2022 [VibeCodingRules](https://github.com/idominikosgr/Vibe-Coding-Rules)**
+**Generated on {{date}} • [VibeKit VDK CLI](https://github.com/idominikosgr/VibeKit-VDK-CLI)**
 
 </div>

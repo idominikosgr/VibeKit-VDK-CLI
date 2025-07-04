@@ -1,6 +1,6 @@
-# Vibe Coding Rules Sync System
+# VibeKit VDK CLI Sync System
 
-The Vibe Coding Rules Sync System allows you to automatically download and synchronize AI rules from the remote repository at [https://github.com/idominikosgr/AI.rules](https://github.com/idominikosgr/AI.rules). This ensures you always have the latest, most up-to-date rules for your AI assistants.
+The VibeKit VDK CLI Sync System allows you to automatically download and synchronize AI rules from the remote repository at [https://github.com/idominikosgr/VibeKit-VDK-AI-rules](https://github.com/idominikosgr/VibeKit-VDK-AI-rules). This ensures you always have the latest, most up-to-date rules for your AI assistants.
 
 ## Overview
 
@@ -157,7 +157,7 @@ templates/rules/00-core-agent.mdc.backup.1705312200000
 
 ### Sync Configuration File
 
-The sync system stores configuration in `src/sync/sync-config.json`:
+The sync system stores configuration in `vdk.config.json`:
 
 ```json
 {
@@ -217,7 +217,7 @@ This will:
 ### Local Files
 
 ```
-Vibe-Coding-Rules/
+vdk-cli/
 ├── templates/                    # Local rule templates (synced from remote)
 │   ├── rules/                   # Core rule files
 │   ├── languages/               # Language-specific rules
@@ -233,10 +233,10 @@ Vibe-Coding-Rules/
 
 ### Remote Repository Structure
 
-The remote repository at [https://github.com/idominikosgr/AI.rules](https://github.com/idominikosgr/AI.rules) contains:
+The remote repository at [https://github.com/idominikosgr/VibeKit-VDK-AI-rules](https://github.com/idominikosgr/VibeKit-VDK-AI-rules) contains:
 
 ```
-AI.rules/
+VibeKit-VDK-AI-rules/
 └── .ai/rules/                   # Rule files organized by category
     ├── languages/               # Language-specific rules
     ├── technologies/            # Technology-specific rules
@@ -275,10 +275,10 @@ tail -f src/sync/sync.log
 
 ```bash
 # Test GitHub API access
-curl -s https://api.github.com/repos/idominikosgr/AI.rules
+curl -s https://api.github.com/repos/idominikosgr/VibeKit-VDK-AI-rules
 
 # Test raw file access
-curl -s https://raw.githubusercontent.com/idominikosgr/AI.rules/main/.ai/rules/00-core-agent.mdc
+curl -s https://raw.githubusercontent.com/idominikosgr/VibeKit-VDK-AI-rules/main/.ai/rules/00-core-agent.mdc
 ```
 
 #### Permission Issues
@@ -297,11 +297,11 @@ chmod -R u+w templates/
 
 ```bash
 # Reset sync configuration
-rm src/sync/sync-config.json
+rm vdk.config.json
 npm run sync-init
 
 # View current configuration
-cat src/sync/sync-config.json
+cat vdk.config.json
 ```
 
 ### Error Messages
@@ -426,4 +426,4 @@ To contribute to the sync system:
 
 ## License
 
-The sync system is part of Vibe Coding Rules and follows the same MIT license. Remote rules from [AI.rules repository](https://github.com/idominikosgr/AI.rules) may have their own licensing terms. 
+The sync system is part of VibeKit VDK CLI and follows the same MIT license. Remote rules from [VibeKit-VDK-AI-rules repository](https://github.com/idominikosgr/VibeKit-VDK-AI-rules) may have their own licensing terms. 

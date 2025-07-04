@@ -3,20 +3,20 @@
 # 🔍 Project Scanner
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
-[![Status](https://img.shields.io/badge/Status-Active-brightgreen)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/idominikosgr/VibeKit-VDK-CLI)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen)](https://github.com/idominikosgr/VibeKit-VDK-CLI)
 
-**Automatically analyzes codebases to generate custom Vibe Coding Rules tailored to your project**
+**Automatically analyzes codebases to generate custom VibeKit VDK CLI tailored to your project**
 
 </div>
 
 ## 🎯 Purpose
 
-The Project Scanner is a powerful tool designed to automatically generate project-specific rule files for the Vibe Coding Rules framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
+The Project Scanner is a powerful tool designed to automatically generate project-specific rule files for the VibeKit VDK CLI framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
 
 ## 📋 Overview
 
-The Project Scanner is an intelligent utility that analyzes your codebase to automatically generate project-specific rule files for the Vibe Coding Rules framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
+The Project Scanner is an intelligent utility that analyzes your codebase to automatically generate project-specific rule files for the VibeKit VDK CLI framework. It detects patterns, naming conventions, architecture, and technology stacks to create customized AI assistance rules.
 
 ## ✨ Features
 
@@ -29,10 +29,10 @@ The Project Scanner is an intelligent utility that analyzes your codebase to aut
 
 ## 🚀 Installation
 
-The scanner is included with Vibe Coding Rules and requires no separate installation:
+The scanner is included with VibeKit VDK CLI and requires no separate installation:
 
 ```bash
-# From the Vibe Coding Rules root directory
+# From the VibeKit VDK CLI root directory
 npm install
 ```
 
@@ -106,11 +106,11 @@ The rule generation uses a flexible Handlebars template system:
 - **Language Rules**: Generates language-specific best practices files
 - **Framework Rules**: Creates framework-specific guidance for detected frameworks
 
-## 🔄 Integration with Vibe Coding Rules
+## 🔄 Integration with VibeKit VDK CLI
 
-This tool integrates seamlessly with the Vibe Coding Rules framework:
+This tool integrates seamlessly with the VibeKit VDK CLI framework:
 
-1. **Initial Project Setup**: Run the scanner when setting up Vibe Coding Rules for a new project
+1. **Initial Project Setup**: Run the scanner when setting up VibeKit VDK CLI for a new project
 2. **Rule Customization**: Review and refine the auto-generated rules for your specific needs
 3. **IDE Integration**: Generated rules are placed in the correct location for IDE plugins
 
@@ -131,8 +131,8 @@ Contributions are welcome! Please check the [CONTRIBUTING.md](../../CONTRIBUTING
 
 ```bash
 # Clone the repository
-git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
-cd Vibe-Coding-Rules
+git clone https://github.com/idominikosgr/VibeKit-VDK-CLI.git
+cd VibeKit-VDK-CLI
 
 # Install dependencies
 npm install
@@ -149,6 +149,6 @@ This project is licensed under the MIT License - see the [LICENSE](../../LICENSE
 
 <div align="center">
 
-**Made with ❤️ by [Vibe Coding Rules Team](https://github.com/idominikosgr/Vibe-Coding-Rules)**
+**Made with ❤️ by [VibeKit VDK CLI Team](https://github.com/idominikosgr/VibeKit-VDK-CLI)**
 
 </div>

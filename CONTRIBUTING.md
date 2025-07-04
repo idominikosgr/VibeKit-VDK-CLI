@@ -1,6 +1,6 @@
-# Contributing to Vibe Coding Rules
+# Contributing to VibeKit VDK CLI
 
-Thank you for considering contributing to Vibe Coding Rules! This document provides guidelines and instructions for contributing to the project.
+Thank you for considering contributing to VibeKit VDK CLI! This document provides guidelines and instructions for contributing to the project.
 
 ## Table of Contents
 
@@ -15,62 +15,62 @@ Thank you for considering contributing to Vibe Coding Rules! This document provi
 
 Before you begin contributing, please:
 
-1. Familiarize yourself with the [Vibe Coding Rules documentation](./docs/)
-2. Read our [Code of Conduct](./CODE_OF_CONDUCT.md)
-3. Check the [Issues](https://github.com/idominikosgr/Vibe-Coding-Rules/issues) for open tasks or create a new issue to discuss your proposed changes
+1. Familiarize yourself with the [VibeKit VDK CLI Guide](./GUIDE.md)
+2. Check the [Issues](https://github.com/idominikosgr/VibeKit-VDK-CLI/issues) for open tasks or create a new issue to discuss your proposed changes.
 
 ## Development Setup
 
-```bash
-# Clone the repository
-git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
-cd Vibe-Coding-Rules
+To set up a local development environment:
 
-# Install dependencies
+```bash
+# 1. Clone the repository
+git clone https://github.com/idominikosgr/VibeKit-VDK-CLI.git
+cd VibeKit-VDK-CLI
+
+# 2. Install dependencies
 npm install
 
-# Run the CLI to verify installation
-npm run setup
+# 3. Link the package for local development
+npm link
+
+# 4. Verify the installation by running the help command
+vdk --help
 ```
 
-## Code Quality Guidelines
+Now, any changes you make to the source code will be immediately reflected when you run the `vdk` command.
 
-We maintain high code quality standards for Vibe Coding Rules. Please follow these guidelines:
+## Testing Guidelines
 
-### Development Standards
+We maintain high code quality standards. Please follow these guidelines:
 
-- All new features should be thoroughly tested manually
-- Bug fixes should include verification that the issue is resolved
-- Core components should be validated with the project scanner
+- All new features should be thoroughly tested manually.
+- Bug fixes should include verification that the issue is resolved.
 
 ### Manual Testing
 
-Test your changes by:
+Test your changes in a separate test project:
 
-1. **Running the CLI**: `npm run setup`
-2. **Testing Project Scanning**: `npm run scan` on various project types
-3. **Validating Rules**: `npm run validate` to ensure rule format compliance
-4. **Checking CLI Commands**: Test all relevant CLI commands
+1. **Initialize VDK**: Run `vdk init` inside a test project and follow the prompts.
+2. **Check Status**: Run `vdk status` to ensure the configuration is correct.
+3. **Validate Changes**: Ensure your changes work as expected and do not introduce any regressions.
 
 ## Code Style
 
 We follow a consistent code style across the project:
 
-- Use ESLint and follow the project's `.eslintrc` configuration
-- Write clear, self-documenting code with meaningful variable and function names
-- Include JSDoc comments for all public API functions
-- Follow the existing project structure and patterns
-- Use modern JavaScript features (ES modules, async/await, etc.)
+- Use ESLint and follow the project's `.eslintrc` configuration.
+- Write clear, self-documenting code with meaningful variable and function names.
+- Include JSDoc comments for all public API functions.
+- Follow the existing project structure and patterns.
+- Use modern JavaScript features (ES modules, async/await, etc.).
 
 ## Pull Request Process
 
-1. **Fork the Repository**: Create your own fork of the Vibe Coding Rules repository
-2. **Create a Branch**: Make your changes in a new git branch based on the main branch
-3. **Test Your Changes**: Manually test your changes using the CLI commands
-4. **Follow Code Style**: Ensure your code follows the project's style guidelines
-5. **Validate**: Run `npm run validate` to ensure everything works correctly
-6. **Document Changes**: Update documentation as needed for your changes
-7. **Submit PR**: Create a pull request with a clear title and description
+1. **Fork the repository** and create a new branch for your feature or bug fix.
+2. **Make your changes** and ensure they adhere to the code style and testing guidelines.
+3. **Commit your changes** with a clear and descriptive commit message.
+4. **Push your branch** to your forked repository.
+5. **Submit a Pull Request** to the `main` branch of the original repository.
 
 ### PR Description Template
 
@@ -86,48 +86,21 @@ Fixes #[issue number]
 - [ ] New feature
 - [ ] Documentation update
 - [ ] Refactoring
-- [ ] Performance improvement
 
 ## Testing
-Describe manual testing performed and how existing functionality was verified.
-
-## Documentation
-Describe documentation updates made.
-
-## Additional Notes
-Any additional information that would be helpful for reviewers.
+Describe the manual testing performed to verify your changes.
 ```
 
 ## Adding New Features
 
-When adding new features to Vibe Coding Rules:
+When adding new features to VibeKit VDK CLI:
 
-1. **Discuss First**: Create an issue to discuss your proposed feature before implementation
-2. **Follow the Architecture**: Understand and follow the existing architecture and design patterns
-3. **Documentation**: Update or create documentation for your feature
-4. **Tests**: Write comprehensive tests for your feature
-5. **Example Usage**: Include examples of how to use your feature
-
-### Adding a New Language Analyzer
-
-To add support for a new programming language:
-
-1. Create a new file in `src/scanner/analyzers/[language].js`
-2. Implement the required analyzer interface:
-   - `analyzeCode(code)`: Analyze code content
-   - `analyzeFile(filePath)`: Analyze a file
-   - `analyzeNamingConventions(files)`: Detect naming conventions
-3. Add language-specific rule templates in `src/scanner/templates/languages/`
-4. Update the `TechnologyAnalyzer` to detect the new language
-5. Test your analyzer manually with sample projects to ensure it works correctly
+1. **Discuss First**: Create an issue to discuss your proposed feature before implementation.
+2. **Follow the Architecture**: Understand and follow the existing architecture and design patterns.
+3. **Update Documentation**: Update `GUIDE.md` and other relevant documentation for your feature.
 
 ### Creating New Rule Files
 
-All new rule files (.mdc) must follow the standardized template format:
+All new rule files must be placed in the `.vdk/rules/` directory within a project after running `vdk init`. If you are contributing new default rule templates, they should be added to the `templates/` directory in this repository.
 
-1. Use the `templates/standardized-rule-template.mdc` as your starting point
-2. Include all required metadata fields (description, version, lastUpdated)
-3. Follow the 8-section format outlined in the template
-4. Place your rule file in the appropriate directory (.ai/rules/[category]/)
-
-Thank you for contributing to Vibe Coding Rules!
+Thank you for contributing to VibeKit VDK CLI!

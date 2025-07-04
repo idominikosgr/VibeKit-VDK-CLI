@@ -3,7 +3,7 @@
 <div align="center">
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/idominikosgr/Vibe-Coding-Rules)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)](https://github.com/idominikosgr/VibeKit-VDK-CLI)
 
 *A powerful tool for analyzing project structures and generating customized coding rules*
 
@@ -45,12 +45,12 @@ Key features include:
 
 ### Installation
 
-The Project Scanner is included with Vibe Coding Rules:
+The Project Scanner is included with VibeKit VDK CLI:
 
 ```bash
 # Clone the repository
-git clone https://github.com/idominikosgr/Vibe-Coding-Rules.git
-cd Vibe-Coding-Rules
+git clone https://github.com/idominikosgr/VibeKit-VDK-CLI.git
+cd VibeKit-VDK-CLI
 
 # Install dependencies
 npm install
@@ -63,7 +63,7 @@ npm install
 Run the scanner on your project:
 
 ```bash
-# From the Vibe-Coding-Rules directory
+# From the VibeKit-VDK-CLI directory
 npm run scan
 
 # Scan a specific project
@@ -247,6 +247,6 @@ Contributions are welcome! See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guid
 
 <div align="center">
 
-**Part of [Vibe Coding Rules](https://github.com/idominikosgr/Vibe-Coding-Rules)**
+**Part of [VibeKit VDK CLI](https://github.com/idominikosgr/VibeKit-VDK-CLI)**
 
 </div>
